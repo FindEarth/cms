@@ -7,9 +7,7 @@
 </template>
 
 <style lang='scss'>
-  // $fa-font-path: '../node_modules/font-awesome/fonts';
-  // @import 'node_modules/font-awesome/scss/font-awesome';
-
+  @import '~font-awesome/css/font-awesome.min.css';
   body {
     font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
     margin: 0
@@ -19,6 +17,4 @@
     vertical-align: baseline;
     margin-right: 10px;
   }
-
-
 </style>
