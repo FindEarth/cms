@@ -43,6 +43,11 @@
         this.step += 1;
       },
 
+      onGelocationSubmitted(geolocation) {
+        Object.assign(this.person.geo, geolocation);
+        this.step += 1;
+      },
+
       createPerson() {
         if (!this.person.photos || !this.person.photos.length) {
           delete this.person.photos;
@@ -69,11 +74,12 @@
 
     el-card.box-card
       basic-information-form(
-        v-if='step === 1'
+        v-if='step === 1',
         v-on:basic-information-submitted="onBasicInformationSubmitted"
       )
       geolocation-form(
-        v-if='step === 2'
+        v-if='step === 2',
+        v-on:gelocation-submitted="onGelocationSubmitted"
       )
 </template>
 

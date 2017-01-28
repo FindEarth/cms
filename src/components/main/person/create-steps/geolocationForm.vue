@@ -6,11 +6,26 @@
         center: { lat: -34.603684, lng: -58.381559 },
         marker: {
           position: { lat: -34.603684, lng: -58.381559 }
+        },
+
+        geo: {
+          loc        : [],
+          address    : '',
+          city       : '',
+          postalCode : '',
+          countryCode: '',
+          country    : ''
         }
       };
     },
 
     methods: {
+      formatGeo(marker, type, format) {
+        const ac = marker.address_components.find(i => i.types[0] === type);
+        if (!ac) { return null; }
+        return ac[`${format}_name`];
+      },
+
       onPlaceChange(marker) {
         const lat = marker.geometry.location.lat();
         const lng = marker.geometry.location.lng();
@@ -20,10 +35,17 @@
 
         this.marker.position.lat = lat;
         this.marker.position.lng = lng;
+
+        this.geo.address     = marker.formatted_address;
+        this.geo.country     = this.formatGeo(marker, 'country', 'long');
+        this.geo.countryCode = this.formatGeo(marker, 'country', 'short');
+        this.geo.city        = this.formatGeo(marker, 'administrative_area_level_1', 'long');
+        this.geo.postalCode  = this.formatGeo(marker, 'postal_code', 'short');
+        this.geo.loc         = [lng, lat];
       },
 
       onSubmit() {
-        this.emit('gelocation-submitted');
+        this.emit('gelocation-submitted', this.geo);
       }
     }
   };
@@ -37,8 +59,6 @@
         gmap-place-input(
           class-name='el-input__inner',
           placeholder='Direccion',
-          place-input,
-          :place.sync='map.place',
           :select-first-on-enter='true',
           v-on:place_changed='onPlaceChange'
         )
