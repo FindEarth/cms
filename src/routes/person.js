@@ -6,11 +6,11 @@ const route = {
   path     : '/person',
   component: Container,
   children : [{
-    path     : '/',
+    path     : '',
     name     : 'person-list',
     component: List
   }, {
-    path     : '/create',
+    path     : 'create',
     name     : 'person-create',
     component: Create
   }]
