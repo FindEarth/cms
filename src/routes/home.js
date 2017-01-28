@@ -1,9 +1,10 @@
-import Container from 'components/main/home/Home';
+import Home from 'components/main/home/Home';
 
-const home = {
+const route = {
   name     : 'home',
-  component: Container,
+  path     : '/',
+  component: Home,
   public   : false
 };
 
-export default home;
+export default route;
