@@ -16,34 +16,34 @@
 <template lang='pug'>
   el-menu.el-menu-vertical-demo(mode='vertical', default-active='1', @select='handleSelect')
     el-menu-item-group(title='General')
-      el-menu-item(index='1')
-        i.el-icon-message
+      el-menu-item(index='home')
+        i.fa.fa-home.fa-lg
         | Dashboard
     el-menu-item-group(title='Personas')
       el-menu-item(index='person-list')
-        i.el-icon-message
+        i.fa.fa-male.fa-lg
         | Perdidos
       el-menu-item(index='3')
-        i.el-icon-message
+        i.fa.fa-male.fa-lg
         | Encontrados
       el-menu-item(index='person-create')
-        i.el-icon-message
+        i.fa.fa-plus.fa-lg
         | Nuevo
       el-menu-item(index='5')
-        i.el-icon-message
+        i.fa.fa-question.fa-lg
         | Solicitudes
 
     el-menu-item-group(title='Notificaciones')
       el-menu-item(index='6')
-        i.el-icon-message
+        i.fa.fa-bell-o.fa-lg
         | Lista
       el-menu-item(index='7')
-        i.el-icon-message
+        i.fa.fa-plus.fa-lg
         | Nuevo
 
     el-menu-item-group(title='Configuracion')
       el-menu-item(index='8')
-        i.el-icon-message
+        i.fa.fa-user.fa-lg
         | Perfil
 </template>
 
