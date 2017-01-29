@@ -1,21 +1,19 @@
 <script>
   import personService from 'services/person';
 
-  import BasicInformationForm from 'components/main/person/create-steps/BasicInformationForm';
-  import GeolocationForm      from 'components/main/person/create-steps/GeolocationForm';
+  import BasicInformation from 'components/main/person/create-steps/BasicInformation';
+  import Geolocation      from 'components/main/person/create-steps/Geolocation';
+  import FileUpload       from 'components/main/person/create-steps/FileUpload';
+  import Resume           from 'components/main/person/create-steps/Resume';
 
   export default {
     name: 'PersonCreate',
 
-    components: { BasicInformationForm, GeolocationForm },
-
-    mounted() {
-
-    },
+    components: { BasicInformation, Geolocation, FileUpload, Resume },
 
     data() {
       return {
-        step: 2,
+        step: 1,
 
         person: {
           name       : '',
@@ -48,19 +46,16 @@
         this.step += 1;
       },
 
-      createPerson() {
-        if (!this.person.photos || !this.person.photos.length) {
-          delete this.person.photos;
-        } else if (this.person.photos && this.person.photos.length > 3) { return; }
+      onFileUploadSubmitted(files) {
+        this.person.photos = files;
+        this.step += 1;
+      },
 
+      onResumeSubmitted() {
         return personService.create(this.person)
-        .then((person) => {
-          this.isLoading = false;
-          this.$route.router.go({ name: 'person-list' });
-        });
+          .then(() => this.$router.push({ name: 'person-list' }));
       }
     }
-
   };
 </script>
 
@@ -70,28 +65,46 @@
       el-step(title='Step 1', description='Informacion basica')
       el-step(title='Step 2', description='Geolocalizacion')
       el-step(title='Step 3', description='Carga de Fotos')
-      el-step(title='Step 4', description='Terminar')
+      el-step.last-step(title='Step 4', description='Resumen')
 
     el-card.box-card
-      basic-information-form(
+      basic-information(
         v-if='step === 1',
-        v-on:basic-information-submitted="onBasicInformationSubmitted"
+        v-on:basic-information-submitted='onBasicInformationSubmitted'
       )
-      geolocation-form(
+
+      geolocation(
         v-if='step === 2',
-        v-on:gelocation-submitted="onGelocationSubmitted"
+        v-on:gelocation-submitted='onGelocationSubmitted'
+      )
+
+      file-upload(
+        v-if='step === 3',
+        v-on:file-upload-submitted='onFileUploadSubmitted'
+      )
+
+      resume(
+        v-if='step === 4',
+        :person='person',
+        v-on:resume-submitted='onResumeSubmitted'
       )
 </template>
 
 <style lang='scss' scoped>
   .steps {
-    margin: auto;
-    width: 50%;
-    padding-top: 30px;
+    padding: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .last-step {
+      width: auto !important;
+    }
   }
 
   .box-card {
-    padding: 10px;
-    margin: 40px;
+    padding: 20px 20px 0 20px;
+    margin: 0 40px 20px 40px;
   }
 </style>
