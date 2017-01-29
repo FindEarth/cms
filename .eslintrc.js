@@ -1,6 +1,6 @@
 module.exports = {
-  root: true,
-  parser: 'babel-eslint',
+  root         : true,
+  parser       : 'babel-eslint',
   parserOptions: {
     sourceType: 'module'
   },
@@ -21,7 +21,7 @@ module.exports = {
   'rules': {
     // don't require .vue extension when importing
     'import/extensions': ['error', 'always', {
-      'js': 'never',
+      'js' : 'never',
       'vue': 'never'
     }],
     // allow debugger during development
@@ -53,5 +53,12 @@ module.exports = {
     'import/no-unresolved'             : 0,
     'import/extensions'                : 0,
     'no-prototype-builtins'            : 0
+  },
+  globals: {
+    location  : true,
+    navigator : true,
+    window    : true,
+    document  : true,
+    FileReader: true
   }
 }
