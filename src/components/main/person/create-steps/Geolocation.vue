@@ -45,7 +45,7 @@
       },
 
       onSubmit() {
-        this.emit('gelocation-submitted', this.geo);
+        this.$emit('gelocation-submitted', this.geo);
       }
     }
   };
