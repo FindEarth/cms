@@ -20,7 +20,7 @@ personRequestService.getById = function(id) {
 
 personRequestService.create = function(personRequest) {
   return api.post('/person-request', personRequest)
-  .then(response => {
+  .then((response) => {
     toast.success('Solicitud de Persona creada correctamente');
     return response.data;
   });
@@ -28,7 +28,7 @@ personRequestService.create = function(personRequest) {
 
 personRequestService.update = function(personRequest) {
   return api.put(`/person-request/${personRequest._id}`, personRequest)
-  .then(response => {
+  .then((response) => {
     toast.success('Solicitud de Persona actualizada correctamente');
     return response.data;
   });
@@ -36,7 +36,7 @@ personRequestService.update = function(personRequest) {
 
 personRequestService.remove = function(id) {
   return api.del(`/person-request/${id}`)
-  .then(response => {
+  .then((response) => {
     toast.success('Solicitud de Persona borrada correctamente');
     return response.data;
   });

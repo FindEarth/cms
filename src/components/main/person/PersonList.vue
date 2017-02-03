@@ -37,8 +37,10 @@ div
     el-table-column(prop='createdAt', label='Fecha', width='210')
     el-table-column(fixed='right', label='Operations', width='120')
       template(scope='scope')
+        router-link(:to="{ name: 'person-detail', params: { personId: scope.row._id }}")
+          i.el-icon-information
         el-button(@click.native.prevent='deleteRow(scope.$index, tableData4)', type='text', size='small')
-          | Borrar
+          i.el-icon-delete
 </template>
 
 <style lang="scss">
