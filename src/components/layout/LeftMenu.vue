@@ -23,7 +23,7 @@
       el-menu-item(index='person-list')
         i.fa.fa-male.fa-lg
         | Perdidos
-      el-menu-item(index='3')
+      el-menu-item(index='person-found')
         i.fa.fa-male.fa-lg
         | Encontrados
       el-menu-item(index='person-create')
