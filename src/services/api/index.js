@@ -1,14 +1,10 @@
-/* global window */
-
 import axios from 'axios';
+import user  from 'services/user';
 
-import env   from 'services/env';
-// import user  from 'services/user';
-import toast from 'services/toast';
 
 const api = {};
 
-axios.defaults.baseURL = env.getApiUrl();
+axios.defaults.baseURL = 'https://alerta-solidaria.herokuapp.com';
 axios.defaults.timeout = 25000;
 
 
@@ -20,7 +16,7 @@ function errorHandler(err) {
     case 400:
       return res.data || 'Error 400: Bad Request';
     case 401:
-      // user.clearToken();
+      user.clearToken();
       window.location.href = '/login';
       if (res.data && res.data.errorDescription) {
         return res.data.errorDescription;
@@ -46,8 +42,8 @@ function errorHandler(err) {
 
 axios.interceptors.request.use((config) => {
   config.headers = config.headers || {};
-  // const idToken = user.getToken();
-  // if (idToken) { config.headers.Authorization = `Bearer ${idToken}`; }
+  const idToken = user.getToken();
+  if (idToken) { config.headers.Authorization = `Bearer ${idToken}`; }
   return config;
 }, error => console.log(error));
 
@@ -57,7 +53,7 @@ api.post = function(path, data, authenticate = true) {
     .then(res => res)
     .catch((err) => {
       const message = errorHandler(err);
-      toast.error(message);
+
       throw (message);
     });
 };
@@ -68,7 +64,7 @@ api.put = function(path, data, authenticate = true) {
     .then(res => res)
     .catch((err) => {
       const message = errorHandler(err);
-      toast.error(message);
+
       throw (message);
     });
 };
@@ -80,7 +76,7 @@ api.get = function(path, data, authenticate = true) {
     .then(res => res)
     .catch((err) => {
       const message = errorHandler(err);
-      toast.error(message);
+
       throw (message);
     });
 };
@@ -91,7 +87,7 @@ api.del = function(path, authenticate = true) {
     .then(res => res)
     .catch((err) => {
       const message = errorHandler(err);
-      toast.error(message);
+
       throw (message);
     });
 };
