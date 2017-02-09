@@ -1930,6 +1930,12 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
 
+echarts@^3.3.2:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/echarts/-/echarts-3.4.0.tgz#425e83be18a70170d2e1a9daf22c75bcd2da58d4"
+  dependencies:
+    zrender "^3.3.0"
+
 editorconfig@^0.13.2:
   version "0.13.2"
   resolved "https://registry.yarnpkg.com/editorconfig/-/editorconfig-0.13.2.tgz#8e57926d9ee69ab6cb999f027c2171467acceb35"
@@ -3772,6 +3778,10 @@ lodash.create@3.1.1, lodash.create@^3.1.1:
     lodash._basecreate "^3.0.0"
     lodash._isiterateecall "^3.0.0"
 
+lodash.debounce@^4.0.8:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
+
 lodash.deburr@^3.0.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/lodash.deburr/-/lodash.deburr-3.2.0.tgz#6da8f54334a366a7cf4c4c76ef8d80aa1b365ed5"
@@ -5112,7 +5122,7 @@ qjobs@^1.1.4:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/qjobs/-/qjobs-1.1.5.tgz#659de9f2cf8dcc27a1481276f205377272382e73"
 
-qs@6.2.0:
+qs@6.2.0, qs@^6.1.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.2.0.tgz#3b7848c03c2dece69a9522b0fae8c4126d745f3b"
 
@@ -5120,7 +5130,7 @@ qs@6.2.1:
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.2.1.tgz#ce03c5ff0935bc1d9d69a9f14cbd18e568d67625"
 
-qs@^6.1.0, qs@~6.3.0:
+qs@~6.3.0:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.3.0.tgz#f403b264f23bc01228c74131b407f18d5ea5d442"
 
@@ -6290,6 +6300,14 @@ void-elements@^2.0.0, void-elements@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
 
+vue-echarts@^2.2.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/vue-echarts/-/vue-echarts-2.3.0.tgz#9c0a2cdf25c66e3f75f61972005b92038ea336f3"
+  dependencies:
+    echarts "^3.3.2"
+    lodash.debounce "^4.0.8"
+    vue "^2.0.1"
+
 vue-hot-reload-api@^2.0.1:
   version "2.0.8"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.0.8.tgz#b3ba6a9a443d561b14f2785c8ea056618cb2faa3"
@@ -6336,7 +6354,7 @@ vue2-google-maps@^0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/vue2-google-maps/-/vue2-google-maps-0.5.2.tgz#18a7468dc82f5f64879618fc956c6d4ba0b927d4"
 
-vue@^2.1.0:
+vue@^2.0.1, vue@^2.1.0:
   version "2.1.10"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.1.10.tgz#c9235ca48c7925137be5807832ac4e3ac180427b"
 
@@ -6579,3 +6597,7 @@ yauzl@2.4.1:
 yeast@0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/yeast/-/yeast-0.1.2.tgz#008e06d8094320c372dbc2f8ed76a0ca6c8ac419"
+
+zrender@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/zrender/-/zrender-3.3.0.tgz#efb5280b248aa48e3bba8d8f8e5469033a355d26"

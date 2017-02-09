@@ -8,7 +8,7 @@
 
     mounted() {
       auth0.show();
-    },
+    }
   };
 </script>
 
