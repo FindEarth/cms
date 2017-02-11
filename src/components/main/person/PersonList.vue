@@ -6,7 +6,8 @@
 
     data() {
       return {
-        people: []
+        people   : [],
+        isLoading: false
       };
     },
 
@@ -16,10 +17,26 @@
 
     methods: {
       getPeople() {
+        this.isLoading = true;
         personService.get()
           .then((people) => {
-            this.people = people;
+            this.people    = people;
+            this.isLoading = false;
           });
+      },
+
+      deletePerson(index, person) {
+        const message = `Esta operacion borrara la persona ${person.name} ` +
+                        'permanentemente, Desea continuar?';
+        this.$confirm(message, 'Eliminar Persona', {
+          confirmButtonText: 'OK',
+          cancelButtonText : 'Cancel',
+          type             : 'warning'
+        })
+        .then(() => personService.delete(person._id))
+        .then(() => {
+          this.people.splice(index, 1);
+        });
       }
     }
   };
@@ -27,7 +44,14 @@
 
 <template lang='pug'>
 div
-  el-table(:data='people', border='', style='width: 100%')
+  el-table(
+    :data='people',
+    border='',
+    style='width: 100%',
+    v-loading='isLoading',
+    element-loading-text='Cargando personas...',
+    empty-text='No se ha encontrado personas'
+  )
     el-table-column(fixed='', prop='name', label='Nombre', width='200')
     el-table-column(prop='age', label='Edad', width='90')
     el-table-column(prop='gender', label='Genero', width='90')
@@ -37,10 +61,15 @@ div
     el-table-column(prop='createdAt', label='Fecha', width='210')
     el-table-column(fixed='right', label='Operations', width='120')
       template(scope='scope')
-        router-link(:to="{ name: 'person-detail', params: { personId: scope.row._id }}")
-          i.el-icon-information
-        el-button(@click.native.prevent='deleteRow(scope.$index, tableData4)', type='text', size='small')
-          i.el-icon-delete
+          el-button-group
+            el-button(type='primary', size='mini', icon='edit')
+            el-button(type='primary', size='mini', icon='share')
+            el-button(
+              type='primary',
+              size='mini',
+              icon='delete',
+              @click.native.prevent='deletePerson(scope.$index, scope.row)'
+            )
 </template>
 
 <style lang="scss">

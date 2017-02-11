@@ -1,5 +1,5 @@
-import api   from 'services/api';
-import toast from 'services/toast';
+import { Message } from 'element-ui';
+import api         from 'services/api';
 
 const personService = {};
 
@@ -16,7 +16,10 @@ personService.getById = function(id) {
 personService.create = function(person) {
   return api.post('/person', person)
     .then((response) => {
-      toast.success('Persona creada correctamente');
+      Message({
+        showClose: true,
+        message  : 'Persona creada correctamente'
+      });
       return response.data;
     });
 };
@@ -24,7 +27,10 @@ personService.create = function(person) {
 personService.update = function(person) {
   return api.put(`/person/${person._id}`, person)
     .then((response) => {
-      toast.success('Persona actualizada correctamente');
+      Message({
+        showClose: true,
+        message  : 'Persona actualizada correctamente'
+      });
       return response.data;
     });
 };
@@ -32,7 +38,10 @@ personService.update = function(person) {
 personService.delete = function(id) {
   return api.del(`/person/${id}`)
     .then((response) => {
-      toast.success('Persona borrada correctamente');
+      Message({
+        showClose: true,
+        message  : 'Persona eliminada correctamente'
+      });
       return response.data;
     });
 };
