@@ -1,6 +1,6 @@
 <script>
   import personService from 'services/person';
-  import { Loading } from 'element-ui';
+  import { Loading }   from 'element-ui';
 
   export default {
     components: { Loading },
@@ -8,29 +8,22 @@
     data() {
       return {
         person: {},
-        isLoading: false,
+
         loadingInstance: {}
       };
     },
 
     mounted() {
-      this.isLoading = true;
       this.loadingInstance = Loading.service({ fullscreen: true });
       this.getPerson(this.$route.params.personId);
     },
-    route: {
-      data: ({ to: { params: { personId } } } ) => ({
-        person: personService.get(personId)
-      })
-    },
+
     methods: {
       getPerson(personId) {
         personService.getById(personId)
           .then((person) => {
             this.person = person;
-            this.isLoading = false;
             this.loadingInstance.close();
-            console.log(this.person.name);
           });
       }
     }
@@ -92,74 +85,68 @@
 </template>
 
 <style lang="scss">
-.el-row {
-    margin-bottom: 20px;
-    background: white;
-    margin-left: 0 ! important;
-    &:last-child {
-      margin-bottom: 0;
+  .el-row {
+      margin-bottom: 20px;
+      background: white;
+      margin-left: 0 ! important;
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
-  }
-  .image {
-    width: 100%;
-    display: block;
-  }
-   .clearfix:before,
-   .clearfix:after {
-       display: table;
-       content: "";
-   }
+    .image {
+      width: 100%;
+      display: block;
+    }
+     .clearfix:before,
+     .clearfix:after {
+         display: table;
+         content: "";
+     }
 
-   .clearfix:after {
+     .clearfix:after {
        clear: both
-   }
-  .el-col {
-    border-radius: 4px;
-  }
-  .bg-purple-dark {
-    background: #99a9bf;
-  }
-  .person-info {
-    background: white;
-    border: solid 1px #e5e9f2;
-  }
-  .message {
-    margin-bottom: 10px;
-  }
-  .header-message {
+     }
+    .el-col {
+      border-radius: 4px;
+    }
+    .bg-purple-dark {
+      background: #99a9bf;
+    }
+    .person-info {
+      background: white;
+      border: solid 1px #e5e9f2;
+    }
+    .message {
+      margin-bottom: 10px;
+    }
+    .bg-purple-light {
+      background: #e5e9f2;
+    }
+    .grid-content {
+      border-radius: 4px;
+      min-height: 36px;
+    }
+    .row-bg {
+      padding: 10px 0;
+      background-color: #f9fafc;
+    }
+    .text {
+      font-size: 14px;
+    }
 
-  }
-  .bg-purple-light {
-    background: #e5e9f2;
-  }
-  .grid-content {
-    border-radius: 4px;
-    min-height: 36px;
-  }
-  .row-bg {
-    padding: 10px 0;
-    background-color: #f9fafc;
-  }
-  .text {
-    font-size: 14px;
-  }
+    .item {
+      padding: 18px 0;
+    }
 
-  .item {
-    padding: 18px 0;
-  }
-
-  .clearfix:before,
-  .clearfix:after {
-      display: table;
-      content: "";
-  }
-  .clearfix:after {
-      clear: both
-  }
-
-  .box-card {
-  }
-  .apariencia {
-    width: 200px;
-  }
+    .clearfix:before,
+    .clearfix:after {
+        display: table;
+        content: "";
+    }
+    .clearfix:after {
+        clear: both
+    }
+    .apariencia {
+      width: 200px;
+    }
 </style>

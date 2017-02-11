@@ -16,18 +16,16 @@
 
     methods: {
       getPersonRequests(query = {}) {
-        const q = Object.assign({}, query);
-        return personRequestService.get(q)
-        .then( (personRequests) => {
-          this.personRequests = personRequests;
-        });
+        personRequestService.get(query)
+          .then( (personRequests) => {
+            this.personRequests = personRequests;
+          });
       }
     }
   };
 </script>
 
 <template lang='pug'>
-div
   el-table(:data='personRequests', border='', style='width: 100%')
     el-table-column(fixed='', prop='name', label='Nombre')
     el-table-column(prop='age', label='Edad')
