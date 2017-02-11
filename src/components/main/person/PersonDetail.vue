@@ -42,16 +42,51 @@
 </script>
 
 <template lang='pug'>
-  gmap-map.map(:center='position', :zoom='14', v-loading='isLoading')
-    gmap-marker(
-      :position='position',
-      :clickable='true'
-    )
+  div
+    gmap-map.map(:center='position', :zoom='14', v-loading='isLoading')
+      gmap-marker(
+        :position='position',
+        :clickable='true'
+      )
+
+    el-row()
+      el-col(:span='7', :offset='1')
+        .grid-content.bg-purple
+          el-card(:body-style="{ padding: '0px' }")
+            img.image(src='https://avatars1.githubusercontent.com/u/6719053?v=3&s=460')
+            div(style='padding: 14px;')
+              span {{ person.name }}
+              .bottom.clearfix
+                time.time {{ person.createdAt }}
+
+      el-col(:span='16')
+        .grid-content.bg-purple
+
 </template>
 
 <style lang="scss">
   .map {
     height: 200px;
     margin-bottom: 20px;
+  }
+  .time {
+    font-size: 13px;
+    color: #999;
+  }
+  .bottom {
+    margin-top: 13px;
+    line-height: 12px;
+  }
+  .image {
+    width: 100%;
+    display: block;
+  }
+  .clearfix:before,
+  .clearfix:after {
+      display: table;
+      content: "";
+  }
+  .clearfix:after {
+      clear: both
   }
 </style>
