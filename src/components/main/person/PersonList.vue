@@ -25,6 +25,13 @@
           });
       },
 
+      onSelect(person) {
+        this.$router.push({
+          name  : 'person-detail',
+          params: { personId: person._id }
+        });
+      },
+
       deletePerson(index, person) {
         const message = `Esta operacion borrara la persona ${person.name} ` +
                         'permanentemente, Desea continuar?';
@@ -43,9 +50,9 @@
 </script>
 
 <template lang='pug'>
-div
   el-table(
     :data='people',
+    v-on:cell-click='onSelect',
     border='',
     style='width: 100%',
     v-loading='isLoading',
