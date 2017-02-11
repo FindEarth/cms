@@ -18,7 +18,7 @@
     methods: {
       getPeople() {
         this.isLoading = true;
-        personService.get()
+        personService.get({ isMissing: true })
           .then((people) => {
             this.people    = people;
             this.isLoading = false;
