@@ -18,7 +18,7 @@ Vue.use(ElementUI);
 Vue.use(Store);
 Vue.use(VueGoogleMaps, {
   load: {
-    key      : 'AIzaSyCrBw8TPQmnVKPLhNxpykbuB8EyzmPotgA',
+    key      : 'AIzaSyBFDFmn-PL1Kg0frwZUXibuFyuiTPDMsas',
     libraries: 'places' // to use place input
   }
 });

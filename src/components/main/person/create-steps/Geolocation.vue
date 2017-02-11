@@ -66,7 +66,6 @@
     el-form-item(label='Radio')
       el-input-number(v-model='radius', :min='100', :max='5000', :step='100')
 
-
     gmap-map.map(:center='center', :zoom='14')
       gmap-marker(
         :position='marker.position',
