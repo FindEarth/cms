@@ -29,7 +29,7 @@
       el-menu-item(index='person-create')
         i.fa.fa-plus.fa-lg
         | Nuevo
-      el-menu-item(index='person-request')
+      el-menu-item(index='person-request-list')
         i.fa.fa-question.fa-lg
         | Solicitudes
 

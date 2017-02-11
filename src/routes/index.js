@@ -1,16 +1,18 @@
 import userService   from 'services/user';
 import MainContainer from 'components/main/MainContainer.vue';
 
-import loginRoutes  from 'routes/login';
-import homeRoutes   from 'routes/home';
-import personRoutes from 'routes/person';
+import loginRoutes         from 'routes/login';
+import homeRoutes          from 'routes/home';
+import personRoutes        from 'routes/person';
+import personRequestRoutes from 'routes/person-request';
 
 const routes = [{
   path     : '/',
   component: MainContainer,
   children : [
     homeRoutes,
-    personRoutes
+    personRoutes,
+    personRequestRoutes
   ]
 }, loginRoutes];
 
