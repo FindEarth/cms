@@ -25,9 +25,7 @@ const lock = new Auth0Lock(
 lock.authCallbackListener = (from, to, next) => {
   if (from.hash && from.hash.includes('access_token')) {
     lock.resumeAuth(from.hash, (err, authResult) => {
-      if (err) {
-        next({ name: 'login' });
-      }
+      if (err) { return next({ name: 'login' }); }
       store.set('token', authResult.idToken);
       next({ name: 'person-list' });
     });
