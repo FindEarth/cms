@@ -52,7 +52,7 @@
 <template lang='pug'>
   el-table(
     :data='people',
-    v-on:cell-click='onSelect',
+    v-on:row-click='onSelect',
     border='',
     style='width: 100%',
     v-loading='isLoading',
@@ -75,7 +75,7 @@
               type='primary',
               size='mini',
               icon='delete',
-              @click.native.prevent='deletePerson(scope.$index, scope.row)'
+              @click.native.stop='deletePerson(scope.$index, scope.row)'
             )
 </template>
 
