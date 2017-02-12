@@ -7,8 +7,6 @@ import ElementUI          from 'element-ui';
 import VueRouter          from 'vue-router';
 import * as VueGoogleMaps from 'vue2-google-maps';
 
-console.log('Now test');
-
 import Store  from 'plugins/store';
 import auth0  from 'services/auth0'; // eslint-disable-line
 import App    from './components/App';
