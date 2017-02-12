@@ -16,15 +16,16 @@ const lock = new Auth0Lock(
       logo: 'https://avatars2.githubusercontent.com/u/19509447?v=3&s=200'
     },
     auth: {
-      responseType: 'token',
+      responseType : 'token',
       autoParseHash: true
     }
   }
 );
 
 lock.authCallbackListener = (from, to, next) => {
-  if (from.hash && from.hash.includes('access_token')) {
-    lock.resumeAuth(from.hash, (err, authResult) => {
+  if (store.get('token')) { next(); }
+  if (window.location.hash && window.location.hash.includes('access_token')) {
+    lock.resumeAuth(window.location.hash, (err, authResult) => {
       if (err) { return next({ name: 'login' }); }
       store.set('token', authResult.idToken);
       next({ name: 'person-list' });
