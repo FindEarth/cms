@@ -56,7 +56,7 @@
     border='',
     style='width: 100%',
     v-loading='isLoading',
-    element-loading-text='Cargando solicitudes...',
+    element-loading-text='Cargando solicitudes',
     empty-text='No se ha encontrado solicitudes de carga de personas'
   )
     el-table-column(fixed='', prop='name', label='Nombre', width='200')

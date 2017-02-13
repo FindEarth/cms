@@ -18,7 +18,9 @@
 <template lang='pug'>
 .container
   el-card(:body-style='{ padding: "0px" }')
-    img.image(:src='person.photos[0].data')
+    el-carousel(v-if='person.photos')
+      el-carousel-item(v-for='photo in person.photos')
+        img.image(v-bind:src='photo.data')
     div(style='padding: 14px;')
       span {{ person.name }}
       .bottom
@@ -32,13 +34,6 @@
 </template>
 
 <style lang='scss' scoped>
-  .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-
   .address {
     font-size: 13px;
     color: #999;
