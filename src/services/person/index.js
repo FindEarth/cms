@@ -36,7 +36,7 @@ personService.update = function(person) {
 };
 
 personService.delete = function(id) {
-  return api.del(`/person/${id}`)
+  return api.delete(`/person/${id}`)
     .then((response) => {
       Message({
         showClose: true,

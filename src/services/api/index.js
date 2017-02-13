@@ -1,5 +1,5 @@
-import trae  from 'trae';
-import user  from 'services/user';
+import trae from 'trae';
+import user from 'services/user';
 
 function errorMessage(err) {
   switch (err.status) {
@@ -45,11 +45,10 @@ function identity(res) {
 }
 
 const api = trae.create({
-  baseUrl: 'https://alerta-solidaria.herokuapp.com'
+  baseUrl: 'https://api.find.earth'
 });
 
 api.before(tokenize);
 api.after(identity, throwError);
 
 export default api;
-
