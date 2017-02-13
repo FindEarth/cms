@@ -37,6 +37,16 @@
         .then(() => {
           this.people.splice(index, 1);
         });
+      },
+
+      sharePerson(person) {
+        const text = `${person.name} ha sido encontrado el el ${person.createdAt}, ` +
+                     'gracias por difundir!';
+        window.open(
+          `https://twitter.com/intent/tweet?text=${text}`,
+          'share-person',
+          'height=400,width=650'
+        );
       }
     }
   };
@@ -49,7 +59,7 @@ div
     border='',
     style='width: 100%',
     v-loading='isLoading',
-    element-loading-text='Cargando personas...',
+    element-loading-text='Cargando personas',
     empty-text='No se ha encontrado personas'
   )
     el-table-column(fixed='', prop='name', label='Nombre', width='200')
@@ -63,7 +73,12 @@ div
       template(scope='scope')
         el-button-group
           el-button(type='primary', size='mini', icon='edit')
-          el-button(type='primary', size='mini', icon='share')
+          el-button(
+            type='primary',
+            size='mini',
+            icon='share',
+            @click.native.stop='sharePerson(scope.row)'
+          )
           el-button(
             type='primary',
             size='mini',
