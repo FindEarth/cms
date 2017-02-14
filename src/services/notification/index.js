@@ -4,7 +4,7 @@ import api         from 'services/api';
 const notificationService = {};
 
 notificationService.getAll = function(query = {}, organizationId) {
-  return api.get(`/notification/organization/${organizationId}/notification-set`, query)
+  return api.get(`/notification/organization/${organizationId}/notification-set`, { params: { query } })
     .then(response => response.data);
 };
 

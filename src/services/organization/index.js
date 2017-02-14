@@ -4,7 +4,7 @@ import toast from 'services/toast';
 const organizationService = {};
 
 organizationService.getOrganizations = function(query = {}) {
-  return api.get('/organization', query)
+  return api.get('/organization', { params: { query } })
   .then(response => response.data);
 };
 
