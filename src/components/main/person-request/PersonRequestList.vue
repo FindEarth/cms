@@ -40,7 +40,11 @@
           cancelButtonText : 'Cancel',
           type             : 'warning'
         })
-        .then(() => personRequestService.delete(personRequest._id))
+        .then(() => {
+          personRequestService.delete(personRequest._id).then(() => {
+            this.$router.push({ name  : 'person-request-list' });
+          });
+        })
         .then(() => {
           this.personRequests.splice(index, 1);
         });
