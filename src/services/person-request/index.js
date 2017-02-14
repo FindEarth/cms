@@ -4,12 +4,12 @@ import api         from 'services/api';
 const personRequestService = {};
 
 personRequestService.get = function(query = {}) {
-  return api.get('/person-request', query)
+  return api.get('/person-request', { params: query })
     .then(response => response.data);
 };
 
 personRequestService.getTotalCount = function(id) {
-  return api.get('/person-request', { approved: false })
+  return api.get('/person-request', { params: { approved: false } })
     .then(response => response.data);
 };
 

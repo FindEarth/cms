@@ -4,7 +4,7 @@ import api         from 'services/api';
 const personService = {};
 
 personService.get = function(query = {}) {
-  return api.get('/person', query)
+  return api.get('/person', { params: query })
     .then(response => response.data);
 };
 
