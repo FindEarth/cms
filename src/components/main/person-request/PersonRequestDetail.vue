@@ -71,32 +71,33 @@
     el-col(:span='7', :offset='1')
       .grid-content
         el-card(:body-style="{ padding: '0px' }", v-loading='isLoading')
-          //- el-carousel(v-if='person.photos')
-          //-   el-carousel-item(v-for='photo in person.photos')
-          //-     img.image(v-bind:src='photo.url')
-          //- div(style='padding: 14px;')
-          //-   span {{ person.name }}
-          //-   .bottom.clearfix
-          //-     time.time {{ person.createdAt }}
+          el-carousel
+            el-carousel-item
+              img.image(src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Placeholder_no_text.svg/1024px-Placeholder_no_text.svg.png')
+          div(style='padding: 14px;')
+            span {{ personRequest.name }}
 
     el-col(:span='15')
       .grid-content
         el-collapse(v-model='activeTab', accordion='')
-          el-collapse-item(title='Apariencia', name='1')
-          el-collapse-item(title='Vestimenta', name='2')
-          el-collapse-item(title='Mas Datos', name='4')
-        //-
-        //- h4 Contactos
-        //- el-table(
-        //-   :data='person.contacts',
-        //-   style='width: 100%',
-        //-   v-loading='isLoading',
-        //-   element-loading-text='Cargando contactos...',
-        //-   empty-text='La persona no posee contactos'
-        //- )
-        //-   el-table-column(prop='name', label='Nombre', width='180')
-        //-   el-table-column(prop='phone', label='Telefono', width='180')
-        //-   el-table-column(prop='email', label='Email')
+          el-collapse-item(title='Solicitud de reporte', name='1')
+            div {{personRequest.name}} tiene {{personRequest.age}} años.
+          el-collapse-item(title='Ultima vez visto', name='2')
+            div {{personRequest.lastSeenAt}}
+          el-collapse-item(title='Descripcion del reporte', name='4')
+            div Phasellus porttitor enim id metus volutpat ultricies. Ut nisi nunc, blandit sed dapibus at, vestibulum in felis. Etiam iaculis lorem ac nibh bibendum rhoncus. Phasellus porttitor enim id metus volutpat ultricies. Ut nisi nunc, blandit sed dapibus at, vestibulum in felis. Etiam iaculis lorem ac nibh bibendum rhoncus.
+
+        h4 Contactos
+        el-table(
+          :data='personRequest.contacts',
+          style='width: 100%',
+          v-loading='isLoading',
+          element-loading-text='Cargando contactos...',
+          empty-text='La persona no posee contactos'
+        )
+          el-table-column(prop='name', label='Nombre', width='180')
+          el-table-column(prop='phone', label='Telefono', width='180')
+          el-table-column(prop='email', label='Email')
 </template>
 
 <style lang="scss">
