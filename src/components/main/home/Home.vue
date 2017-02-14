@@ -21,7 +21,7 @@ export default {
         data: [4, 43, 12, 1, 5, 6, 20, 13, 80, 5, 4, 43, 12, 1, 5, 6, 20, 13, 80, 5],
         title: {
           x: 'center',
-          text: 'Desaparecidos por Edad',
+          text: 'Perdidos por Edad',
           textStyle: {
             color: '#48576a',
             fontWeight: 'normal',
@@ -39,7 +39,7 @@ export default {
         }],
         title: {
           x: 'center',
-          text: 'Desaparecidos por Género',
+          text: 'Perdidos por Género',
           textStyle: {
             color: '#48576a',
             fontWeight: 'normal',
@@ -57,7 +57,7 @@ export default {
         }],
         title: {
           x: 'center',
-          text: 'Desaparecidos por Tipo',
+          text: 'Perdidos por Tipo',
           textStyle: {
             color: '#48576a',
             fontWeight: 'normal',

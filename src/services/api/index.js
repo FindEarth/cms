@@ -1,31 +1,14 @@
-/* global window */
+import trae from 'trae';
+import user from 'services/user';
 
-import axios from 'axios';
-
-import env   from 'services/env';
-// import user  from 'services/user';
-import toast from 'services/toast';
-
-const api = {};
-
-axios.defaults.baseURL = env.getApiUrl();
-axios.defaults.timeout = 25000;
-
-
-function errorHandler(err) {
-  const res = err.response || err;
-  if (!res.status) { return `Unknown Error: ${res}`; }
-
-  switch (res.status) {
+function errorMessage(err) {
+  switch (err.status) {
     case 400:
-      return res.data || 'Error 400: Bad Request';
+      return err.message || 'Error 400: Bad Request';
     case 401:
-      // user.clearToken();
+      user.clearToken();
       window.location.href = '/login';
-      if (res.data && res.data.errorDescription) {
-        return res.data.errorDescription;
-      }
-      break;
+      return err.message;
     case 402:
       return 'Error 402: You must upgrade your account to do that';
     case 403:
@@ -37,63 +20,35 @@ function errorHandler(err) {
     case 500: break;
     case 502: break;
     case 503:
-      return `API Server Error ${res.status}`;
+      return `API Server Error ${err.status}`;
     default:
-      return `API Request Error ${res.status}`;
+      return `API Request Error ${err.status}`;
   }
   return 'Unknown Error';
 }
 
-axios.interceptors.request.use((config) => {
-  config.headers = config.headers || {};
-  // const idToken = user.getToken();
-  // if (idToken) { config.headers.Authorization = `Bearer ${idToken}`; }
+function tokenize(config) {
+  const token = user.getToken();
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
   return config;
-}, error => console.log(error));
+}
 
-api.post = function(path, data, authenticate = true) {
-  return axios
-    .post(path, data)
-    .then(res => res)
-    .catch((err) => {
-      const message = errorHandler(err);
-      toast.error(message);
-      throw (message);
-    });
-};
+function throwError(err) {
+  const msg = errorMessage(err);
+  throw msg;
+}
 
-api.put = function(path, data, authenticate = true) {
-  return axios
-    .put(path, data)
-    .then(res => res)
-    .catch((err) => {
-      const message = errorHandler(err);
-      toast.error(message);
-      throw (message);
-    });
-};
+function identity(res) {
+  return res;
+}
 
-api.get = function(path, data, authenticate = true) {
-  const query = { params: data };
-  return axios
-    .get(path, query)
-    .then(res => res)
-    .catch((err) => {
-      const message = errorHandler(err);
-      toast.error(message);
-      throw (message);
-    });
-};
+const api = trae.create({
+  baseUrl: 'https://api.find.earth'
+});
 
-api.del = function(path, authenticate = true) {
-  return axios
-    .delete(path)
-    .then(res => res)
-    .catch((err) => {
-      const message = errorHandler(err);
-      toast.error(message);
-      throw (message);
-    });
-};
+api.before(tokenize);
+api.after(identity, throwError);
 
 export default api;

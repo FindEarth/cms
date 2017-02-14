@@ -7,21 +7,28 @@ import ElementUI          from 'element-ui';
 import VueRouter          from 'vue-router';
 import * as VueGoogleMaps from 'vue2-google-maps';
 
+import Store  from 'plugins/store';
+import auth0  from 'services/auth0'; // eslint-disable-line
 import App    from './components/App';
-import Routes from './routes';
+import Router from './routes';
 
 Vue.use(VueRouter);
 Vue.use(ElementUI);
+Vue.use(Store);
 Vue.use(VueGoogleMaps, {
   load: {
-    key      : 'AIzaSyCrBw8TPQmnVKPLhNxpykbuB8EyzmPotgA',
+    key      : 'AIzaSyBFDFmn-PL1Kg0frwZUXibuFyuiTPDMsas',
     libraries: 'places' // to use place input
   }
 });
 
 const router = new VueRouter({
-  routes: Routes
+  routes: Router.routes,
+  mode  : 'history'
 });
+
+router.beforeEach(Router.loginMiddleware);
+router.beforeEach(auth0.authCallbackListener);
 
 /* eslint-disable no-new */
 new Vue({

@@ -1,15 +1,34 @@
+import userService   from 'services/user';
 import MainContainer from 'components/main/MainContainer.vue';
 
-import home   from 'routes/home';
-import person from 'routes/person';
+import loginRoutes         from 'routes/login';
+import homeRoutes          from 'routes/home';
+import personRoutes        from 'routes/person';
+import personRequestRoutes from 'routes/person-request';
 
 const routes = [{
   path     : '/',
   component: MainContainer,
   children : [
-    home,
-    person
+    homeRoutes,
+    personRoutes,
+    personRequestRoutes
   ]
-}];
+}, loginRoutes];
 
-export default routes;
+const publicRoutes = ['login'];
+
+const loginMiddleware = (to, from, next) => {
+  if (publicRoutes.find(publicr => publicr === to.name)) {
+    return next();
+  }
+  if (!userService.getToken()) {
+    return next({ name: 'login' });
+  }
+  next();
+};
+
+export default {
+  routes,
+  loginMiddleware
+};

@@ -4,7 +4,7 @@ import toast from 'services/toast';
 const organizationService = {};
 
 organizationService.getOrganizations = function(query = {}) {
-  return api.get('/organization', query)
+  return api.get('/organization', { params: { query } })
   .then(response => response.data);
 };
 
@@ -16,7 +16,7 @@ organizationService.get = function(id) {
 
 organizationService.update = function(organization) {
   return api.put(`/organization/${organization._id}`, organization)
-  .then(response => {
+  .then((response) => {
     toast.success('Organizacion actualizada correctamente');
     return response.data;
   });

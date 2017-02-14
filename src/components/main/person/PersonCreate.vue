@@ -13,7 +13,8 @@
 
     data() {
       return {
-        step: 1,
+        step     : 1,
+        isLoading: false,
 
         person: {
           name       : '',
@@ -52,6 +53,7 @@
       },
 
       onResumeSubmitted() {
+        this.isLoading = true;
         return personService.create(this.person)
           .then(() => this.$router.push({ name: 'person-list' }));
       }
@@ -60,7 +62,7 @@
 </script>
 
 <template lang='pug'>
-  div
+  div(v-loading='isLoading', element-loading-text='Creando persona',)
     el-steps.steps(:space='150', :active='step')
       el-step(title='Step 1', description='Informacion basica')
       el-step(title='Step 2', description='Geolocalizacion')

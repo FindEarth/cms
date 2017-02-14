@@ -14,7 +14,7 @@
 </script>
 
 <template lang='pug'>
-  el-menu.el-menu-vertical-demo(mode='vertical', default-active='1', @select='handleSelect')
+  el-menu(mode='vertical', default-active='1', @select='handleSelect')
     el-menu-item-group(title='General')
       el-menu-item(index='home')
         i.fa.fa-home.fa-lg
@@ -29,7 +29,7 @@
       el-menu-item(index='person-create')
         i.fa.fa-plus.fa-lg
         | Nuevo
-      el-menu-item(index='5')
+      el-menu-item(index='person-request-list')
         i.fa.fa-question.fa-lg
         | Solicitudes
 

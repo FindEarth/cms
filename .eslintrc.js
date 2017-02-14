@@ -52,13 +52,16 @@ module.exports = {
     'no-mixed-operators'               : 0,
     'import/no-unresolved'             : 0,
     'import/extensions'                : 0,
-    'no-prototype-builtins'            : 0
+    'no-prototype-builtins'            : 0,
+    'new-cap'                          : 0
   },
   globals: {
-    location  : true,
-    navigator : true,
-    window    : true,
-    document  : true,
-    FileReader: true
+    location      : true,
+    navigator     : true,
+    window        : true,
+    document      : true,
+    FileReader    : true,
+    sessionStorage: true,
+    localStorage  : true
   }
 }

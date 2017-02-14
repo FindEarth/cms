@@ -6,7 +6,8 @@
 
     data() {
       return {
-        people: []
+        people   : [],
+        isLoading: false
       };
     },
 
@@ -16,18 +17,58 @@
 
     methods: {
       getPeople() {
-        personService.get()
+        this.isLoading = true;
+        personService.get({ isMissing: true })
           .then((people) => {
-            this.people = people;
+            this.people    = people;
+            this.isLoading = false;
           });
+      },
+
+      onSelect(person) {
+        this.$router.push({
+          name  : 'person-detail',
+          params: { personId: person._id }
+        });
+      },
+
+      deletePerson(index, person) {
+        const message = `Esta operacion borrara la persona ${person.name} ` +
+                        'permanentemente, Desea continuar?';
+        this.$confirm(message, 'Eliminar Persona', {
+          confirmButtonText: 'OK',
+          cancelButtonText : 'Cancel',
+          type             : 'warning'
+        })
+        .then(() => personService.delete(person._id))
+        .then(() => {
+          this.people.splice(index, 1);
+        });
+      },
+
+      sharePerson(person) {
+        const text = `${person.name} se perdió el ${person.createdAt}, ` +
+                     'ayudanos a encontrarlo.';
+        window.open(
+          `https://twitter.com/intent/tweet?text=${text}`,
+          'share-person',
+          'height=400,width=650'
+        );
       }
     }
   };
 </script>
 
 <template lang='pug'>
-div
-  el-table(:data='people', border='', style='width: 100%')
+  el-table(
+    :data='people',
+    v-on:row-click='onSelect',
+    border='',
+    style='width: 100%',
+    v-loading='isLoading',
+    element-loading-text='Cargando personas',
+    empty-text='No se ha encontrado personas'
+  )
     el-table-column(fixed='', prop='name', label='Nombre', width='200')
     el-table-column(prop='age', label='Edad', width='90')
     el-table-column(prop='gender', label='Genero', width='90')
@@ -37,8 +78,20 @@ div
     el-table-column(prop='createdAt', label='Fecha', width='210')
     el-table-column(fixed='right', label='Operations', width='120')
       template(scope='scope')
-        el-button(@click.native.prevent='deleteRow(scope.$index, tableData4)', type='text', size='small')
-          | Borrar
+          el-button-group
+            el-button(type='primary', size='mini', icon='edit')
+            el-button(
+              type='primary',
+              size='mini',
+              icon='share',
+              @click.native.stop='sharePerson(scope.row)'
+            )
+            el-button(
+              type='primary',
+              size='mini',
+              icon='delete',
+              @click.native.stop='deletePerson(scope.$index, scope.row)'
+            )
 </template>
 
 <style lang="scss">
