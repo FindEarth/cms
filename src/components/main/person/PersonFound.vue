@@ -21,7 +21,6 @@
         personService.get({ isMissing: false })
           .then((people) => {
             this.people    = people;
-            console.log(this.people);
             this.isLoading = false;
           });
       },
