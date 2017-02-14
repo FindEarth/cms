@@ -26,10 +26,10 @@
       },
 
       onSelect(personRequest) {
-        // this.$router.push({
-        //   name  : 'person-request-detail',
-        //   params: { personId: personRequest._id }
-        // });
+        this.$router.push({
+          name  : 'person-request-detail',
+          params: { personRequestId: personRequest._id }
+        });
       },
 
       deletePersonRequest(index, personRequest) {
