@@ -41,9 +41,7 @@
           type             : 'warning'
         })
         .then(() => {
-          personRequestService.delete(personRequest._id).then(() => {
-            this.$router.push({ name  : 'person-request-list' });
-          });
+          personRequestService.delete(personRequest._id);
         })
         .then(() => {
           this.personRequests.splice(index, 1);
@@ -56,7 +54,6 @@
 <template lang='pug'>
   el-table(
     :data='personRequests',
-    v-on:cell-click='onSelect',
     border='',
     style='width: 100%',
     v-loading='isLoading',
@@ -73,7 +70,12 @@
     el-table-column(fixed='right', label='Operations', width='120')
       template(scope='scope')
           el-button-group
-            el-button(type='primary', size='mini', icon='edit')
+            el-button(
+              type='primary',
+              size='mini',
+              icon='edit'
+              @click.native.prevent='onSelect'
+              )
             el-button(
               type='primary',
               size='mini',

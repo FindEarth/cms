@@ -55,8 +55,7 @@
           });
       },
       setFound(person) {
-        const message = 'Desea marcar a ' +
-                        `${person.name} como encontrado?`;
+        const message = `Desea marcar a ${person.name} como encontrado?`;
         this.$confirm(message, 'Persona encontrada', {
           confirmButtonText: 'OK',
           cancelButtonText : 'Cancel',
