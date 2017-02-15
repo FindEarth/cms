@@ -53,6 +53,22 @@
             this.person    = person;
             this.isLoading = false;
           });
+      },
+      setFound(person) {
+        const message = 'Desea marcar a ' +
+                        `${person.name} como encontrado?`;
+        this.$confirm(message, 'Persona encontrada', {
+          confirmButtonText: 'OK',
+          cancelButtonText : 'Cancel',
+          type             : 'warning'
+        }).then(() => {
+          personService.update({
+            _id      : person._id,
+            isMissing: !person.isMissing
+          }).then(() => {
+            this.$router.push({ name  : 'person-found' });
+          });
+        });
       }
     }
   };
@@ -99,6 +115,11 @@
             el-table-column(prop='name', label='Nombre', width='180')
             el-table-column(prop='phone', label='Telefono', width='180')
             el-table-column(prop='email', label='Email')
+          div(style='padding-top: 8px;')
+            el-button(
+              type='warning',
+              @click.native.prevent='setFound(person)'
+              ) Encontrado!
 </template>
 
 <style lang="scss">
