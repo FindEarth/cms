@@ -23,7 +23,8 @@ div
   )
     el-row
       el-col.left-section(:span='4')
-        p.logo Find Earth
+        img.logo-img(src='/static/logo.svg')
+        p.logo-text Find Earth
       el-col.right-section(:span='20')
 </template>
 
@@ -44,13 +45,20 @@ div
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: 15px;
 
       p {
-        &.logo {
+        &.logo-text {
           color: white;
           font-weight: 400;
-          font-size: 23px;
+          font-size: 18px;
         }
+      }
+
+      .logo-img {
+        width: 30px;
+        height: 30px;
+        margin-right: 5px;
       }
     }
   }
