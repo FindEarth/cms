@@ -1,7 +1,8 @@
-import 'element-ui/lib/theme-default/index.css';
-
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+// Custom theme #00bcd4 for element-ui https://elementui.github.io/theme-preview/#/en-US
+import 'styles/custom-theme/index.css';
+
 import Vue                from 'vue';
 import ElementUI          from 'element-ui';
 import locale             from 'element-ui/lib/locale/lang/es';
@@ -12,6 +13,7 @@ import Store  from 'plugins/store';
 import auth0  from 'services/auth0'; // eslint-disable-line
 import App    from './components/App';
 import Router from './routes';
+
 
 Vue.use(VueRouter);
 Vue.use(ElementUI, { locale });

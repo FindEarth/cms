@@ -6,7 +6,7 @@ import homeRoutes          from 'routes/home';
 import personRoutes        from 'routes/person';
 import personRequestRoutes from 'routes/person-request';
 
-const routes = [{
+const mainRoute = {
   path     : '/',
   component: MainContainer,
   children : [
@@ -14,7 +14,18 @@ const routes = [{
     personRoutes,
     personRequestRoutes
   ]
-}, loginRoutes];
+};
+
+const defaultRoute = {
+  path: '*',
+  redirect: '/'
+};
+
+const routes = [
+  mainRoute,
+  loginRoutes,
+  defaultRoute
+];
 
 const publicRoutes = ['login'];
 
