@@ -14,7 +14,7 @@
 </script>
 
 <template lang='pug'>
-  el-menu(mode='vertical', default-active='1', @select='handleSelect')
+  el-menu.full-height(mode='vertical', default-active='1', @select='handleSelect')
     el-menu-item-group(title='General')
       el-menu-item(index='home')
         i.fa.fa-home.fa-lg
@@ -48,4 +48,9 @@
 </template>
 
 <style lang='scss' scoped>
+  @import "../../style/variables.scss";
+
+  .full-height {
+    height: $layout-height;
+  }
 </style>

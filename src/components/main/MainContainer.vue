@@ -18,10 +18,16 @@
       el-col(:span='4')
         .grid-content.bg-purple
           left-menu
-      el-col(:span='20')
+      el-col.full-height(:span='20')
         .grid-content.bg-purple
           router-view
 </template>
 
 <style lang='scss' scoped>
+  @import "../../style/variables.scss";
+
+  .full-height {
+    height: $layout-height;
+    overflow-y: scroll;
+  }
 </style>
