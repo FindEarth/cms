@@ -21,13 +21,12 @@ div
     mode='horizontal',
     @select='handleSelect'
   )
-    el-menu-item(index='1') Processing Center
-    el-submenu(index='2')
-      template(slot='title') Workspace
-      el-menu-item(index='2-1') item one
-      el-menu-item(index='2-2') item two
-      el-menu-item(index='2-3') item three
+    p.logo Find Earth
 </template>
 
 <style lang='scss' scoped>
+  p.logo {
+    color: white;
+    margin-left: 20px;
+  }
 </style>
