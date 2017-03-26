@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "auth0-lock": "^10.10.2",
-    "element-ui": "^1.1.6",
+    "element-ui": "^1.2.5",
     "lodash": "^4.17.4",
     "marker-clusterer-plus": "^2.1.4",
     "pug": "^2.0.0-beta9",

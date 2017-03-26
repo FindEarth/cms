@@ -1,6 +1,6 @@
 # findearth
 
-> FindEarth Content Management System
+> FindEarth Content Management System.
 
 ## Build Setup
 

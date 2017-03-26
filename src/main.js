@@ -4,6 +4,7 @@ import 'element-ui/lib/theme-default/index.css';
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue                from 'vue';
 import ElementUI          from 'element-ui';
+import locale             from 'element-ui/lib/locale/lang/es';
 import VueRouter          from 'vue-router';
 import * as VueGoogleMaps from 'vue2-google-maps';
 
@@ -13,7 +14,7 @@ import App    from './components/App';
 import Router from './routes';
 
 Vue.use(VueRouter);
-Vue.use(ElementUI);
+Vue.use(ElementUI, { locale });
 Vue.use(Store);
 Vue.use(VueGoogleMaps, {
   load: {
