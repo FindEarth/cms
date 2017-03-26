@@ -63,7 +63,7 @@
     el-table-column(fixed='', prop='name', label='Nombre', width='200')
     el-table-column(prop='age', label='Edad', width='90')
     el-table-column(prop='gender', label='Genero', width='90')
-    el-table-column(prop='geo.city', label='Ciudad', width='220')
+    el-table-column(prop='geo.city', label='Ciudad', width='260')
     el-table-column(prop='geo.countryCode', label='Pais', width='70')
     el-table-column(prop='geo.postalCode', label='Zip', width='80')
     el-table-column(prop='createdAt', label='Fecha', width='210')
