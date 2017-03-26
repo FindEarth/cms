@@ -16,21 +16,20 @@
 </script>
 
 <template lang='pug'>
-.container
-  el-card(:body-style='{ padding: "0px" }')
-    el-carousel(v-if='person.photos')
-      el-carousel-item(v-for='photo in person.photos')
-        img.image(v-bind:src='photo.data')
-    div(style='padding: 14px;')
-      span {{ person.name }}
-      .bottom
-        .address {{ person.geo.address }}
+  .container
+    el-card(:body-style='{ padding: "0px" }')
+      el-carousel(v-if='person.photos')
+        el-carousel-item(v-for='photo in person.photos')
+          img.image(v-bind:src='photo.data')
+      div(style='padding: 14px;')
+        span {{ person.name }}
+        .bottom
+          .address {{ person.geo.address }}
 
-  .button-wrapper
-    el-button(type='primary', @click='onSubmit')
-      | Crear Persona
-      i.el-icon-upload.el-icon-right
-
+    .button-wrapper
+      el-button(type='primary', @click='onSubmit')
+        | Crear Persona
+        i.el-icon-upload.el-icon-right
 </template>
 
 <style lang='scss' scoped>

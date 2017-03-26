@@ -15,6 +15,7 @@
       this.isLoading = true;
       this.getPersonRequest(this.$route.params.personRequestId);
     },
+
     computed: {
       position() {
         const position = {
@@ -28,12 +29,12 @@
         return position;
       }
     },
+
     methods: {
       getPersonRequest(personRequestId) {
         personRequestService.getById(personRequestId)
-          .then((req) => {
-            this.personRequest = req;
-            console.log(this.personRequest);
+          .then((personRequest) => {
+            this.personRequest = personRequest;
             this.isLoading     = false;
           });
       },
@@ -46,9 +47,7 @@
           type             : 'warning'
         })
         .then(() => personRequestService.delete(personRequest._id))
-        .then(() => {
-          this.personRequests.splice(index, 1);
-        });
+        .then(() => this.personRequests.splice(index, 1));
       }
     }
 };

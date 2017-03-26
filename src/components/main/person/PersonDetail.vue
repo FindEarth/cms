@@ -114,14 +114,14 @@
             el-table-column(prop='name', label='Nombre', width='180')
             el-table-column(prop='phone', label='Telefono', width='180')
             el-table-column(prop='email', label='Email')
+
           div(style='padding-top: 8px;')
             el-button(
-              type='warning',
               @click.native.prevent='setFound(person)'
-              ) Encontrado!
+            ) Encontrado!
 </template>
 
-<style lang="scss">
+<style lang='scss'>
   .container {
     padding-bottom: 30px;
   }
@@ -143,10 +143,10 @@
   }
   .clearfix:before,
   .clearfix:after {
-      display: table;
-      content: "";
+    display: table;
+    content: "";
   }
   .clearfix:after {
-      clear: both
+    clear: both
   }
 </style>
