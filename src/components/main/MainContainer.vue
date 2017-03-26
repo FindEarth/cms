@@ -30,5 +30,6 @@
     height: $layout-height;
     overflow-y: scroll;
     background-color: $background;
+    padding: 30px;
   }
 </style>

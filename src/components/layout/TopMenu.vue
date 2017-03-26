@@ -26,6 +26,16 @@ div
         img.logo-img(src='/static/logo.svg')
         p.logo-text Find Earth
       el-col.right-section(:span='20')
+        el-dropdown
+          el-button
+            i.fa.fa-user-circle-o.fa-2x(aria-hidden="true")
+            span.name
+              | Jonatan del valle
+              i.el-icon-caret-bottom.el-icon--right
+          el-dropdown-menu(slot='dropdown')
+            el-dropdown-item Perfil
+            el-dropdown-item Información
+            el-dropdown-item Salir
 </template>
 
 <style lang='scss' scoped>
@@ -59,6 +69,29 @@ div
         width: 30px;
         height: 30px;
         margin-right: 5px;
+      }
+    }
+
+    .right-section {
+      display: flex;
+      height: $header-height;
+      align-items: center;
+      justify-content: flex-end;
+      flex-direction: row;
+      padding: 0 15px;
+
+      button {
+        border: none;
+        color: $dark-grey;
+
+        &:hover {
+          color: $lightBlue;
+        }
+
+        .name {
+          position: relative;
+          bottom: 4px;
+        }
       }
     }
   }

@@ -94,11 +94,11 @@
 
 <style lang='scss' scoped>
   .steps {
-    padding: 40px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    margin-bottom: 30px;
 
     .last-step {
       width: auto !important;
@@ -107,6 +107,5 @@
 
   .box-card {
     padding: 20px 20px 0 20px;
-    margin: 0 40px 20px 40px;
   }
 </style>
