@@ -29,5 +29,6 @@
   .full-height {
     height: $layout-height;
     overflow-y: scroll;
+    background-color: $background;
   }
 </style>

@@ -15,11 +15,11 @@
 
 <template lang='pug'>
   el-menu.full-height(mode='vertical', default-active='1', @select='handleSelect')
-    el-menu-item-group(title='General')
+    el-menu-item-group.group-custom(title='General')
       el-menu-item(index='home')
         i.fa.fa-home.fa-lg
         | Dashboard
-    el-menu-item-group(title='Personas')
+    el-menu-item-group.group-custom(title='Personas')
       el-menu-item(index='person-list')
         i.fa.fa-male.fa-lg
         | Perdidos
@@ -33,7 +33,7 @@
         i.fa.fa-question.fa-lg
         | Solicitudes
 
-    el-menu-item-group(title='Notificaciones')
+    el-menu-item-group.group-custom(title='Notificaciones')
       el-menu-item(index='6')
         i.fa.fa-bell-o.fa-lg
         | Lista
@@ -41,7 +41,7 @@
         i.fa.fa-plus.fa-lg
         | Nuevo
 
-    el-menu-item-group(title='Configuracion')
+    el-menu-item-group.group-custom(title='Configuracion')
       el-menu-item(index='8')
         i.fa.fa-user.fa-lg
         | Perfil
@@ -52,5 +52,22 @@
 
   .full-height {
     height: $layout-height;
+    background-color: $dark-grey;
+    border-radius: 0;
+  }
+
+  .el-menu-item-group {
+    .el-menu-item {
+      color: #a1a1a1;
+
+      &.is-active {
+        color: $white;
+      }
+
+      &:hover {
+        color: $white;
+        background-color: $dark-grey;
+      }
+    }
   }
 </style>

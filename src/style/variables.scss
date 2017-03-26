@@ -1,1 +1,9 @@
-$layout-height: 92vh;
+// Colors
+$lightBlue:  #00bcd4;
+$white:      #fff;
+$dark-grey:  #333c44;
+$background: #f5f5f5;
+
+// Layout Measurements
+$header-height: 60px;
+$layout-height: calc(100vh - #{$header-height});

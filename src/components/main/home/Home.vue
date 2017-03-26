@@ -23,7 +23,7 @@ export default {
           x: 'center',
           text: 'Perdidos por Edad',
           textStyle: {
-            color: '#48576a',
+            color: '#333c44',
             fontWeight: 'normal',
             fontFamily: 'Helvetica Neue'
           }
@@ -41,7 +41,7 @@ export default {
           x: 'center',
           text: 'Perdidos por Género',
           textStyle: {
-            color: '#48576a',
+            color: '#333c44',
             fontWeight: 'normal',
             fontFamily: 'Helvetica Neue'
           }
@@ -59,7 +59,7 @@ export default {
           x: 'center',
           text: 'Perdidos por Tipo',
           textStyle: {
-            color: '#48576a',
+            color: '#333c44',
             fontWeight: 'normal',
             fontFamily: 'Helvetica Neue'
           }
@@ -82,13 +82,13 @@ export default {
             :height='300',
             :title='missingByAge.title',
             :animationDuration='2000',
-            xAxisColor='#48576a',
+            xAxisColor='#333c44',
             xAxisName='Edad',
             xAxisLegend='Edad',
-            yAxisColor='#48576a',
+            yAxisColor='#333c44',
             yAxisName='Perdidas',
             yAxisLegend='Perdidas',
-            :barColor='["#20a0ff"]',
+            :barColor='["#00bcd4"]',
             :xAxisData='missingByAge.xAxisData',
             :yAxisData='missingByAge.yAxisData',
             :data='missingByAge.data'
@@ -101,7 +101,7 @@ export default {
             :height='300',
             :title='missingByGender.title',
             :animationDuration='2000',
-            :colors='["#48576a", "#20a0ff"]',
+            :colors='["#333c44", "#00bcd4"]',
             legendOrient='vertical',
             :legendDistanceFromTop='40',
             legendFormatter='{name}',
@@ -116,7 +116,7 @@ export default {
             :height='300',
             :title='missingByType.title',
             :animationDuration='2000',
-            :colors='["#48576a", "#20a0ff"]',
+            :colors='["#333c44", "#00bcd4"]',
             legendOrient='vertical',
             :legendDistanceFromTop='40',
             legendFormatter='{name} de 18 años',
@@ -138,6 +138,7 @@ export default {
 </template>
 
 <style lang='scss' scoped>
+@import "../../../style/variables.scss";
 
 $chart-height: 300px;
 
@@ -152,9 +153,10 @@ $chart-height: 300px;
   .chart-row {
     .chart-wrapper {
       margin: 15px;
-      box-shadow: 0 1px 6px rgba(0,0,0,.117647), 0 1px 4px rgba(0,0,0,.117647);
-      background-color: #eef1f6;
+      box-shadow: 0 0 2px rgba(0,0,0,.15);
+      background-color: $white;
       padding: 10px;
+      border-radius: 3px;
 
       &.full {
         height: $chart-height;
@@ -191,7 +193,7 @@ $chart-height: 300px;
         font-weight: normal;
         margin: 0;
         text-align: center;
-        color: #48576a;
+        color: #333c44;
         margin-top: 4px;
         font-size: 19px;
       }
