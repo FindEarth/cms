@@ -21,12 +21,24 @@ div
     mode='horizontal',
     @select='handleSelect'
   )
-    p.logo Find Earth
+    .logo
+      img(src='/static/favicon.png')
+      p.logo Find Earth
 </template>
 
 <style lang='scss' scoped>
-  p.logo {
-    color: white;
-    margin-left: 20px;
+  .logo {
+    img {
+      width: 35px;
+      padding: 10px;
+      vertical-align: middle;
+    }
+
+    p {
+      display: inline-block;
+      margin: 10px 0;
+      vertical-align: middle;
+      color: white;
+    }
   }
 </style>
