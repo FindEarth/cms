@@ -6,7 +6,11 @@
     },
 
     methods: {
+      getActive() {
+        return this.$route.name;
+      },
       handleSelect(key, keyPath) {
+        if (key === 'people' || key === 'notifications') return;
         this.$router.push({ name: key });
       }
     }
@@ -14,38 +18,71 @@
 </script>
 
 <template lang='pug'>
-  el-menu(mode='vertical', default-active='1', @select='handleSelect')
-    el-menu-item-group(title='General')
-      el-menu-item(index='home')
-        i.fa.fa-home.fa-lg
-        | Dashboard
-    el-menu-item-group(title='Personas')
-      el-menu-item(index='person-list')
-        i.fa.fa-male.fa-lg
-        | Perdidos
-      el-menu-item(index='person-found')
-        i.fa.fa-male.fa-lg
-        | Encontrados
-      el-menu-item(index='person-create')
-        i.fa.fa-plus.fa-lg
-        | Nuevo
-      el-menu-item(index='person-request-list')
-        i.fa.fa-question.fa-lg
-        | Solicitudes
-
-    el-menu-item-group(title='Notificaciones')
-      el-menu-item(index='6')
-        i.fa.fa-bell-o.fa-lg
-        | Lista
-      el-menu-item(index='7')
-        i.fa.fa-plus.fa-lg
-        | Nuevo
-
-    el-menu-item-group(title='Configuracion')
-      el-menu-item(index='8')
-        i.fa.fa-user.fa-lg
-        | Perfil
+  section#left-menu
+    el-menu.full-height(:default-active='getActive()', @select='handleSelect')
+      el-menu-item-group.group-custom(title='')
+        el-menu-item(index='home')
+          i.fa.fa-home.fa-lg
+          | Dashboard
+        el-submenu(index='people')
+          template(slot='title')
+            i.fa.fa-male.fa-lg
+            | Personas
+          el-menu-item-group(title='')
+            el-menu-item(index='person-list') Perdidos
+            el-menu-item(index='person-found') Encontrados
+            el-menu-item(index='person-create') Nuevo
+            el-menu-item(index='person-request-list') Solicitudes
+        el-submenu(index='notifications')
+          template(slot='title')
+             i.fa.fa-bell-o.fa-lg
+             | Notificaciones
+          el-menu-item-group(title='')
+            el-menu-item(index='') Lista
+            el-menu-item(index='') Crear
+        el-menu-item(index='')
+          i.fa.fa-user.fa-lg
+          | Perfil
 </template>
 
-<style lang='scss' scoped>
+<style lang='scss'>
+  @import "../../style/variables.scss";
+
+  section#left-menu {
+    .full-height {
+      height: $layout-height;
+      background-color: $dark-grey;
+      border-radius: 0;
+    }
+
+    .el-menu-item {
+      color: #a1a1a1;
+      &.is-active {
+        color: $white;
+      }
+      &:hover {
+        color: $white;
+        background-color: $darker-grey;
+      }
+    }
+
+    .el-submenu {
+      .el-menu-item-group__title {
+        padding: 0;
+        height: 0;
+      }
+      .el-submenu__title {
+        color: #a1a1a1;
+      }
+      .el-menu-item-group {
+        background-color: $darker-grey;
+      }
+      .el-submenu__title {
+        &:hover {
+          color: $white;
+          background-color: $darker-grey;
+        }
+      }
+    }
+  }
 </style>

@@ -1,0 +1,10 @@
+// Colors
+$lightBlue:  #00bcd4;
+$white:      #fff;
+$dark-grey:  #333c44;
+$darker-grey: #25292d;
+$background: rgba(245, 245, 245, .65);
+
+// Layout Measurements
+$header-height: 50px;
+$layout-height: calc(100vh - #{$header-height});
