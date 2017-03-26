@@ -143,7 +143,7 @@ export default {
 $chart-height: 300px;
 
 .container {
-  padding: 15px;
+  margin: -15px;
 
   .echarts {
     height: 300px;

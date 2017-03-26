@@ -14,7 +14,7 @@
 </script>
 
 <template lang='pug'>
-  el-menu.full-height(mode='vertical', default-active='1', @select='handleSelect')
+  el-menu.full-height(mode='vertical', default-active='home', @select='handleSelect')
     el-menu-item-group.group-custom(title='General')
       el-menu-item(index='home')
         i.fa.fa-home.fa-lg
