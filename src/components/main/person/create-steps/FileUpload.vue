@@ -46,7 +46,6 @@
 
       onRemove(file) {
         const index = this.files.findIndex(f => f.name === file.name);
-        console.log(index);
         this.files.splice(index, 1);
       },
 
