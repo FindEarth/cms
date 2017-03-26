@@ -1,4 +1,6 @@
-# findearth
+# CMS | Find Earth
+
+[![Codeship](https://img.shields.io/codeship/08998b80-d320-0134-1787-029621bb9ebb/master.svg)]()
 
 > FindEarth Content Management System.
 

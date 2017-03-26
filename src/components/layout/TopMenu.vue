@@ -21,13 +21,24 @@ div
     mode='horizontal',
     @select='handleSelect'
   )
-    el-menu-item(index='1') Processing Center
-    el-submenu(index='2')
-      template(slot='title') Workspace
-      el-menu-item(index='2-1') item one
-      el-menu-item(index='2-2') item two
-      el-menu-item(index='2-3') item three
+    .logo
+      img(src='/static/favicon.png')
+      p.logo Find Earth
 </template>
 
 <style lang='scss' scoped>
+  .logo {
+    img {
+      width: 35px;
+      padding: 10px;
+      vertical-align: middle;
+    }
+
+    p {
+      display: inline-block;
+      margin: 10px 0;
+      vertical-align: middle;
+      color: white;
+    }
+  }
 </style>
