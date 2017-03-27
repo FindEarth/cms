@@ -59,6 +59,7 @@
       color: #a1a1a1;
       &.is-active {
         color: $white;
+        background-color: $darker-grey;
       }
       &:hover {
         color: $white;
