@@ -26,4 +26,35 @@ body {
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
   border-radius: 3px;
   border: 0;
+
+  th >.cell {
+    color: lighten($dark-grey, 10);
+  }
+}
+
+.top-bar {
+  .el-submenu {
+    .el-submenu__title {
+      height: 50px;
+      line-height: 52px;
+      color: $dark-grey;
+      position: relative;
+      left: 15px;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
+    .el-submenu__icon-arrow {
+      color: $dark-grey;
+      margin-left: 10px;
+      margin-top: -1px;
+    }
+  }
+}
+
+.el-table__fixed,
+.el-table__fixed-right {
+  z-index: 1;
 }
