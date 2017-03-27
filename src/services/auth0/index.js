@@ -3,8 +3,8 @@ import store     from 'store';
 
 
 const lock = new Auth0Lock(
-  'zFGAcWRqfBqY1lf77Rt9GUgshPpz6i3d',
-  'keepers-co.auth0.com',
+  'fqfXBUk40SmkYJBwy1a5gNgi3Vod60lK',
+  'keepers.auth0.com',
   {
     allowedConnections: ['Username-Password-Authentication'],
     rememberLastLogin: true,
@@ -17,7 +17,8 @@ const lock = new Auth0Lock(
     },
     auth: {
       responseType : 'token',
-      autoParseHash: true
+      autoParseHash: true,
+      params       : { scope: 'openid email user_metadata' }
     }
   }
 );
