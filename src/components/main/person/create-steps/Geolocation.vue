@@ -1,20 +1,25 @@
 <script>
   export default {
-    data() {
-      return {
-        radius: 1000,
-        center: { lat: -34.603684, lng: -58.381559 },
-        marker: {
-          position: { lat: -34.603684, lng: -58.381559 }
-        },
-
-        geo: {
+    props: {
+      geo: {
+        type: Object,
+        default: () => ({
           loc        : [],
           address    : '',
           city       : '',
           postalCode : '',
           countryCode: '',
           country    : ''
+        })
+      }
+    },
+
+    data() {
+      return {
+        radius: 1000,
+        center: { lat: this.geo.loc[1] || -34.603684, lng: this.geo.loc[0] || -58.381559 },
+        marker: {
+          position: { lat: this.geo.loc[1] || -34.603684, lng: this.geo.loc[0] || -58.381559 }
         }
       };
     },
@@ -60,6 +65,7 @@
           class-name='el-input__inner',
           placeholder='Direccion',
           :select-first-on-enter='true',
+          :default-place='geo.address',
           v-on:place_changed='onPlaceChange'
         )
 

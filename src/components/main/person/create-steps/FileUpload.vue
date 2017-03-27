@@ -1,9 +1,14 @@
 <script>
   export default {
+    props: {
+      files: {
+        type: Array,
+        default: () => []
+      }
+    },
+
     data() {
       return {
-        files: [],
-
         dialogImageUrl: '',
         dialogVisible : false
       };
@@ -26,7 +31,7 @@
         };
 
         if (!isJPG) {
-          return fail('El formato de imagen debe ser JPG');
+          return fail('El formato debe ser valido');
         }
         if (!isLt2M) {
           return fail('El tamaño de imagen debe ser menor a 2MB');
@@ -45,7 +50,8 @@
       },
 
       onRemove(file) {
-        const index = this.files.findIndex(f => f.name === file.name);
+        const propToSearch = file.name ? 'name' : 'url';
+        const index = this.files.findIndex(f => f[propToSearch] === file[propToSearch]);
         this.files.splice(index, 1);
       },
 

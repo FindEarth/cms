@@ -3,6 +3,7 @@ import List        from 'components/main/person/PersonList';
 import Create      from 'components/main/person/PersonCreate';
 import Found       from 'components/main/person/PersonFound';
 import Detail      from 'components/main/person/PersonDetail';
+import Edit        from 'components/main/person/PersonEdit';
 
 const route = {
   path     : '/person',
@@ -23,6 +24,10 @@ const route = {
     path     : ':personId',
     name     : 'person-detail',
     component: Detail
+  }, {
+    path     : ':personId/edit',
+    name     : 'person-edit',
+    component: Edit
   }]
 };
 

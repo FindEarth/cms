@@ -40,7 +40,7 @@
           el-menu-item-group(title='')
             el-menu-item(index='') Lista
             el-menu-item(index='') Crear
-        el-menu-item(index='')
+        el-menu-item(index='profile')
           i.fa.fa-user.fa-lg
           | Perfil
     .copyright
@@ -64,6 +64,7 @@
       color: #a1a1a1;
       &.is-active {
         color: $white;
+        background-color: $darker-grey;
       }
       &:hover {
         color: $white;

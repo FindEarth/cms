@@ -54,6 +54,13 @@
           'share-person',
           'height=400,width=650'
         );
+      },
+
+      editPerson(person) {
+        this.$router.push({
+          name  : 'person-edit',
+          params: { personId: person._id }
+        });
       }
     }
   };
@@ -79,7 +86,12 @@
     el-table-column(fixed='right', label='Operations', width='120')
       template(scope='scope')
           el-button-group
-            el-button(type='primary', size='mini', icon='edit')
+            el-button(
+              type='primary',
+              size='mini',
+              icon='edit',
+              @click.native.stop='editPerson(scope.row)'
+            )
             el-button(
               type='primary',
               size='mini',

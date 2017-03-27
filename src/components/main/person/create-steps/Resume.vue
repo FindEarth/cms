@@ -1,6 +1,10 @@
 <script>
   export default {
-    props:{
+    props: {
+      isEdit: {
+        type   : Boolean,
+        default: false
+      },
       person: {
         type    : Object,
         required: true
@@ -20,7 +24,7 @@
     el-card(:body-style='{ padding: "0px" }')
       el-carousel(v-if='person.photos')
         el-carousel-item(v-for='photo in person.photos')
-          img.image(v-bind:src='photo.data')
+          img.image(v-bind:src='photo.data || photo.url')
       div(style='padding: 14px;')
         span {{ person.name }}
         .bottom
@@ -28,7 +32,7 @@
 
     .button-wrapper
       el-button(type='primary', @click='onSubmit')
-        | Crear Persona
+        | {{ isEdit ? 'Guardar' : 'Crear Persona' }}
         i.el-icon-upload.el-icon-right
 </template>
 
