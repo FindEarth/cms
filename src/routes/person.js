@@ -25,7 +25,7 @@ const route = {
     name     : 'person-detail',
     component: Detail
   }, {
-    path     : 'edit/:personId',
+    path     : ':personId/edit',
     name     : 'person-edit',
     component: Edit
   }]
