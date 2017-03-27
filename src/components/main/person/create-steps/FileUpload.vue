@@ -50,7 +50,8 @@
       },
 
       onRemove(file) {
-        const index = this.files.findIndex(f => f.name === file.name);
+        const propToSearch = file.name ? 'name' : 'url';
+        const index = this.files.findIndex(f => f[propToSearch] === file[propToSearch]);
         this.files.splice(index, 1);
       },
 
