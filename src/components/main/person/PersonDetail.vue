@@ -82,7 +82,7 @@
       )
 
     el-row(:gutter="20")
-      el-col(:span='7', :offset='1')
+      el-col(:span='8')
         .grid-content
           el-card(:body-style="{ padding: '0px' }", v-loading='isLoading')
             el-carousel(v-if='person.photos')
@@ -93,7 +93,7 @@
               .bottom.clearfix
                 time.time {{ person.createdAt }}
 
-      el-col(:span='15')
+      el-col(:span='16')
         .grid-content
           el-collapse(v-model='activeTab', accordion='')
             el-collapse-item(title='Apariencia', name='1')
@@ -115,7 +115,7 @@
             el-table-column(prop='phone', label='Telefono', width='180')
             el-table-column(prop='email', label='Email')
 
-          div(style='padding-top: 8px;')
+          div(style='padding-top: 20px;')
             el-button(
               @click.native.prevent='setFound(person)'
             ) Encontrado!
@@ -127,11 +127,14 @@
   }
   .map {
     height: 200px;
-    margin-bottom: 20px;
+    margin: -30px;
+    margin-bottom: 30px;
   }
   .time {
     font-size: 13px;
     color: #999;
+    display: inline-block;
+    margin-bottom: 12px;
   }
   .bottom {
     margin-top: 13px;
