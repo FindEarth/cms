@@ -26,16 +26,18 @@ div
         img.logo-img(src='/static/logo.svg')
         p.logo-text Find Earth
       el-col.right-section(:span='20')
-        el-dropdown
-          el-button
-            img.img-gravatar(src="http://cdn.wpbeginner.com/wp-content/uploads/2012/08/gravatarlogo.jpg")
-            span.name
-              | Jonatan del valle
-            i.el-icon-caret-bottom.el-icon--right
-          el-dropdown-menu(slot='dropdown')
-            el-dropdown-item Perfil
-            el-dropdown-item Información
-            el-dropdown-item Salir
+        img.img-gravatar(src="http://cdn.wpbeginner.com/wp-content/uploads/2012/08/gravatarlogo.jpg")
+        el-submenu
+          template(slot='title') Juan Andres Juanjo
+          el-menu-item(index='2-1')
+            i.fa.fa-user(aria-hidden='true')
+            | Perfil
+          el-menu-item(index='2-2')
+            i.fa.fa-info-circle(aria-hidden='true')
+            | Información
+          el-menu-item(index='2-3')
+            i.fa.fa-sign-out(aria-hidden='true')
+            | Salir
 </template>
 
 <style lang='scss' scoped>
@@ -62,6 +64,7 @@ div
           color: white;
           font-weight: 400;
           font-size: 18px;
+          cursor: pointer;
         }
       }
 
@@ -69,6 +72,7 @@ div
         width: 30px;
         height: 30px;
         margin-right: 5px;
+        cursor: pointer;
       }
     }
 
@@ -78,38 +82,14 @@ div
       align-items: center;
       justify-content: flex-end;
       flex-direction: row;
-      padding: 0 15px;
+      padding: 0 30px;
 
-      button {
-        border: none;
-        color: $dark-grey;
+      .img-gravatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
         position: relative;
-        bottom: 2px;
-
-        &:hover {
-          color: $lightBlue;
-        }
-
-        .img-gravatar {
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          margin-right: 10px;
-          position: relative;
-          top: 3px;
-        }
-
-        .name {
-          position: relative;
-          bottom: 7px;
-          margin-right: 5px;
-        }
-
-        .el-icon-caret-bottom {
-          position: relative;
-          bottom: 6px;
-          transform: scale(.9);
-        }
+        left: 25px;
       }
     }
   }

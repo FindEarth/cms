@@ -21,7 +21,7 @@ export default {
         data: [4, 43, 12, 1, 5, 6, 20, 13, 80, 5, 4, 43, 12, 1, 5, 6, 20, 13, 80, 5],
         title: {
           x: 'center',
-          text: 'Perdidos por Edad',
+          text: 'Desaparecidos por Edad',
           textStyle: {
             color: '#333c44',
             fontWeight: 'normal',
@@ -39,7 +39,7 @@ export default {
         }],
         title: {
           x: 'center',
-          text: 'Perdidos por Género',
+          text: 'Desaparecidos por Género',
           textStyle: {
             color: '#333c44',
             fontWeight: 'normal',
@@ -57,7 +57,7 @@ export default {
         }],
         title: {
           x: 'center',
-          text: 'Perdidos por Tipo',
+          text: 'Desaparecidos por Tipo',
           textStyle: {
             color: '#333c44',
             fontWeight: 'normal',
@@ -86,8 +86,8 @@ export default {
             xAxisName='Edad',
             xAxisLegend='Edad',
             yAxisColor='#333c44',
-            yAxisName='Perdidas',
-            yAxisLegend='Perdidas',
+            yAxisName='Desaparecidos',
+            yAxisLegend='Desaparecidos',
             :barColor='["#00bcd4"]',
             :xAxisData='missingByAge.xAxisData',
             :yAxisData='missingByAge.yAxisData',
@@ -132,7 +132,7 @@ export default {
               counter(:limitToReach='missingPeople', :animationDuration='260')
         el-row(:span='12')
           div(class='grid-content' class='chart-wrapper half')
-            h3(class='counter-title') Personas Perdidas
+            h3(class='counter-title') Personas Desaparecidas
             p(class='number lost')
               counter(:limitToReach='foundPeople', :animationDuration='260')
 </template>
@@ -181,11 +181,11 @@ $chart-height: 300px;
         }
 
         &.found {
-          color: green;
+          color: darken($green, 10);
         }
 
         &.lost {
-          color: red;
+          color: $red;
         }
       }
 
