@@ -4,7 +4,7 @@
   export default {
     data() {
       return {
-        user: userService.get()
+        user: userService.get() || {}
       };
     },
 
