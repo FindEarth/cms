@@ -43,6 +43,9 @@
         el-menu-item(index='profile')
           i.fa.fa-user.fa-lg
           | Perfil
+    .copyright
+      span ❤
+      |  Keepers
 </template>
 
 <style lang='scss'>
@@ -53,6 +56,8 @@
       height: $layout-height;
       background-color: $dark-grey;
       border-radius: 0;
+      box-shadow: 0 1px 1px rgba(0,0,0,.1);
+      position: relative;
     }
 
     .el-menu-item {
@@ -83,6 +88,20 @@
           color: $white;
           background-color: $darker-grey;
         }
+      }
+    }
+
+    .copyright {
+      position: absolute;
+      bottom: 10px;
+      left: 75px;
+      color: #a1a1a1;
+      font-size: 14px;
+
+      span {
+        color: $red;
+        margin-right: 5px;
+        font-size: 15px;
       }
     }
   }

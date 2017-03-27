@@ -3,8 +3,8 @@ import store     from 'store';
 
 
 const lock = new Auth0Lock(
-  'zFGAcWRqfBqY1lf77Rt9GUgshPpz6i3d',
-  'keepers-co.auth0.com',
+  'fqfXBUk40SmkYJBwy1a5gNgi3Vod60lK',
+  'keepers.auth0.com',
   {
     allowedConnections: ['Username-Password-Authentication'],
     rememberLastLogin: true,
@@ -17,7 +17,8 @@ const lock = new Auth0Lock(
     },
     auth: {
       responseType : 'token',
-      autoParseHash: true
+      autoParseHash: true,
+      params       : { scope: 'openid email user_metadata app_metadata picture' }
     }
   }
 );
@@ -28,6 +29,12 @@ lock.authCallbackListener = (from, to, next) => {
     lock.resumeAuth(window.location.hash, (err, authResult) => {
       if (err) { return next({ name: 'login' }); }
       store.set('token', authResult.idToken);
+      store.set('user', {
+        name        : authResult.idTokenPayload.app_metadata.name,
+        email       : authResult.idTokenPayload.email,
+        picture     : authResult.idTokenPayload.picture,
+        organization: authResult.idTokenPayload.user_metadata.organization
+      });
       next({ name: 'person-list' });
     });
   }
