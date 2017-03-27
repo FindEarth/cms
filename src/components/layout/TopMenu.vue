@@ -1,13 +1,27 @@
 <script>
+  import userService from 'services/user';
+
   export default {
     data() {
       return {
+        user: userService.get()
       };
     },
 
     methods: {
       handleSelect(key, keyPath) {
-        console.log(key, keyPath);
+        switch (key) {
+          case 'logout':
+            this.logout();
+            break;
+          default:
+            console.log(key, keyPath);
+        }
+      },
+
+      logout() {
+        userService.clear();
+        this.$router.push({ name: 'login' });
       }
     }
   };
@@ -26,16 +40,16 @@ div
         img.logo-img(src='/static/logo.svg')
         p.logo-text Find Earth
       el-col.right-section(:span='20')
-        img.img-gravatar(src="http://cdn.wpbeginner.com/wp-content/uploads/2012/08/gravatarlogo.jpg")
-        el-submenu
-          template(slot='title') Juan Andres Juanjo
-          el-menu-item(index='2-1')
+        img.img-gravatar(:src='user.picture')
+        el-submenu(index='submenu')
+          template(slot='title') {{ user.name }}
+          el-menu-item(index='profile')
             i.fa.fa-user(aria-hidden='true')
             | Perfil
-          el-menu-item(index='2-2')
+          el-menu-item(index='info')
             i.fa.fa-info-circle(aria-hidden='true')
             | Información
-          el-menu-item(index='2-3')
+          el-menu-item(index='logout')
             i.fa.fa-sign-out(aria-hidden='true')
             | Salir
 </template>
