@@ -43,21 +43,23 @@
         el-menu-item(index='')
           i.fa.fa-user.fa-lg
           | Perfil
-    .copyright
-      span ❤
-      |  Keepers
+    a(href='https://keepe.rs/', target='_blank').copyright
+      span.copyright-container
+        span.hearth ❤
+        |  Keepers
 </template>
 
 <style lang='scss'>
   @import "../../style/variables.scss";
 
   section#left-menu {
+    position: relative;
+
     .full-height {
       height: $layout-height;
       background-color: $dark-grey;
       border-radius: 0;
       box-shadow: 0 1px 1px rgba(0,0,0,.1);
-      position: relative;
     }
 
     .el-menu-item {
@@ -93,14 +95,28 @@
     .copyright {
       position: absolute;
       bottom: 10px;
-      left: 75px;
+      left: 50%;
+      transform: translateX(-50%);
       color: #a1a1a1;
       font-size: 14px;
+      text-decoration: none;
 
-      span {
-        color: $red;
-        margin-right: 5px;
-        font-size: 15px;
+      .copyright-container {
+        .hearth {
+          color: $red;
+          margin-right: 2px;
+          font-size: 15px;
+          transition: all .3s ease;
+        }
+
+        &:hover {
+          .hearth {
+            font-size: 18px;
+            position: relative;
+            top: 1px;
+            transition: all .3s ease;
+          }
+        }
       }
     }
   }
