@@ -1,6 +1,5 @@
-import { Message } from 'element-ui';
-import api         from 'services/api';
-import store       from 'store';
+import api   from 'services/api';
+import store from 'store';
 
 
 const userService = {};
@@ -12,20 +11,8 @@ userService.authenticate = function(username, password) {
     });
 };
 
-userService.getCurrentUser = function() {
-  return api.get('/user-profile', { type: 'cms' })
-    .then(response => response.data);
-};
-
-userService.updateUser = function(user) {
-  return api.put(`user/${user.sub}`, user)
-    .then((response) => {
-      Message({
-        showClose: true,
-        message  : 'Usuario actualizado correctamente'
-      });
-      return response.data;
-    });
+userService.get = function() {
+  return store.get('user');
 };
 
 userService.getToken = function() {
@@ -34,6 +21,15 @@ userService.getToken = function() {
 
 userService.clearToken = function() {
   store.remove('token');
+};
+
+userService.clearUser = function() {
+  store.remove('user');
+};
+
+userService.clear = function() {
+  this.clearToken();
+  this.clearUser();
 };
 
 export default userService;
