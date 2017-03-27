@@ -18,7 +18,7 @@ const lock = new Auth0Lock(
     auth: {
       responseType : 'token',
       autoParseHash: true,
-      params       : { scope: 'openid email user_metadata' }
+      params       : { scope: 'openid email user_metadata app_metadata picture' }
     }
   }
 );
@@ -29,6 +29,12 @@ lock.authCallbackListener = (from, to, next) => {
     lock.resumeAuth(window.location.hash, (err, authResult) => {
       if (err) { return next({ name: 'login' }); }
       store.set('token', authResult.idToken);
+      store.set('user', {
+        name        : authResult.idTokenPayload.app_metadata.name,
+        email       : authResult.idTokenPayload.email,
+        picture     : authResult.idTokenPayload.picture,
+        organization: authResult.idTokenPayload.user_metadata.organization
+      });
       next({ name: 'person-list' });
     });
   }
