@@ -1,15 +1,21 @@
 <script>
   export default {
-    data() {
-      return {
-        person: {
+    props: {
+      person: {
+        type: Object,
+        default: () => ({
           name       : '',
           age        : '',
           gender     : 'M',
           lastSeenAt : '',
           description: {},
           contacts   : [{ name: '', phone: '', email: '' }]
-        },
+        })
+      }
+    },
+
+    data() {
+      return {
         rules: {
           name: [
             { required: true, message: 'Please input Activity name', trigger: 'blur' },

@@ -1,9 +1,14 @@
 <script>
   export default {
+    props: {
+      files: {
+        type: Array,
+        default: () => []
+      }
+    },
+
     data() {
       return {
-        files: [],
-
         dialogImageUrl: '',
         dialogVisible : false
       };
@@ -26,7 +31,7 @@
         };
 
         if (!isJPG) {
-          return fail('El formato de imagen debe ser JPG');
+          return fail('El formato debe ser valido');
         }
         if (!isLt2M) {
           return fail('El tamaño de imagen debe ser menor a 2MB');
