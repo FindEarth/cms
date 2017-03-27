@@ -41,8 +41,8 @@ div
   )
     el-row
       el-col.left-section(:span='4')
-        img.logo-img(src='/static/logo.svg' @click='goToHome')
-        //- img.logo-img(src='/static/logo_animated.svg' @click='goToHome')
+        //- img.logo-img(src='/static/logo.svg' @click='goToHome')
+        img.logo-img(src='/static/logo_animated.svg' @click='goToHome')
         p.logo-text(@click='goToHome') Find Earth
       el-col.right-section(:span='20')
         img.img-gravatar(:src='user.picture')
