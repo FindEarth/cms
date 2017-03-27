@@ -43,7 +43,7 @@
         el-menu-item(index='')
           i.fa.fa-user.fa-lg
           | Perfil
-    a(href='https://keepe.rs/', target='_blank').copyright
+    a.copyright(href='https://keepe.rs/', target='_blank')
       span.copyright-container
         span.hearth ❤
         |  Keepers
