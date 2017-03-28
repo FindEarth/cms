@@ -2,14 +2,14 @@
   import personService from 'services/person';
 
   import BasicInformation from 'components/main/person/create-steps/BasicInformation';
-  import Geolocation      from 'components/main/person/create-steps/Geolocation';
+  import Geo              from 'components/main/person/create-steps/Geolocation';
   import FileUpload       from 'components/main/person/create-steps/FileUpload';
   import Resume           from 'components/main/person/create-steps/Resume';
 
   export default {
     name: 'PersonCreate',
 
-    components: { BasicInformation, Geolocation, FileUpload, Resume },
+    components: { BasicInformation, Geo, FileUpload, Resume },
 
     data() {
       return {
@@ -79,7 +79,7 @@
         v-on:basic-information-submitted='onBasicInformationSubmitted'
       )
 
-      geolocation(
+      geo(
         v-if='step === 2',
         v-on:gelocation-submitted='onGelocationSubmitted',
         v-on:step-back='stepBack'
