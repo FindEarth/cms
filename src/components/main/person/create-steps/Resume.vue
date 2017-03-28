@@ -30,7 +30,8 @@
         .bottom
           .address {{ person.geo.address }}
 
-    .button-wrapper
+    el-button-group.button-wrapper
+      el-button(type='primary', @click="$emit('step-back')") Atras
       el-button(type='primary', @click='onSubmit')
         | {{ isEdit ? 'Guardar' : 'Crear Persona' }}
         i.el-icon-upload.el-icon-right

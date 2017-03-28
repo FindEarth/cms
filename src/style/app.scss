@@ -27,9 +27,18 @@ body {
   border-radius: 3px;
   border: 0;
 
-  th >.cell {
+  th > .cell {
     color: lighten($dark-grey, 10);
   }
+}
+
+.el-table__fixed,
+.el-table__fixed-right {
+  z-index: 1;
+}
+
+td.pointer:hover {
+  cursor: pointer;
 }
 
 .top-bar {
@@ -52,9 +61,4 @@ body {
       margin-top: -1px;
     }
   }
-}
-
-.el-table__fixed,
-.el-table__fixed-right {
-  z-index: 1;
 }

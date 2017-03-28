@@ -85,7 +85,9 @@
         :draggable='true'
       )
 
-    el-button(type='primary', @click='onSubmit') Siguiente
+    el-button-group
+      el-button(type='primary', @click="$emit('step-back')") Atras
+      el-button(type='primary', @click='onSubmit') Siguiente
 </template>
 
 <style lang='scss' scoped>

@@ -2,14 +2,14 @@
   import personService from 'services/person';
 
   import BasicInformation from 'components/main/person/create-steps/BasicInformation';
-  import Geolocation      from 'components/main/person/create-steps/Geolocation';
+  import Geo              from 'components/main/person/create-steps/Geolocation';
   import FileUpload       from 'components/main/person/create-steps/FileUpload';
   import Resume           from 'components/main/person/create-steps/Resume';
 
   export default {
     name: 'PersonCreate',
 
-    components: { BasicInformation, Geolocation, FileUpload, Resume },
+    components: { BasicInformation, Geo, FileUpload, Resume },
 
     data() {
       return {
@@ -37,6 +37,10 @@
     },
 
     methods: {
+      stepBack() {
+        this.step -= 1;
+      },
+
       onBasicInformationSubmitted(basicInformation) {
         Object.assign(this.person, basicInformation);
         this.step += 1;
@@ -75,20 +79,23 @@
         v-on:basic-information-submitted='onBasicInformationSubmitted'
       )
 
-      geolocation(
+      geo(
         v-if='step === 2',
-        v-on:gelocation-submitted='onGelocationSubmitted'
+        v-on:gelocation-submitted='onGelocationSubmitted',
+        v-on:step-back='stepBack'
       )
 
       file-upload(
         v-if='step === 3',
-        v-on:file-upload-submitted='onFileUploadSubmitted'
+        v-on:file-upload-submitted='onFileUploadSubmitted',
+        v-on:step-back='stepBack'
       )
 
       resume(
         v-if='step === 4',
         :person='person',
-        v-on:resume-submitted='onResumeSubmitted'
+        v-on:resume-submitted='onResumeSubmitted',
+        v-on:step-back='stepBack'
       )
 </template>
 
