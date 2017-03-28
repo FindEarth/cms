@@ -2,6 +2,9 @@
   export default {
     data() {
       return {
+        singleItems: ['home', 'profile'],
+        subMenus: ['people', 'notifications'],
+        defaultOpeneds: []
       };
     },
 
@@ -10,7 +13,10 @@
         return this.$route.name;
       },
       handleSelect(key, keyPath) {
-        if (key === 'people' || key === 'notifications') return;
+        if (this.subMenus.includes(key)) return;
+        if (this.singleItems.includes(key)) {
+          this.defaultOpeneds = [];
+        }
         this.$router.push({ name: key });
       }
     }
@@ -19,7 +25,7 @@
 
 <template lang='pug'>
   section#left-menu
-    el-menu.full-height(:default-active='getActive()', @select='handleSelect')
+    el-menu.full-height(:default-active='getActive()', @select='handleSelect', :unique-opened='true', :default-openeds='defaultOpeneds')
       el-menu-item-group.group-custom(title='')
         el-menu-item(index='home')
           i.fa.fa-home.fa-lg
@@ -66,7 +72,7 @@
       color: #a1a1a1;
       &.is-active {
         color: $white;
-        background-color: $darker-grey;
+        // background-color: $darker-grey;
       }
       &:hover {
         color: $white;

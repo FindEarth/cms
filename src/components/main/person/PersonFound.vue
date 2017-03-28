@@ -62,23 +62,16 @@ div
     element-loading-text='Cargando personas',
     empty-text='No se ha encontrado personas'
   )
-    el-table-column(fixed='', prop='name', label='Nombre', width='200')
-    el-table-column(prop='age', label='Edad', width='90')
-    el-table-column(prop='gender', label='Genero', width='90')
-    el-table-column(prop='geo.city', label='Ciudad', width='260')
-    el-table-column(prop='geo.countryCode', label='Pais', width='70')
-    el-table-column(prop='geo.postalCode', label='Zip', width='80')
-    el-table-column(prop='createdAt', label='Fecha', width='210')
+    el-table-column(fixed='', prop='name', label='Nombre', width='200', class-name='pointer')
+    el-table-column(prop='age', label='Edad', width='90', class-name='pointer')
+    el-table-column(prop='gender', label='Genero', width='90', class-name='pointer')
+    el-table-column(prop='geo.city', label='Ciudad', width='260', class-name='pointer')
+    el-table-column(prop='geo.countryCode', label='Pais', width='70', class-name='pointer')
+    el-table-column(prop='geo.postalCode', label='Zip', width='80', class-name='pointer')
+    el-table-column(prop='createdAt', label='Fecha', width='210', class-name='pointer')
     el-table-column(fixed='right', label='Operations', width='120')
       template(scope='scope')
         el-button-group
-          el-button(type='primary', size='mini', icon='edit')
-          el-button(
-            type='primary',
-            size='mini',
-            icon='share',
-            @click.native.stop='sharePerson(scope.row)'
-          )
           el-button(
             type='primary',
             size='mini',
