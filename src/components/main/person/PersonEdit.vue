@@ -2,7 +2,7 @@
   import personService from 'services/person';
 
   import BasicInformation from 'components/main/person/create-steps/BasicInformation';
-  import Geo      from 'components/main/person/create-steps/Geolocation';
+  import Geo              from 'components/main/person/create-steps/Geolocation';
   import FileUpload       from 'components/main/person/create-steps/FileUpload';
   import Resume           from 'components/main/person/create-steps/Resume';
 
@@ -42,6 +42,10 @@
     },
 
     methods: {
+      stepBack() {
+        this.step -= 1;
+      },
+
       getPerson(personId) {
         personService.getById(personId)
           .then((person) => {
@@ -92,20 +96,23 @@
       geo(
         v-if='step === 2',
         :geo='person.geo',
-        v-on:gelocation-submitted='onGelocationSubmitted'
+        v-on:gelocation-submitted='onGelocationSubmitted',
+        v-on:step-back='stepBack'
       )
 
       file-upload(
         v-if='step === 3',
         :files='person.photos',
-        v-on:file-upload-submitted='onFileUploadSubmitted'
+        v-on:file-upload-submitted='onFileUploadSubmitted',
+        v-on:step-back='stepBack'
       )
 
       resume(
         v-if='step === 4',
         :person='person',
         :isEdit='true',
-        v-on:resume-submitted='onResumeSubmitted'
+        v-on:resume-submitted='onResumeSubmitted',
+        v-on:step-back='stepBack'
       )
 </template>
 
