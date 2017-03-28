@@ -37,6 +37,10 @@
     },
 
     methods: {
+      stepBack() {
+        this.step -= 1;
+      },
+
       onBasicInformationSubmitted(basicInformation) {
         Object.assign(this.person, basicInformation);
         this.step += 1;
@@ -77,18 +81,21 @@
 
       geolocation(
         v-if='step === 2',
-        v-on:gelocation-submitted='onGelocationSubmitted'
+        v-on:gelocation-submitted='onGelocationSubmitted',
+        v-on:step-back='stepBack'
       )
 
       file-upload(
         v-if='step === 3',
-        v-on:file-upload-submitted='onFileUploadSubmitted'
+        v-on:file-upload-submitted='onFileUploadSubmitted',
+        v-on:step-back='stepBack'
       )
 
       resume(
         v-if='step === 4',
         :person='person',
-        v-on:resume-submitted='onResumeSubmitted'
+        v-on:resume-submitted='onResumeSubmitted',
+        v-on:step-back='stepBack'
       )
 </template>
 
