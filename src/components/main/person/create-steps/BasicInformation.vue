@@ -31,6 +31,12 @@
       };
     },
     methods: {
+      addContact() {
+        this.person.contacts.push({ name: '', phone: '', email: '' });
+      },
+      removeContact(index) {
+        this.person.contacts.splice(index, 1);
+      },
       submitForm(formName) {
         // this.$refs[formName].validate((valid) => {
         //   if (!valid) {
@@ -56,12 +62,12 @@
     el-form-item(label='Edad')
       el-input-number(v-model='person.age')
 
-    el-form-item(label='Genero', required='')
+    el-form-item(label='Genero')
       el-select(v-model='person.gender', placeholder='Masculino')
         el-option(label='Masculino', value='M')
         el-option(label='Femenino', value='F')
 
-    el-form-item(label='Fecha', required='')
+    el-form-item(label='Fecha')
       el-date-picker(
         v-model='person.lastSeenAt',
         type='datetime',
@@ -77,17 +83,24 @@
     el-form-item(label='Otra información')
       el-input(type='textarea', v-model='person.description.more')
 
-    el-form-item(label='Contact', :gutter="20")
+    el-form-item(label='Contacto', :gutter='20', v-for='(contact, index) in person.contacts')
       el-col(:span='6')
-        el-input(type='text', placeholder='Nombre', style='width: 100%;', v-model='person.contacts[0].name')
+        el-input(type='text', placeholder='Nombre', style='width: 100%;', v-model='contact.name')
       el-col.line(:span='1') &nbsp;
       el-col(:span='6')
-        el-input(type='phone', placeholder='Telefono', style='width: 100%;', v-model='person.contacts[0].phone')
+        el-input(type='phone', placeholder='Telefono', style='width: 100%;', v-model='contact.phone')
       el-col.line(:span='1') &nbsp;
       el-col(:span='6')
-        el-input(type='email', placeholder='Email', style='width: 100%;', v-model='person.contacts[0].email')
-      el-col(:span='1')
-        el-button.remove-contact-button(type='primary', size='mini') borrar
+        el-input(type='email', placeholder='Email', style='width: 100%;', v-model='contact.email')
+
+      el-col(:span='4', v-if='person.contacts.length === 1')
+        el-button.remove-contact-button(type='primary', size='mini', @click='addContact') Agregar
+      el-col(:span='4', v-if='index + 1 < person.contacts.length && person.contacts.length > 1')
+        el-button.remove-contact-button(type='danger', size='mini', @click='removeContact(index)') Eliminar
+      el-col(:span='4', v-if='index + 1 === person.contacts.length && index !== 0')
+        el-button-group
+          el-button.remove-contact-button(type='danger', size='mini', @click='removeContact(index)') Eliminar
+          el-button.remove-contact-button(type='primary', size='mini', @click='addContact') Agregar
 
     el-form-item
       el-button(type='primary', @click="submitForm('person')") Siguiente
