@@ -18,18 +18,21 @@
       return {
         rules: {
           name: [
-            { required: true, message: 'Please input Activity name', trigger: 'blur' },
-            { min: 3, max: 50, message: 'Length should be 3 to 50', trigger: 'blur' }
+            { required: true, message: 'Ingrese un nombre', trigger: 'blur' },
+            { min: 4, max: 50, message: 'Ingrese un nombre correcto', trigger: 'blur' }
           ],
           age: [
-            { type: 'number', required: true, min: 0, max: 140, message: 'Please select a correct age', trigger: 'change' }
+            { type: 'number', required: true, min: 1, max: 140, message: 'Ingrese una edad correcta', trigger: 'change' }
           ],
           lastSeenAt: [
-            { type: 'date', required: true, message: 'Please pick a date', trigger: 'change' }
+            { type: 'date', required: true, message: 'Ingrese una fecha', trigger: 'change' }
           ]
-        }
+        },
+
+        isFormValid: true
       };
     },
+
     methods: {
       addContact() {
         this.person.contacts.push({ name: '', phone: '', email: '' });
@@ -37,29 +40,39 @@
       removeContact(index) {
         this.person.contacts.splice(index, 1);
       },
-      submitForm(formName) {
-        // this.$refs[formName].validate((valid) => {
-        //   if (!valid) {
-        //     console.log('error submit!!');
-        //     return false;
-        //   }
-        // });
-        this.$emit('basic-information-submitted', this.person);
+      submitForm() {
+        this.$refs.personForm.validate((valid) => {
+          if (!valid) {
+            this.isFormValid = false;
+            this.watchFormChange();
+            return false;
+          }
+          this.$emit('basic-information-submitted', this.person);
+        });
       },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
+      watchFormChange() {
+        this.$watch('person', () => {
+          this.$refs.personForm.validate((valid) => {
+            if (valid) {
+              this.isFormValid = true;
+              return true;
+            }
+          });
+        }, {
+          deep: true
+        });
       }
     }
   };
 </script>
 
 <template lang='pug'>
-  el-form(:model='person', :rules='rules', ref='person', label-width='120px')
+  el-form(:model='person', :rules='rules', ref='personForm', label-width='120px')
 
-    el-form-item(label='Nombre')
+    el-form-item(label='Nombre', prop='name')
       el-input(v-model='person.name')
 
-    el-form-item(label='Edad')
+    el-form-item(label='Edad', prop='age')
       el-input-number(v-model='person.age')
 
     el-form-item(label='Genero')
@@ -67,7 +80,7 @@
         el-option(label='Masculino', value='M')
         el-option(label='Femenino', value='F')
 
-    el-form-item(label='Fecha')
+    el-form-item(label='Fecha', prop='lastSeenAt')
       el-date-picker(
         v-model='person.lastSeenAt',
         type='datetime',
@@ -103,7 +116,7 @@
           el-button.remove-contact-button(type='primary', size='mini', @click='addContact') Agregar
 
     el-form-item
-      el-button(type='primary', @click="submitForm('person')") Siguiente
+      el-button(type='primary', :disabled='!isFormValid', @click='submitForm') Siguiente
 </template>
 
 <style lang='scss'>
