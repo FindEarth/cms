@@ -28,7 +28,6 @@
             { type: 'date', required: true, message: 'Ingrese una fecha', trigger: 'change' }
           ]
         },
-
         isFormValid: true
       };
     },

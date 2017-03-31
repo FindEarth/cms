@@ -49,7 +49,9 @@
       getPerson(personId) {
         personService.getById(personId)
           .then((person) => {
-            this.person    = person;
+            this.person = person;
+            this.person.description || (this.person.description = {});
+            this.person.lastSeenAt = new Date(this.person.lastSeenAt);
             this.isLoading = false;
           });
       },

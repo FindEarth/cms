@@ -20,7 +20,8 @@
         center: { lat: this.geo.loc[1] || -34.603684, lng: this.geo.loc[0] || -58.381559 },
         marker: {
           position: { lat: this.geo.loc[1] || -34.603684, lng: this.geo.loc[0] || -58.381559 }
-        }
+        },
+        isFormValid: true
       };
     },
 
@@ -50,14 +51,28 @@
       },
 
       onSubmit() {
+        if (!this.geo.address) {
+          this.isFormValid = false;
+          this.watchAddressChange();
+          return;
+        }
+
         this.$emit('gelocation-submitted', this.geo);
+      },
+
+      watchAddressChange() {
+        this.$watch('geo.address', (nv) => {
+          if (nv) {
+            this.isFormValid = true;
+          }
+        });
       }
     }
   };
 </script>
 
 <template lang='pug'>
-  el-form(label-width='70px')
+  el-form(label-width='85px')
 
     el-form-item(label='Direccion')
       .el-input.input-map
@@ -66,7 +81,7 @@
           placeholder='Direccion',
           :select-first-on-enter='true',
           :default-place='geo.address',
-          v-on:place_changed='onPlaceChange'
+          @place_changed='onPlaceChange'
         )
 
     el-form-item(label='Radio')
@@ -77,7 +92,7 @@
         :position='marker.position',
         :clickable='true',
         :draggable='true',
-        @click="center=marker.position"
+        @click='center=marker.position'
       )
       gmap-circle(
         :center='marker.position',
@@ -86,13 +101,14 @@
       )
 
     el-button-group
-      el-button(type='primary', @click="$emit('step-back')") Atras
-      el-button(type='primary', @click='onSubmit') Siguiente
+      el-button(type='primary', @click='$emit("step-back")') Atras
+      el-button(type='primary', :disabled='!isFormValid' @click='onSubmit') Siguiente
 </template>
 
 <style lang='scss' scoped>
   .map {
     height: 400px;
+    margin: initial;
     margin-bottom: 20px;
   }
 </style>
