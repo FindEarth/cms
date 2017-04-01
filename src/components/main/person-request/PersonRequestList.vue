@@ -66,8 +66,8 @@
     el-table-column(prop='geo.city', label='Ciudad', width='260')
     el-table-column(prop='geo.countryCode', label='Pais', width='70')
     el-table-column(prop='geo.postalCode', label='Zip', width='80')
-    el-table-column(prop='createdAt', label='Fecha', width='210')
-    el-table-column(fixed='right', label='Operations', width='120')
+    el-table-column(prop='createdAt', label='Fecha de Creación', width='210')
+    el-table-column(fixed='right', label='Acciones', width='120')
       template(scope='scope')
           el-button-group
             el-button(

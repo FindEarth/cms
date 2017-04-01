@@ -84,10 +84,10 @@
     el-table-column(prop='lastSeenAt', label='Ultimo avistamiento', width='180', class-name='pointer')
       template(scope='scope')
         span {{ scope.row.lastSeenAt | date }}
-    el-table-column(prop='createdAt', label='Fecha de Creacion', width='180', class-name='pointer')
+    el-table-column(prop='createdAt', label='Fecha de Creación', width='180', class-name='pointer')
       template(scope='scope')
         span {{ scope.row.createdAt | date }}
-    el-table-column(fixed='right', label='Operations', width='120')
+    el-table-column(fixed='right', label='Acciones', width='120')
       template(scope='scope')
           el-button-group
             el-button(

@@ -2,7 +2,7 @@
 
 import barChart from 'components/shared/barChart';
 import pieChart from 'components/shared/pieChart';
-import counter from 'components/shared/counter';
+import counter  from 'components/shared/counter';
 
 export default {
 
