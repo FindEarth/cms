@@ -36,8 +36,7 @@
         const lat = marker.geometry.location.lat();
         const lng = marker.geometry.location.lng();
 
-        this.center.lat = lat;
-        this.center.lng = lng;
+        this.center = { lat, lng };
 
         this.marker.position.lat = lat;
         this.marker.position.lng = lng;

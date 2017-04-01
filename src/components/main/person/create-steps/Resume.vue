@@ -38,6 +38,11 @@
 </template>
 
 <style lang='scss' scoped>
+  .container {
+    width: 500px;
+    margin: auto;
+  }
+
   .address {
     font-size: 13px;
     color: #999;
