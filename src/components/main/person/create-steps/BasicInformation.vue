@@ -22,7 +22,7 @@
             { min: 4, max: 50, message: 'Ingrese un nombre correcto', trigger: 'blur' }
           ],
           age: [
-            { type: 'number', required: true, min: 1, max: 140, message: 'Ingrese una edad correcta', trigger: 'change' }
+            { type: 'number', required: true, min: 1, max: 120, message: 'Ingrese una edad correcta', trigger: 'change' }
           ],
           lastSeenAt: [
             { type: 'date', required: true, message: 'Ingrese una fecha', trigger: 'change' }
