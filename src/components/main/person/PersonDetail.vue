@@ -1,5 +1,6 @@
 <script>
   import personService from 'services/person';
+  import mapStyle      from 'styles/map/wy';
 
   export default {
 
@@ -7,7 +8,12 @@
       return {
         person   : {},
         isLoading: true,
-        activeTab: '1'
+        activeTab: '1',
+        mapOptions : {
+          mapTypeControl   : false,
+          fullscreenControl: true,
+          styles           : mapStyle
+        }
       };
     },
 
@@ -97,7 +103,7 @@
 
 <template lang="pug">
   .container
-    gmap-map.map(:center='position', :zoom='14', v-loading='isLoading')
+    gmap-map.map(:center='position', :options='mapOptions', :zoom='14', v-loading='isLoading')
       gmap-marker(
         :position='position',
         :clickable='true'
@@ -150,9 +156,8 @@
     padding-bottom: 30px;
   }
   .map {
-    height: 200px;
-    margin: -30px;
-    margin-bottom: 30px;
+    height: 250px;
+    margin: -25px -30px 30px -30px;
   }
   .time {
     font-size: 13px;

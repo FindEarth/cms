@@ -1,4 +1,6 @@
 <script>
+  import mapStyle from 'styles/map/wy';
+
   export default {
     props: {
       geo: {
@@ -16,6 +18,11 @@
 
     data() {
       return {
+        mapOptions : {
+          mapTypeControl   : false,
+          fullscreenControl: true,
+          styles           : mapStyle
+        },
         radius: 1000,
         center: { lat: this.geo.loc[1] || -34.603684, lng: this.geo.loc[0] || -58.381559 },
         marker: {
@@ -86,7 +93,7 @@
     el-form-item(label='Radio')
       el-input-number(v-model='radius', :min='100', :max='5000', :step='100')
 
-    gmap-map.map(:center='center', :zoom='14')
+    gmap-map.map(:center='center', :options='mapOptions', :zoom='14')
       gmap-marker(
         :position='marker.position',
         :clickable='true',
