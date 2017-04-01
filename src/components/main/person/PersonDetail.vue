@@ -5,8 +5,7 @@
 
     data() {
       return {
-        person: {},
-
+        person   : {},
         isLoading: true,
         activeTab: '1'
       };
@@ -54,20 +53,43 @@
             this.isLoading = false;
           });
       },
-      setFound(person) {
-        const message = `Desea marcar a ${person.name} como encontrado?`;
+
+      setFound() {
+        const message = `Desea marcar a ${this.person.name} como encontrado?`;
         this.$confirm(message, 'Persona encontrada', {
           confirmButtonText: 'OK',
           cancelButtonText : 'Cancel',
           type             : 'warning'
         }).then(() => {
           personService.update({
-            _id      : person._id,
-            isMissing: !person.isMissing
-          }).then(() => {
-            this.$router.push({ name  : 'person-found' });
-          });
+            _id      : this.person._id,
+            isMissing: !this.person.isMissing
+          })
+          .then(() => this.$router.push({ name  : 'person-found' }));
         });
+      },
+
+      sharePerson() {
+        personService.share(this.person);
+      },
+
+      editPerson() {
+        this.$router.push({
+          name  : 'person-edit',
+          params: { personId: this.person._id }
+        });
+      },
+
+      deletePerson() {
+        const message = `Esta operacion borrara la persona ${this.person.name} ` +
+                        'permanentemente, Desea continuar?';
+        this.$confirm(message, 'Eliminar Persona', {
+          confirmButtonText: 'OK',
+          cancelButtonText : 'Cancel',
+          type             : 'warning'
+        })
+        .then(() => personService.delete(this.person._id))
+        .then(() => this.$router.push({ name: 'person-list' }));
       }
     }
   };
@@ -94,6 +116,13 @@
                 time.time {{ person.createdAt }}
 
       el-col(:span='16')
+        .action-button-container
+          el-button-group
+            el-button(type='primary', @click='setFound(person)') Encontrado
+            el-button(type='primary', icon='edit', @click='editPerson')
+            el-button(type='primary', icon='share', @click='sharePerson')
+            el-button(type='danger', icon='delete', @click='deletePerson')
+
         .grid-content
           el-collapse(v-model='activeTab', accordion='')
             el-collapse-item(title='Apariencia', name='1')
@@ -114,11 +143,6 @@
             el-table-column(prop='name', label='Nombre', width='180')
             el-table-column(prop='phone', label='Telefono', width='180')
             el-table-column(prop='email', label='Email')
-
-          div(style='padding-top: 20px;')
-            el-button(
-              @click.native.prevent='setFound(person)'
-            ) Encontrado!
 </template>
 
 <style lang='scss'>
@@ -144,12 +168,9 @@
     width: 100%;
     display: block;
   }
-  .clearfix:before,
-  .clearfix:after {
-    display: table;
-    content: "";
-  }
-  .clearfix:after {
-    clear: both
+  .action-button-container {
+    margin-bottom: 21px;
+    display: flex;
+    justify-content: flex-end;
   }
 </style>

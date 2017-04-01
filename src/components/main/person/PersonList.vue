@@ -47,13 +47,7 @@
       },
 
       sharePerson(person) {
-        const text = `${person.name} se perdió el ${person.createdAt}, ` +
-                     'ayudanos a encontrarlo.';
-        window.open(
-          `https://twitter.com/intent/tweet?text=${text}`,
-          'share-person',
-          'height=400,width=650'
-        );
+        personService.share(person);
       },
 
       editPerson(person) {
