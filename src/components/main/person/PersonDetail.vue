@@ -35,6 +35,10 @@
         return position;
       },
 
+      isFound() {
+        return this.$route.query.isFound;
+      },
+
       appearance() {
         const message = 'Apariencia no definida';
         return this.person.description && this.person.description.appearance || message;
@@ -124,8 +128,8 @@
       el-col(:span='16')
         .action-button-container
           el-button-group
-            el-button(type='primary', @click='setFound(person)') Encontrado
-            el-button(type='primary', icon='edit', @click='editPerson')
+            el-button(type='primary', @click='setFound(person)', v-if='!isFound') Encontrado
+            el-button(type='primary', icon='edit', @click='editPerson', v-if='!isFound')
             el-button(type='primary', icon='share', @click='sharePerson')
             el-button(type='danger', icon='delete', @click='deletePerson')
 
