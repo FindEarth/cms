@@ -74,9 +74,9 @@ export default {
 
 <template lang='pug'>
   .container
-    el-row(class='chart-row')
+    el-row.chart-row
       el-col(:span='24')
-        grid-content.chart-wrapper.full
+        .grid-content.chart-wrapper.full
           barChart(
             :width='100',
             :height='300',
