@@ -18,7 +18,7 @@
     methods: {
       getPersonRequests() {
         this.isLoading = true;
-        personRequestService.get()
+        personRequestService.get({ approved: false })
           .then((personRequests) => {
             this.personRequests = personRequests;
             this.isLoading      = false;
