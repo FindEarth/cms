@@ -70,13 +70,12 @@
     el-table-column(prop='createdAt', label='Fecha de Creación', width='210', class-name='pointer')
     el-table-column(fixed='right', label='Acciones', width='120', class-name='pointer')
       template(scope='scope')
-          el-button-group
-            el-button(
-              type='primary',
-              size='mini',
-              icon='delete',
-              @click.native.stop='deletePersonRequest(scope.$index, scope.row)'
-            )
+        el-button(
+          type='primary',
+          size='mini',
+          icon='delete',
+          @click.native.stop='deletePersonRequest(scope.$index, scope.row)'
+        )
 </template>
 
 <style lang="scss">
