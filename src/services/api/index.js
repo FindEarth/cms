@@ -1,5 +1,6 @@
 import trae from 'trae';
 import user from 'services/user';
+import { Message } from 'element-ui';
 
 function errorMessage(err) {
   switch (err.status) {
@@ -37,6 +38,11 @@ function tokenize(config) {
 
 function throwError(err) {
   const msg = errorMessage(err);
+  Message({
+    showClose: true,
+    message  : msg,
+    type     : 'error'
+  });
   throw msg;
 }
 
