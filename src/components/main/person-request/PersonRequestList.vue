@@ -34,8 +34,8 @@
 
       deletePersonRequest(index, personRequest) {
         const message = 'Esta operacion borrara la solicitud de persona de ' +
-                        `${personRequest.name} permanentemente, Desea continuar?`;
-        this.$confirm(message, 'Eliminar Solicitud de Persona', {
+                        `${personRequest.name} permanentemente. Desea continuar?`;
+        this.$confirm(message, 'Eliminar solicitud de persona', {
           confirmButtonText: 'OK',
           cancelButtonText : 'Cancel',
           type             : 'warning'
@@ -75,7 +75,7 @@
               type='primary',
               size='mini',
               icon='delete',
-              @click.native.prevent='deletePersonRequest(scope.$index, scope.row)'
+              @click.native.stop='deletePersonRequest(scope.$index, scope.row)'
             )
 </template>
 

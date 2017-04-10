@@ -61,27 +61,43 @@
           });
       },
       approve() {
-        this.isLoading = true;
-        personService.create(this.personRequest)
-          .then((person) => {
-            this.personRequest.approved = true;
-
-            personRequestService.update(this.personRequest)
-              .then(() => {
-                this.isLoading = false;
-                this.$router.push({
-                  name  : 'person-detail',
-                  params: { personRequestId: person._id }
-                });
-              });
+        let newPersonId;
+        const message = 'Esta seguro que desea aprobar la solicitud de persona de ' +
+                        `${this.personRequest.name}?`;
+        this.$confirm(message, 'Aprobar solicitud de persona', {
+          confirmButtonText: 'OK',
+          cancelButtonText : 'Cancel',
+          type             : 'warning'
+        })
+        .then(() => {
+          this.isLoading = true;
+          return personService.create(this.personRequest);
+        })
+        .then((person) => {
+          newPersonId = person._id;
+          this.personRequest.approved = true;
+          return personRequestService.update(this.personRequest);
+        })
+        .then(() => {
+          this.isLoading = false;
+          this.$router.push({
+            name  : 'person-detail',
+            params: { personId: newPersonId }
           });
+        });
       },
       removePersonRequests() {
-        personRequestService.delete(this.personRequest._id)
+        const message = 'Esta operacion borrara la solicitud de persona de ' +
+                        `${this.personRequest.name} permanentemente. Desea continuar?`;
+        this.$confirm(message, 'Eliminar Solicitud de Persona', {
+          confirmButtonText: 'OK',
+          cancelButtonText : 'Cancel',
+          type             : 'warning'
+        })
+        .then(() => personRequestService.delete(this.personRequest._id))
         .then(() => {
           this.$router.push({
-            name  : 'person-list',
-            params: { personRequestId: this.personRequest._id }
+            name: 'person-list'
           });
         });
       }
