@@ -1,13 +1,20 @@
 <script>
+  import personService        from 'services/person';
   import personRequestService from 'services/person-request';
+  import mapStyle             from 'styles/map/wy';
 
   export default {
 
     data() {
       return {
-        isLoading     : false,
-        activeTab     : '1',
-        personRequest : {}
+        personRequest   : {},
+        isLoading       : true,
+        activeTab       : '1',
+        mapOptions      : {
+          mapTypeControl   : false,
+          fullscreenControl: true,
+          styles           : mapStyle
+        }
       };
     },
 
@@ -27,6 +34,21 @@
         position.lat = this.personRequest.geo.loc[1];
         position.lng = this.personRequest.geo.loc[0];
         return position;
+      },
+
+      appearance() {
+        const message = 'Apariencia no definida';
+        return this.personRequest.description && this.personRequest.description.appearance || message;
+      },
+
+      clothing() {
+        const message = 'Vestimenta no definida';
+        return this.personRequest.description && this.personRequest.description.clothing || message;
+      },
+
+      moreData() {
+        const message = 'Mas informacion no provista';
+        return this.personRequest.description && this.personRequest.description.more || message;
       }
     },
 
@@ -38,47 +60,69 @@
             this.isLoading     = false;
           });
       },
-      deletePersonRequest(index, personRequest) {
-        const message = 'Esta operacion borrara la solicitud de persona de' +
-                        `${personRequest.name} permanentemente, Desea continuar?`;
-        this.$confirm(message, 'Eliminar Solicitud de Persona', {
-          confirmButtonText: 'OK',
-          cancelButtonText : 'Cancel',
-          type             : 'warning'
-        })
-        .then(() => personRequestService.delete(personRequest._id))
-        .then(() => this.personRequests.splice(index, 1));
+      approve() {
+        this.isLoading = true;
+        personService.create(this.personRequest)
+          .then((person) => {
+            this.personRequest.approved = true;
+
+            personRequestService.update(this.personRequest)
+              .then(() => {
+                this.isLoading = false;
+                this.$router.push({
+                  name  : 'person-detail',
+                  params: { personRequestId: person._id }
+                });
+              });
+          });
+      },
+      removePersonRequests() {
+        personRequestService.delete(this.personRequest._id)
+        .then(() => {
+          this.$router.push({
+            name  : 'person-list',
+            params: { personRequestId: this.personRequest._id }
+          });
+        });
       }
     }
-};
+  };
 </script>
 
-<template lang='pug'>
+<template lang="pug">
   .container
-    gmap-map.map(:center='position', :zoom='14', v-loading='isLoading')
+    gmap-map.map(:center='position', :options='mapOptions', :zoom='16', v-loading='isLoading')
       gmap-marker(
         :position='position',
         :clickable='true'
       )
+
     el-row(:gutter="20")
-      el-col(:span='7', :offset='1')
+      el-col(:span='8')
         .grid-content
           el-card(:body-style="{ padding: '0px' }", v-loading='isLoading')
-            el-carousel
-              el-carousel-item
-                img.image(src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Placeholder_no_text.svg/1024px-Placeholder_no_text.svg.png')
+            el-carousel(v-if='personRequest.photos')
+              el-carousel-item(v-for='photo in personRequest.photos')
+                img.image(v-bind:src='photo.url')
             div(style='padding: 14px;')
               span {{ personRequest.name }}
+              .bottom.clearfix
+                time.time {{ personRequest.createdAt }}
 
-      el-col(:span='15')
+      el-col(:span='16')
+        .action-button-container
+          el-button-group
+            el-button(type='primary', @click='approve()') Aprobar
+            el-button(type='danger', icon='delete', @click='removePersonRequests()')
+
         .grid-content
           el-collapse(v-model='activeTab', accordion='')
-            el-collapse-item(title='Solicitud de reporte', name='1')
-              div {{personRequest.name}} tiene {{personRequest.age}} años.
-            el-collapse-item(title='Ultima vez visto', name='2')
-              div {{personRequest.lastSeenAt}}
-            el-collapse-item(title='Descripcion del reporte', name='4')
-              div Phasellus porttitor enim id metus volutpat ultricies. Ut nisi nunc, blandit sed dapibus at, vestibulum in felis. Etiam iaculis lorem ac nibh bibendum rhoncus. Phasellus porttitor enim id metus volutpat ultricies. Ut nisi nunc, blandit sed dapibus at, vestibulum in felis. Etiam iaculis lorem ac nibh bibendum rhoncus.
+            el-collapse-item(title='Apariencia', name='1')
+              div {{ appearance }}
+            el-collapse-item(title='Vestimenta', name='2')
+              div {{ clothing }}
+            el-collapse-item(title='Mas Datos', name='4')
+              div {{ moreData }}
 
           h4 Contactos
           el-table(
@@ -93,5 +137,31 @@
             el-table-column(prop='email', label='Email')
 </template>
 
-<style lang="scss">
+<style lang='scss'>
+  .container {
+    padding-bottom: 30px;
+  }
+  .map {
+    height: 250px;
+    margin: -25px -30px 30px -30px;
+  }
+  .time {
+    font-size: 13px;
+    color: #999;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+  .bottom {
+    margin-top: 13px;
+    line-height: 12px;
+  }
+  .image {
+    width: 100%;
+    display: block;
+  }
+  .action-button-container {
+    margin-bottom: 21px;
+    display: flex;
+    justify-content: flex-end;
+  }
 </style>
