@@ -1,4 +1,4 @@
-import { Message } from 'element-ui';
+import { Notification } from 'element-ui';
 import api         from 'services/api';
 
 const personRequestService = {};
@@ -21,8 +21,7 @@ personRequestService.getById = function(id) {
 personRequestService.create = function(personRequest) {
   return api.post('/person-request', personRequest)
     .then((response) => {
-      Message({
-        showClose: true,
+      Notification({
         message  : 'Pedido de carga de persona creado correctamente'
       });
       return response.data;
@@ -32,8 +31,7 @@ personRequestService.create = function(personRequest) {
 personRequestService.update = function(personRequest) {
   return api.put(`/person-request/${personRequest._id}`, personRequest)
     .then((response) => {
-      Message({
-        showClose: true,
+      Notification({
         message  : 'Pedido de carga de persona actualizado correctamente'
       });
       return response.data;
@@ -43,8 +41,7 @@ personRequestService.update = function(personRequest) {
 personRequestService.delete = function(id) {
   return api.delete(`/person-request/${id}`)
     .then((response) => {
-      Message({
-        showClose: true,
+      Notification({
         message  : 'Pedido de carga de persona borrado correctamente'
       });
       return response.data;
