@@ -107,7 +107,7 @@
 
 <template lang="pug">
   .container
-    gmap-map.map(:center='position', :options='mapOptions', :zoom='14', v-loading='isLoading')
+    gmap-map.map(:center='position', :options='mapOptions', :zoom='16', v-loading='isLoading')
       gmap-marker(
         :position='position',
         :clickable='true'
