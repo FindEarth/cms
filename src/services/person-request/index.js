@@ -22,7 +22,8 @@ personRequestService.create = function(personRequest) {
   return api.post('/person-request', personRequest)
     .then((response) => {
       Notification({
-        message  : 'Pedido de carga de persona creado correctamente'
+        message: 'Pedido de carga de persona creado correctamente',
+        type   : 'success'
       });
       return response.data;
     });
@@ -32,7 +33,8 @@ personRequestService.update = function(personRequest) {
   return api.put(`/person-request/${personRequest._id}`, personRequest)
     .then((response) => {
       Notification({
-        message  : 'Pedido de carga de persona actualizado correctamente'
+        message: 'Pedido de carga de persona actualizado correctamente',
+        type   : 'success'
       });
       return response.data;
     });
@@ -42,7 +44,8 @@ personRequestService.delete = function(id) {
   return api.delete(`/person-request/${id}`)
     .then((response) => {
       Notification({
-        message  : 'Pedido de carga de persona borrado correctamente'
+        message: 'Pedido de carga de persona borrado correctamente',
+        type   : 'success'
       });
       return response.data;
     });

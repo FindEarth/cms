@@ -17,7 +17,8 @@ personService.create = function(person) {
   return api.post('/person', person)
     .then((response) => {
       Notification({
-        message: 'Persona creada correctamente'
+        message: 'Persona creada correctamente',
+        type   : 'success'
       });
       return response.data;
     });
@@ -27,7 +28,8 @@ personService.update = function(person) {
   return api.put(`/person/${person._id}`, person)
     .then((response) => {
       Notification({
-        message: 'Persona actualizada correctamente'
+        message: 'Persona actualizada correctamente',
+        type   : 'success'
       });
       return response.data;
     });
@@ -37,7 +39,8 @@ personService.delete = function(id) {
   return api.delete(`/person/${id}`)
     .then((response) => {
       Notification({
-        message: 'Persona eliminada correctamente'
+        message: 'Persona eliminada correctamente',
+        type   : 'success'
       });
       return response.data;
     });
