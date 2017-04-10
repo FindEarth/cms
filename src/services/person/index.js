@@ -47,8 +47,7 @@ personService.delete = function(id) {
 };
 
 personService.share = function(person) {
-  const text = `${person.name} se perdió el ${person.createdAt}, ` +
-               'ayudanos a encontrarlo.';
+  const text = `Ayudanos a encontrar a ${person.name} https://find.earth/person/${person._id} @FindEarth`;
   window.open(
     `https://twitter.com/intent/tweet?text=${text}`,
     'share-person',
