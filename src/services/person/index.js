@@ -1,5 +1,6 @@
+import moment           from 'moment';
 import { Notification } from 'element-ui';
-import api         from 'services/api';
+import api              from 'services/api';
 
 const personService = {};
 
@@ -46,13 +47,21 @@ personService.delete = function(id) {
     });
 };
 
-personService.share = function(person) {
-  const text = `Ayudanos a encontrar a ${person.name} https://find.earth/person/${person._id} @FindEarth`;
-  window.open(
-    `https://twitter.com/intent/tweet?text=${text}`,
-    'share-person',
-    'height=400,width=650'
-  );
+personService.share = function(person, source) {
+  const url  = `https://find.earth/person/${person._id}`;
+  const text = `${person.name} se perdió el ${moment(person.createdAt).format('DD/MM/YYYY')} en ` +
+               `${person.geo.city}, ayúdanos a encontrarlo: ${url}`;
+
+  const sources = {
+    twitter : `https://twitter.com/intent/tweet?text=${encodeURI(text)}`,
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+    whatsapp: `whatsapp://send/?text=${encodeURI(text)}`
+  };
+  if (source === 'whatsapp') {
+    window.location = sources[source];
+    return;
+  }
+  window.open(sources[source]);
 };
 
 export default personService;

@@ -79,8 +79,8 @@
         });
       },
 
-      sharePerson() {
-        personService.share(this.person);
+      sharePerson(source) {
+        personService.share(this.person, source);
       },
 
       editPerson() {
@@ -128,9 +128,16 @@
       el-col(:span='16')
         .action-button-container
           el-button-group
+            el-button(type='primary', @click='sharePerson("facebook")')
+              i.fa.fa-facebook
+            el-button(type='primary', @click='sharePerson("twitter")')
+              i.fa.fa-twitter
+            el-button(type='primary', @click='sharePerson("whatsapp")')
+              i.fa.fa-whatsapp
+
+          el-button-group.right
             el-button(type='primary', @click='setFound(person)', v-if='!isFound') Encontrado
             el-button(type='primary', icon='edit', @click='editPerson', v-if='!isFound')
-            el-button(type='primary', icon='share', @click='sharePerson')
             el-button(type='danger', icon='delete', @click='deletePerson')
 
         .grid-content
@@ -180,6 +187,11 @@
   .action-button-container {
     margin-bottom: 21px;
     display: flex;
-    justify-content: flex-end;
+
+    .el-button-group {
+      &.right {
+        margin-left: auto;
+      }
+    }
   }
 </style>
