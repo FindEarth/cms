@@ -45,5 +45,5 @@
 </script>
 
 <template lang='pug'>
-  span {{showCounter}}
+  span {{ showCounter }}
 </template>

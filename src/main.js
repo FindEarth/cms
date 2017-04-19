@@ -7,6 +7,7 @@ import Vue                from 'vue';
 import ElementUI          from 'element-ui';
 import locale             from 'element-ui/lib/locale/lang/es';
 import VueRouter          from 'vue-router';
+import moment             from 'moment';
 import * as VueGoogleMaps from 'vue2-google-maps';
 
 import Store  from 'plugins/store';
@@ -24,6 +25,8 @@ Vue.use(VueGoogleMaps, {
     libraries: 'places' // to use place input
   }
 });
+
+moment.locale('es');
 
 const router = new VueRouter({
   routes: Router.routes,

@@ -12,9 +12,11 @@ body {
   height: 100%;
 }
 
-.fa {
-  vertical-align: baseline;
-  margin-right: 10px;
+.el-menu-item-group, .el-submenu {
+  .fa {
+    vertical-align: baseline;
+    margin-right: 10px;
+  }
 }
 
 .el-menu-item-group__title {

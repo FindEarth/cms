@@ -12,6 +12,7 @@
       getActive() {
         return this.$route.name;
       },
+
       handleSelect(key, keyPath) {
         if (this.subMenus.includes(key)) return;
         if (this.singleItems.includes(key)) {

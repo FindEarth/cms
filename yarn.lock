@@ -789,7 +789,7 @@ babel-plugin-transform-regenerator@^6.22.0:
   dependencies:
     regenerator-transform "0.9.8"
 
-babel-plugin-transform-runtime@^6.0.0:
+babel-plugin-transform-runtime@^6.0.0, babel-plugin-transform-runtime@^6.15.0:
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-runtime/-/babel-plugin-transform-runtime-6.22.0.tgz#10968d760bbf6517243081eec778e10fa828551c"
   dependencies:
@@ -861,6 +861,12 @@ babel-register@^6.0.0, babel-register@^6.22.0:
     lodash "^4.2.0"
     mkdirp "^0.5.1"
     source-map-support "^0.4.2"
+
+babel-runtime@^5.8.0:
+  version "5.8.38"
+  resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-5.8.38.tgz#1c0b02eb63312f5f087ff20450827b425c9d4c19"
+  dependencies:
+    core-js "^1.0.0"
 
 babel-runtime@^6.18.0, babel-runtime@^6.22.0:
   version "6.22.0"
@@ -4452,6 +4458,10 @@ mocha@^3.1.0:
     mkdirp "0.5.1"
     supports-color "3.1.2"
 
+moment@^2.18.1:
+  version "2.18.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
+
 ms@0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.1.tgz#9cd13c03adbff25b65effde7ce864ee952017098"
@@ -5456,7 +5466,7 @@ qjobs@^1.1.4:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/qjobs/-/qjobs-1.1.5.tgz#659de9f2cf8dcc27a1481276f205377272382e73"
 
-qs@6.2.0, qs@^6.1.0:
+qs@6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.2.0.tgz#3b7848c03c2dece69a9522b0fae8c4126d745f3b"
 
@@ -5464,7 +5474,7 @@ qs@6.2.1:
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.2.1.tgz#ce03c5ff0935bc1d9d69a9f14cbd18e568d67625"
 
-qs@^6.3.1:
+qs@^6.1.0, qs@^6.3.1:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
 
@@ -6837,9 +6847,13 @@ vue-template-es2015-compiler@^1.2.2:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.5.0.tgz#e4f672ab1718a3abf9171a080daefac31be117e1"
 
-vue2-google-maps@^0.5.2:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/vue2-google-maps/-/vue2-google-maps-0.5.2.tgz#18a7468dc82f5f64879618fc956c6d4ba0b927d4"
+vue2-google-maps@^0.7.2:
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/vue2-google-maps/-/vue2-google-maps-0.7.4.tgz#142127c8d1d1f62d478b2b24bae7a052d3c16456"
+  dependencies:
+    babel-plugin-transform-runtime "^6.15.0"
+    babel-runtime "^5.8.0"
+    marker-clusterer-plus "^2.1.4"
 
 vue@^2.0.1, vue@^2.1.0:
   version "2.1.10"

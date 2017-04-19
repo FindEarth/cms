@@ -1,4 +1,5 @@
 <script>
+  import moment        from 'moment';
   import personService from 'services/person';
 
   export default {
@@ -41,19 +42,11 @@
           type             : 'warning'
         })
         .then(() => personService.delete(person._id))
-        .then(() => {
-          this.people.splice(index, 1);
-        });
+        .then(() => this.people.splice(index, 1));
       },
 
       sharePerson(person) {
-        const text = `${person.name} se perdió el ${person.createdAt}, ` +
-                     'ayudanos a encontrarlo.';
-        window.open(
-          `https://twitter.com/intent/tweet?text=${text}`,
-          'share-person',
-          'height=400,width=650'
-        );
+        personService.share(person);
       },
 
       editPerson(person) {
@@ -61,6 +54,12 @@
           name  : 'person-edit',
           params: { personId: person._id }
         });
+      }
+    },
+
+    filters: {
+      date(date) {
+        return moment(date).format('D MMMM YYYY');
       }
     }
   };
@@ -82,8 +81,13 @@
     el-table-column(prop='geo.city', label='Ciudad', width='260', class-name='pointer')
     el-table-column(prop='geo.countryCode', label='Pais', width='70', class-name='pointer')
     el-table-column(prop='geo.postalCode', label='Zip', width='80', class-name='pointer')
-    el-table-column(prop='createdAt', label='Fecha', width='210', class-name='pointer')
-    el-table-column(fixed='right', label='Operations', width='120')
+    el-table-column(prop='lastSeenAt', label='Ultimo avistamiento', width='180', class-name='pointer')
+      template(scope='scope')
+        span {{ scope.row.lastSeenAt | date }}
+    el-table-column(prop='createdAt', label='Fecha de Creación', width='180', class-name='pointer')
+      template(scope='scope')
+        span {{ scope.row.createdAt | date }}
+    el-table-column(fixed='right', label='Acciones', width='120')
       template(scope='scope')
           el-button-group
             el-button(

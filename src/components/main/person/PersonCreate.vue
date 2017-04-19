@@ -68,25 +68,28 @@
 <template lang='pug'>
   div(v-loading='isLoading', element-loading-text='Creando persona',)
     el-steps.steps(:space='150', :active='step')
-      el-step(title='Step 1', description='Informacion basica')
-      el-step(title='Step 2', description='Geolocalizacion')
-      el-step(title='Step 3', description='Carga de Fotos')
-      el-step.last-step(title='Step 4', description='Resumen')
+      el-step(title='Información básica', icon='information')
+      el-step(title='Geolocalización', icon='search')
+      el-step(title='Carga de fotos', icon='picture')
+      el-step.last-step(title='Resumen', icon='check')
 
     el-card.box-card
       basic-information(
         v-if='step === 1',
+        :person='person',
         v-on:basic-information-submitted='onBasicInformationSubmitted'
       )
 
       geo(
         v-if='step === 2',
+        :geo='person.geo',
         v-on:gelocation-submitted='onGelocationSubmitted',
         v-on:step-back='stepBack'
       )
 
       file-upload(
         v-if='step === 3',
+        :files='person.photos',
         v-on:file-upload-submitted='onFileUploadSubmitted',
         v-on:step-back='stepBack'
       )

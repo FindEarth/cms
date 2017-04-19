@@ -2,7 +2,7 @@
 
 import barChart from 'components/shared/barChart';
 import pieChart from 'components/shared/pieChart';
-import counter from 'components/shared/counter';
+import counter  from 'components/shared/counter';
 
 export default {
 
@@ -73,10 +73,10 @@ export default {
 </script>
 
 <template lang='pug'>
-  div(class='container')
-    el-row(class='chart-row')
+  .container
+    el-row.chart-row
       el-col(:span='24')
-        div(class='grid-content', class='chart-wrapper full')
+        .grid-content.chart-wrapper.full
           barChart(
             :width='100',
             :height='300',
@@ -93,9 +93,9 @@ export default {
             :yAxisData='missingByAge.yAxisData',
             :data='missingByAge.data'
           )
-    el-row(class='chart-row')
+    el-row.chart-row
       el-col(:span='8')
-        div(class='grid-content' class='chart-wrapper full')
+        .grid-content.chart-wrapper.full
           pieChart(
             :width='100',
             :height='300',
@@ -110,7 +110,7 @@ export default {
             :data='missingByGender.data'
           )
       el-col(:span='8')
-        div(class='grid-content' class='chart-wrapper full')
+        .grid-content.chart-wrapper.full
           pieChart(
             :width='100',
             :height='300',
@@ -126,12 +126,12 @@ export default {
           )
       el-col(:span='8')
         el-row(:span='12')
-          div(class='grid-content' class='chart-wrapper half')
+          .grid-content.chart-wrapper.half
             h3(class='counter-title') Personas Encontradas
             p(class='number found')
               counter(:limitToReach='missingPeople', :animationDuration='260')
         el-row(:span='12')
-          div(class='grid-content' class='chart-wrapper half')
+          .grid-content.chart-wrapper.half
             h3(class='counter-title') Personas Desaparecidas
             p(class='number lost')
               counter(:limitToReach='foundPeople', :animationDuration='260')
@@ -173,7 +173,7 @@ $chart-height: 300px;
         font-size: 40px;
         margin-top: 20px;
         transition: transform .2s ease;
-        text-shadow: -2px 2px 0 #c9c9c9;
+
         &:hover {
           transform: scale(1.2);
           cursor: pointer;
@@ -181,11 +181,11 @@ $chart-height: 300px;
         }
 
         &.found {
-          color: darken($green, 10);
+          color: $lightBlue;
         }
 
         &.lost {
-          color: $red;
+          color: $dark-grey;
         }
       }
 

@@ -1,4 +1,5 @@
 <script>
+  import moment        from 'moment';
   import personService from 'services/person';
 
   export default {
@@ -25,6 +26,14 @@
           });
       },
 
+      onSelect(person) {
+        this.$router.push({
+          name  : 'person-detail',
+          params: { personId: person._id },
+          query : { isFound : true }
+        });
+      },
+
       deletePerson(index, person) {
         const message = `Esta operacion borrara la persona ${person.name} ` +
                         'permanentemente, Desea continuar?';
@@ -48,6 +57,12 @@
           'height=400,width=650'
         );
       }
+    },
+
+    filters: {
+      date(date) {
+        return moment(date).format('D MMMM YYYY');
+      }
     }
   };
 </script>
@@ -56,6 +71,7 @@
 div
   el-table(
     :data='people',
+    v-on:row-click='onSelect',
     border='',
     style='width: 100%',
     v-loading='isLoading',
@@ -68,10 +84,21 @@ div
     el-table-column(prop='geo.city', label='Ciudad', width='260', class-name='pointer')
     el-table-column(prop='geo.countryCode', label='Pais', width='70', class-name='pointer')
     el-table-column(prop='geo.postalCode', label='Zip', width='80', class-name='pointer')
-    el-table-column(prop='createdAt', label='Fecha', width='210', class-name='pointer')
-    el-table-column(fixed='right', label='Operations', width='120')
+    el-table-column(prop='foundAt', label='Fecha de Aparición', width='180', class-name='pointer')
+      template(scope='scope')
+        span {{ scope.row.foundAt | date }}
+    el-table-column(prop='createdAt', label='Fecha de Creación', width='180', class-name='pointer')
+      template(scope='scope')
+        span {{ scope.row.createdAt | date }}
+    el-table-column(fixed='right', label='Acciones', width='120')
       template(scope='scope')
         el-button-group
+          el-button(
+            type='primary',
+            size='mini',
+            icon='share',
+            @click.native.stop='sharePerson(scope.row)'
+          )
           el-button(
             type='primary',
             size='mini',

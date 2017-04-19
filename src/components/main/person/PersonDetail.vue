@@ -1,14 +1,19 @@
 <script>
   import personService from 'services/person';
+  import mapStyle      from 'styles/map/wy';
 
   export default {
 
     data() {
       return {
-        person: {},
-
+        person   : {},
         isLoading: true,
-        activeTab: '1'
+        activeTab: '1',
+        mapOptions : {
+          mapTypeControl   : false,
+          fullscreenControl: true,
+          styles           : mapStyle
+        }
       };
     },
 
@@ -28,6 +33,10 @@
         position.lat = this.person.geo.loc[1];
         position.lng = this.person.geo.loc[0];
         return position;
+      },
+
+      isFound() {
+        return this.$route.query.isFound;
       },
 
       appearance() {
@@ -54,20 +63,43 @@
             this.isLoading = false;
           });
       },
-      setFound(person) {
-        const message = `Desea marcar a ${person.name} como encontrado?`;
+
+      setFound() {
+        const message = `Desea marcar a ${this.person.name} como encontrado?`;
         this.$confirm(message, 'Persona encontrada', {
           confirmButtonText: 'OK',
           cancelButtonText : 'Cancel',
           type             : 'warning'
         }).then(() => {
           personService.update({
-            _id      : person._id,
-            isMissing: !person.isMissing
-          }).then(() => {
-            this.$router.push({ name  : 'person-found' });
-          });
+            _id      : this.person._id,
+            isMissing: !this.person.isMissing
+          })
+          .then(() => this.$router.push({ name  : 'person-found' }));
         });
+      },
+
+      sharePerson(source) {
+        personService.share(this.person, source);
+      },
+
+      editPerson() {
+        this.$router.push({
+          name  : 'person-edit',
+          params: { personId: this.person._id }
+        });
+      },
+
+      deletePerson() {
+        const message = `Esta operacion borrara la persona ${this.person.name} ` +
+                        'permanentemente, Desea continuar?';
+        this.$confirm(message, 'Eliminar Persona', {
+          confirmButtonText: 'OK',
+          cancelButtonText : 'Cancel',
+          type             : 'warning'
+        })
+        .then(() => personService.delete(this.person._id))
+        .then(() => this.$router.push({ name: 'person-list' }));
       }
     }
   };
@@ -75,7 +107,7 @@
 
 <template lang="pug">
   .container
-    gmap-map.map(:center='position', :zoom='14', v-loading='isLoading')
+    gmap-map.map(:center='position', :options='mapOptions', :zoom='16', v-loading='isLoading')
       gmap-marker(
         :position='position',
         :clickable='true'
@@ -94,6 +126,20 @@
                 time.time {{ person.createdAt }}
 
       el-col(:span='16')
+        .action-button-container
+          el-button-group
+            el-button(type='primary', @click='sharePerson("facebook")')
+              i.fa.fa-facebook
+            el-button(type='primary', @click='sharePerson("twitter")')
+              i.fa.fa-twitter
+            el-button(type='primary', @click='sharePerson("whatsapp")')
+              i.fa.fa-whatsapp
+
+          el-button-group.right
+            el-button(type='primary', @click='setFound(person)', v-if='!isFound') Encontrado
+            el-button(type='primary', icon='edit', @click='editPerson', v-if='!isFound')
+            el-button(type='danger', icon='delete', @click='deletePerson')
+
         .grid-content
           el-collapse(v-model='activeTab', accordion='')
             el-collapse-item(title='Apariencia', name='1')
@@ -114,11 +160,6 @@
             el-table-column(prop='name', label='Nombre', width='180')
             el-table-column(prop='phone', label='Telefono', width='180')
             el-table-column(prop='email', label='Email')
-
-          div(style='padding-top: 20px;')
-            el-button(
-              @click.native.prevent='setFound(person)'
-            ) Encontrado!
 </template>
 
 <style lang='scss'>
@@ -126,9 +167,8 @@
     padding-bottom: 30px;
   }
   .map {
-    height: 200px;
-    margin: -30px;
-    margin-bottom: 30px;
+    height: 250px;
+    margin: -25px -30px 30px -30px;
   }
   .time {
     font-size: 13px;
@@ -144,12 +184,14 @@
     width: 100%;
     display: block;
   }
-  .clearfix:before,
-  .clearfix:after {
-    display: table;
-    content: "";
-  }
-  .clearfix:after {
-    clear: both
+  .action-button-container {
+    margin-bottom: 21px;
+    display: flex;
+
+    .el-button-group {
+      &.right {
+        margin-left: auto;
+      }
+    }
   }
 </style>
