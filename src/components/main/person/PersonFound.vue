@@ -19,7 +19,7 @@
     methods: {
       getPeople() {
         this.isLoading = true;
-        personService.get({ isMissing: false })
+        personService.getFound()
           .then((people) => {
             this.people    = people;
             this.isLoading = false;

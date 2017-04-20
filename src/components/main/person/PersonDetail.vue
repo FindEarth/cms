@@ -72,8 +72,8 @@
           type             : 'warning'
         }).then(() => {
           personService.update({
-            _id      : this.person._id,
-            isMissing: !this.person.isMissing
+            _id    : this.person._id,
+            foundAt: new Date()
           })
           .then(() => this.$router.push({ name  : 'person-found' }));
         });
