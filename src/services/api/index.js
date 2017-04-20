@@ -1,6 +1,21 @@
-import trae from 'trae';
-import user from 'services/user';
+import trae        from 'trae';
+import environment from 'services/environment';
+import user        from 'services/user';
 import { Message } from 'element-ui';
+
+environment.init([{
+  name      : 'local',
+  url       : 'http://localhost:9090',
+  startsWith: 'http://localhost'
+}, {
+  name      : 'qa',
+  url       : 'https://qa-api.find.earth',
+  startsWith: 'https://qa-admin'
+}, {
+  name      : 'prod',
+  url       : 'https://api.find.earth',
+  startsWith: 'https://admin'
+}]);
 
 function errorMessage(err) {
   switch (err.status) {
@@ -51,7 +66,7 @@ function identity(res) {
 }
 
 const api = trae.create({
-  baseUrl: 'https://api.find.earth'
+  baseUrl: environment.getUrl()
 });
 
 api.before(tokenize);
