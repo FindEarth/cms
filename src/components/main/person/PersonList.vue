@@ -96,12 +96,12 @@
               icon='edit',
               @click.native.stop='editPerson(scope.row)'
             )
-            el-button(
-              type='primary',
-              size='mini',
-              icon='share',
-              @click.native.stop='sharePerson(scope.row)'
-            )
+            //- el-button(
+            //-   type='primary',
+            //-   size='mini',
+            //-   icon='share',
+            //-   @click.native.stop='sharePerson(scope.row)'
+            //- )
             el-button(
               type='primary',
               size='mini',

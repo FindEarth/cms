@@ -53,7 +53,7 @@ personService.delete = function(id) {
 };
 
 personService.share = function(person, source) {
-  const url  = `https://find.earth/person/${person._id}`;
+  const url  = `https://find.earth/person/${person.slug}`;
   const text = `${person.name} se perdió el ${moment(person.createdAt).format('DD/MM/YYYY')} en ` +
                `${person.geo.city}, ayúdanos a encontrarlo: ${url}`;
 
