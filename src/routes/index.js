@@ -33,7 +33,9 @@ const loginMiddleware = (to, from, next) => {
   if (publicRoutes.find(publicr => publicr === to.name)) {
     return next();
   }
-  if (!userService.getToken()) {
+  const token = userService.getToken();
+  const currentTimestamp = Math.floor(Date.now() / 1000);
+  if (!token || token.expiresAt < currentTimestamp) {
     return next({ name: 'login' });
   }
   next();
