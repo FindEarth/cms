@@ -44,7 +44,7 @@ function errorMessage(err) {
 }
 
 function tokenize(config) {
-  const token = user.getToken();
+  const token = user.getToken().value;
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
