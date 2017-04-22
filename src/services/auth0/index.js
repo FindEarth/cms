@@ -28,14 +28,17 @@ lock.authCallbackListener = (from, to, next) => {
   if (window.location.hash && window.location.hash.includes('access_token')) {
     lock.resumeAuth(window.location.hash, (err, authResult) => {
       if (err) { return next({ name: 'login' }); }
-      store.set('token', authResult.idToken);
+      store.set('token', {
+        value    : authResult.idToken,
+        expiresAt: authResult.idTokenPayload.exp
+      });
       store.set('user', {
         name        : authResult.idTokenPayload.app_metadata.name,
         email       : authResult.idTokenPayload.email,
         picture     : authResult.idTokenPayload.picture,
         organization: authResult.idTokenPayload.user_metadata.organization
       });
-      next({ name: 'person-list' });
+      next({ name: 'home' });
     });
   }
   next();
