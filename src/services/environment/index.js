@@ -16,7 +16,7 @@ class ClientEnvironment {
     });
 
     if (!this.environment) {
-      throw new Error('Enable to find environment, make sure to register the current url');
+      throw new Error('Unable to find environment, make sure to register the current url');
     }
     this._isInitialized = true;
   }
@@ -31,7 +31,7 @@ class ClientEnvironment {
     this._isInitializedControl();
     const newEnvironment = this.environments.find(env => env.name === environmentName);
     if (!newEnvironment) {
-      throw new Error(`Enable to set new environment, ${environmentName} not found`);
+      throw new Error(`Unable to set new environment, ${environmentName} not found`);
     }
     this.environment = newEnvironment;
   }
@@ -40,7 +40,7 @@ class ClientEnvironment {
     this._isInitializedControl();
     const newEnvironment = this.environments.find(env => env.url === environmentUrl);
     if (!newEnvironment) {
-      throw new Error(`Enable to set new environment, ${environmentUrl} not found`);
+      throw new Error(`Unable to set new environment, ${environmentUrl} not found`);
     }
     this.environment = newEnvironment;
   }
