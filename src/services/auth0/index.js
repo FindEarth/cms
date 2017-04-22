@@ -29,7 +29,7 @@ lock.authCallbackListener = (from, to, next) => {
     lock.resumeAuth(window.location.hash, (err, authResult) => {
       if (err) { return next({ name: 'login' }); }
       store.set('token', {
-        value: authResult.idToken,
+        value    : authResult.idToken,
         expiresAt: authResult.idTokenPayload.exp
       });
       store.set('user', {
