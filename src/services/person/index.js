@@ -9,6 +9,11 @@ personService.get = function(query = {}) {
     .then(response => response.data);
 };
 
+personService.getFound = function(query = {}) {
+  return api.get('/person/found', { params: query })
+    .then(response => response.data);
+};
+
 personService.getById = function(id) {
   return api.get(`/person/${id}`)
     .then(response => response.data);
@@ -48,7 +53,7 @@ personService.delete = function(id) {
 };
 
 personService.share = function(person, source) {
-  const url  = `https://find.earth/person/${person._id}`;
+  const url  = `https://find.earth/person/${person.slug}`;
   const text = `${person.name} se perdió el ${moment(person.createdAt).format('DD/MM/YYYY')} en ` +
                `${person.geo.city}, ayúdanos a encontrarlo: ${url}`;
 
