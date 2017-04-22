@@ -2,7 +2,7 @@
   export default {
     props: {
       files: {
-        type: Array,
+        type   : Array,
         default: () => []
       }
     },
@@ -20,7 +20,8 @@
         // We are not handling uploading in this step
 
         const isJPG  = file.type === 'image/jpeg';
-        const isLt2M = file.size / 1024 / 1024 < 2;
+        const isPNG  = file.type === 'image/png';
+        const isLt3M = file.size / 1024 / 1024 < 3;
 
         const fail = (message) => {
           this.$message.error({
@@ -30,11 +31,11 @@
           return false;
         };
 
-        if (!isJPG) {
+        if (!(isJPG || isPNG)) {
           return fail('El formato debe ser valido');
         }
-        if (!isLt2M) {
-          return fail('El tamaño de imagen debe ser menor a 2MB');
+        if (!isLt3M) {
+          return fail('El tamaño de imagen debe ser menor a 3MB');
         }
 
         const reader = new FileReader();
