@@ -2,21 +2,21 @@
   export default {
     props: {
       isEdit: {
-        type   : Boolean,
+        type: Boolean,
         default: false
       },
       person: {
-        type    : Object,
+        type: Object,
         required: true
       }
     },
 
     methods: {
-      onSubmit() {
-        this.$emit('resume-submitted');
+      onSubmit () {
+        this.$emit('resume-submitted')
       }
     }
-  };
+  }
 </script>
 
 <template lang='pug'>

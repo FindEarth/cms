@@ -1,27 +1,27 @@
 <script>
   export default {
-    data() {
+    data () {
       return {
         singleItems: ['home', 'profile'],
         subMenus: ['people', 'notifications'],
         defaultOpeneds: []
-      };
+      }
     },
 
     methods: {
-      getActive() {
-        return this.$route.name;
+      getActive () {
+        return this.$route.name
       },
 
-      handleSelect(key, keyPath) {
-        if (this.subMenus.includes(key)) return;
+      handleSelect (key, keyPath) {
+        if (this.subMenus.includes(key)) return
         if (this.singleItems.includes(key)) {
-          this.defaultOpeneds = [];
+          this.defaultOpeneds = []
         }
-        this.$router.push({ name: key });
+        this.$router.push({ name: key })
       }
     }
-  };
+  }
 </script>
 
 <template lang='pug'>

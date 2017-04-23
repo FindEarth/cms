@@ -1,6 +1,6 @@
 <script>
 
-  import chart from 'vue-echarts';
+  import chart from 'vue-echarts'
 
   // Vue echarts wrapper https://github.com/Justineo/vue-echarts
   // For more chart properties refer to https://ecomfe.github.io/echarts-doc/public/en/option.html
@@ -61,8 +61,7 @@
       chart
     },
 
-    data() {
-
+    data () {
       return {
         options: {
           title: this.title,
@@ -93,11 +92,11 @@
             }
           }]
         }
-      };
+      }
     }
-  });
+  })
 </script>
 
 <template lang='pug'>
-  chart(:options="options", :style='`height:${height}px; width:${width}%`')
+  chart(:options="options", :style='`height:${height}px width:${width}%`')
 </template>

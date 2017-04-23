@@ -2,70 +2,70 @@
   export default {
     props: {
       files: {
-        type   : Array,
+        type: Array,
         default: () => []
       }
     },
 
-    data() {
+    data () {
       return {
         dialogImageUrl: '',
-        dialogVisible : false
-      };
+        dialogVisible: false
+      }
     },
 
     methods: {
-      onBeforeUpload(file) {
+      onBeforeUpload (file) {
         // If false is returned, uploading will be aborted.
         // We are not handling uploading in this step
 
-        const isJPG  = file.type === 'image/jpeg';
-        const isPNG  = file.type === 'image/png';
-        const isLt3M = file.size / 1024 / 1024 < 3;
+        const isJPG = file.type === 'image/jpeg'
+        const isPNG = file.type === 'image/png'
+        const isLt3M = file.size / 1024 / 1024 < 3
 
         const fail = (message) => {
           this.$message.error({
             showClose: true,
             message
-          });
-          return false;
-        };
+          })
+          return false
+        }
 
         if (!(isJPG || isPNG)) {
-          return fail('El formato debe ser valido');
+          return fail('El formato debe ser valido')
         }
         if (!isLt3M) {
-          return fail('El tamaño de imagen debe ser menor a 3MB');
+          return fail('El tamaño de imagen debe ser menor a 3MB')
         }
 
-        const reader = new FileReader();
+        const reader = new FileReader()
         reader.onloadend = () => {
           this.files.push({
             name: file.name.split(' ').join('-'),
             data: reader.result,
-            url : reader.result
-          });
-        };
-        reader.readAsDataURL(file);
-        return false;
+            url: reader.result
+          })
+        }
+        reader.readAsDataURL(file)
+        return false
       },
 
-      onRemove(file) {
-        const propToSearch = file.name ? 'name' : 'url';
-        const index = this.files.findIndex(f => f[propToSearch] === file[propToSearch]);
-        this.files.splice(index, 1);
+      onRemove (file) {
+        const propToSearch = file.name ? 'name' : 'url'
+        const index = this.files.findIndex(f => f[propToSearch] === file[propToSearch])
+        this.files.splice(index, 1)
       },
 
-      onPreview(file) {
-        this.dialogImageUrl = file.url;
-        this.dialogVisible  = true;
+      onPreview (file) {
+        this.dialogImageUrl = file.url
+        this.dialogVisible = true
       },
 
-      onSubmit() {
-        this.$emit('file-upload-submitted', this.files);
+      onSubmit () {
+        this.$emit('file-upload-submitted', this.files)
       }
     }
-  };
+  }
 </script>
 
 <template lang='pug'>

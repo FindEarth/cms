@@ -4,17 +4,17 @@
       person: {
         type: Object,
         default: () => ({
-          name       : '',
-          age        : '',
-          gender     : 'M',
-          lastSeenAt : '',
+          name: '',
+          age: '',
+          gender: 'M',
+          lastSeenAt: '',
           description: {},
-          contacts   : [{ name: '', phone: '', email: '' }]
+          contacts: [{ name: '', phone: '', email: '' }]
         })
       }
     },
 
-    data() {
+    data () {
       return {
         rules: {
           name: [
@@ -29,40 +29,40 @@
           ]
         },
         isFormValid: true
-      };
+      }
     },
 
     methods: {
-      addContact() {
-        this.person.contacts.push({ name: '', phone: '', email: '' });
+      addContact () {
+        this.person.contacts.push({ name: '', phone: '', email: '' })
       },
-      removeContact(index) {
-        this.person.contacts.splice(index, 1);
+      removeContact (index) {
+        this.person.contacts.splice(index, 1)
       },
-      submitForm() {
+      submitForm () {
         this.$refs.personForm.validate((valid) => {
           if (!valid) {
-            this.isFormValid = false;
-            this.watchFormChange();
-            return false;
+            this.isFormValid = false
+            this.watchFormChange()
+            return false
           }
-          this.$emit('basic-information-submitted', this.person);
-        });
+          this.$emit('basic-information-submitted', this.person)
+        })
       },
-      watchFormChange() {
+      watchFormChange () {
         this.$watch('person', () => {
           this.$refs.personForm.validate((valid) => {
             if (valid) {
-              this.isFormValid = true;
-              return true;
+              this.isFormValid = true
+              return true
             }
-          });
+          })
         }, {
           deep: true
-        });
+        })
       }
     }
-  };
+  }
 </script>
 
 <template lang='pug'>
@@ -97,13 +97,13 @@
 
     el-form-item(label='Contacto', :gutter='20', v-for='(contact, index) in person.contacts')
       el-col(:span='6')
-        el-input(type='text', placeholder='Nombre', style='width: 100%;', v-model='contact.name')
-      el-col.line(:span='1') &nbsp;
+        el-input(type='text', placeholder='Nombre', style='width: 100%', v-model='contact.name')
+      el-col.line(:span='1') &nbsp
       el-col(:span='6')
-        el-input(type='phone', placeholder='Telefono', style='width: 100%;', v-model='contact.phone')
-      el-col.line(:span='1') &nbsp;
+        el-input(type='phone', placeholder='Telefono', style='width: 100%', v-model='contact.phone')
+      el-col.line(:span='1') &nbsp
       el-col(:span='6')
-        el-input(type='email', placeholder='Email', style='width: 100%;', v-model='contact.email')
+        el-input(type='email', placeholder='Email', style='width: 100%', v-model='contact.email')
 
       el-col(:span='4', v-if='person.contacts.length === 1')
         el-button.remove-contact-button(type='primary', size='mini', @click='addContact') Agregar

@@ -1,34 +1,34 @@
 <script>
-  import userService from 'services/user';
+  import userService from 'services/user'
 
   export default {
-    data() {
+    data () {
       return {
         user: userService.get() || {}
-      };
+      }
     },
 
     methods: {
-      handleSelect(key, keyPath) {
+      handleSelect (key, keyPath) {
         switch (key) {
           case 'logout':
-            this.logout();
-            break;
+            this.logout()
+            break
           default:
-            console.log(key, keyPath);
+            console.log(key, keyPath)
         }
       },
 
-      goToHome() {
-        this.$router.push({ name: 'home' });
+      goToHome () {
+        this.$router.push({ name: 'home' })
       },
 
-      logout() {
-        userService.clear();
-        this.$router.push({ name: 'login' });
+      logout () {
+        userService.clear()
+        this.$router.push({ name: 'login' })
       }
     }
-  };
+  }
 </script>
 
 <template lang='pug'>
