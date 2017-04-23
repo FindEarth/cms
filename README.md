@@ -31,4 +31,10 @@ npm run e2e
 npm test
 ```
 
+## License
+[MIT License](https://github.com/findearth/cms/blob/develop/LICENSE)
+
+## Style
+[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](http://standardjs.com)
+
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader)
