@@ -1,8 +1,7 @@
-import store from 'store';
+import store from 'store'
 
 store.install = (Vue) => {
-  Vue.prototype.$store = store;
-};
+  Vue.prototype.$store = store
+}
 
-
-export default store;
+export default store

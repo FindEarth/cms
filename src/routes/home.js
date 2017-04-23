@@ -1,9 +1,9 @@
-import Home from 'components/main/home/Home';
+import Home from 'components/main/home/Home'
 
 const route = {
-  name     : 'home',
-  path     : '/',
+  name: 'home',
+  path: '/',
   component: Home
-};
+}
 
-export default route;
+export default route
