@@ -1,108 +1,107 @@
 <script>
-  import personService from 'services/person';
-  import mapStyle      from 'styles/map/wy';
+  import personService from 'services/person'
+  import mapStyle from 'styles/map/wy'
 
   export default {
-
-    data() {
+    data () {
       return {
-        person   : {},
+        person: {},
         isLoading: true,
         activeTab: '1',
-        mapOptions : {
-          mapTypeControl   : false,
+        mapOptions: {
+          mapTypeControl: false,
           fullscreenControl: true,
-          styles           : mapStyle
+          styles: mapStyle
         }
-      };
+      }
     },
 
-    mounted() {
-      this.isLoading = true;
-      this.getPerson(this.$route.params.personId);
+    mounted () {
+      this.isLoading = true
+      this.getPerson(this.$route.params.personId)
     },
 
     computed: {
-      position() {
+      position () {
         const position = {
           lat: 0,
           lng: 0
-        };
-        if (!this.person.geo) { return position; }
+        }
+        if (!this.person.geo) { return position }
 
-        position.lat = this.person.geo.loc[1];
-        position.lng = this.person.geo.loc[0];
-        return position;
+        position.lat = this.person.geo.loc[1]
+        position.lng = this.person.geo.loc[0]
+        return position
       },
 
-      isFound() {
-        return this.$route.query.isFound;
+      isFound () {
+        return this.$route.query.isFound
       },
 
-      appearance() {
-        const message = 'Apariencia no definida';
-        return this.person.description && this.person.description.appearance || message;
+      appearance () {
+        const message = 'Apariencia no definida'
+        return this.person.description && this.person.description.appearance || message
       },
 
-      clothing() {
-        const message = 'Vestimenta no definida';
-        return this.person.description && this.person.description.clothing || message;
+      clothing () {
+        const message = 'Vestimenta no definida'
+        return this.person.description && this.person.description.clothing || message
       },
 
-      moreData() {
-        const message = 'Mas informacion no provista';
-        return this.person.description && this.person.description.more || message;
+      moreData () {
+        const message = 'Mas informacion no provista'
+        return this.person.description && this.person.description.more || message
       }
     },
 
     methods: {
-      getPerson(personId) {
+      getPerson (personId) {
         personService.getById(personId)
           .then((person) => {
-            this.person    = person;
-            this.isLoading = false;
-          });
+            this.person = person
+            this.isLoading = false
+          })
       },
 
-      setFound() {
-        const message = `Desea marcar a ${this.person.name} como encontrado?`;
+      setFound () {
+        const message = `Desea marcar a ${this.person.name} como encontrado?`
         this.$confirm(message, 'Persona encontrada', {
           confirmButtonText: 'OK',
-          cancelButtonText : 'Cancel',
-          type             : 'warning'
+          cancelButtonText: 'Cancel',
+          type: 'warning'
         }).then(() => {
           personService.update({
-            _id    : this.person._id,
+            _id: this.person._id,
             foundAt: new Date()
           })
-          .then(() => this.$router.push({ name  : 'person-found' }));
-        });
+          .then(() => this.$router.push({ name: 'person-found' }))
+        })
       },
 
-      sharePerson(source) {
-        personService.share(this.person, source);
+      sharePerson (source) {
+        personService.share(this.person, source)
       },
 
-      editPerson() {
+      editPerson () {
         this.$router.push({
-          name  : 'person-edit',
+          name: 'person-edit',
           params: { personId: this.person._id }
-        });
+        })
       },
 
-      deletePerson() {
+      deletePerson () {
         const message = `Esta operacion borrara la persona ${this.person.name} ` +
-                        'permanentemente, Desea continuar?';
+                        'permanentemente, Desea continuar?'
         this.$confirm(message, 'Eliminar Persona', {
           confirmButtonText: 'OK',
-          cancelButtonText : 'Cancel',
-          type             : 'warning'
+          cancelButtonText: 'Cancel',
+          type: 'warning'
         })
         .then(() => personService.delete(this.person._id))
-        .then(() => this.$router.push({ name: 'person-list' }));
+        .then(() => this.$router.push({ name: 'person-list' }))
       }
     }
-  };
+  }
 </script>
 
 <template lang="pug">

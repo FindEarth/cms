@@ -1,8 +1,7 @@
 <script>
-
-import barChart from 'components/shared/barChart';
-import pieChart from 'components/shared/pieChart';
-import counter  from 'components/shared/counter';
+import barChart from 'components/shared/barChart'
+import pieChart from 'components/shared/pieChart'
+import counter from 'components/shared/counter'
 
 export default {
 
@@ -12,8 +11,7 @@ export default {
     counter
   },
 
-  data() {
-
+  data () {
     return {
       missingByAge: {
         xAxisData: [10, 11, 12, 14, 15, 18, 20, 24, 25, 28, 30, 36, 40, 48, 52, 60, 80, 85, 90, 92],
@@ -67,9 +65,9 @@ export default {
       },
       missingPeople: 188,
       foundPeople: 57
-    };
+    }
   }
-};
+}
 </script>
 
 <template lang='pug'>

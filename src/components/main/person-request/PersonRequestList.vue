@@ -1,54 +1,54 @@
 <script>
-  import personRequestService from 'services/person-request';
+  import personRequestService from 'services/person-request'
 
   export default {
 
-    data() {
+    data () {
       return {
         personRequests: [],
 
         isLoading: false
-      };
+      }
     },
 
-    mounted() {
-      this.getPersonRequests();
+    mounted () {
+      this.getPersonRequests()
     },
 
     methods: {
-      getPersonRequests() {
-        this.isLoading = true;
+      getPersonRequests () {
+        this.isLoading = true
         personRequestService.get({ approved: false })
           .then((personRequests) => {
-            this.personRequests = personRequests;
-            this.isLoading      = false;
-          });
+            this.personRequests = personRequests
+            this.isLoading = false
+          })
       },
 
-      onSelect(personRequest) {
+      onSelect (personRequest) {
         this.$router.push({
-          name  : 'person-request-detail',
+          name: 'person-request-detail',
           params: { personRequestId: personRequest._id }
-        });
+        })
       },
 
-      deletePersonRequest(index, personRequest) {
+      deletePersonRequest (index, personRequest) {
         const message = 'Esta operacion borrara la solicitud de persona de ' +
-                        `${personRequest.name} permanentemente. Desea continuar?`;
+                        `${personRequest.name} permanentemente. Desea continuar?`
         this.$confirm(message, 'Eliminar solicitud de persona', {
           confirmButtonText: 'OK',
-          cancelButtonText : 'Cancel',
-          type             : 'warning'
+          cancelButtonText: 'Cancel',
+          type: 'warning'
         })
         .then(() => {
-          personRequestService.delete(personRequest._id);
+          personRequestService.delete(personRequest._id)
         })
         .then(() => {
-          this.personRequests.splice(index, 1);
-        });
+          this.personRequests.splice(index, 1)
+        })
       }
     }
-  };
+  }
 </script>
 
 <template lang='pug'>
@@ -77,6 +77,3 @@
           @click.native.stop='deletePersonRequest(scope.$index, scope.row)'
         )
 </template>
-
-<style lang="scss">
-</style>

@@ -1,10 +1,11 @@
 import userService from 'services/user'
-import MainContainer from 'components/main/MainContainer.vue'
 
-import loginRoutes from 'routes/login'
 import homeRoutes from 'routes/home'
+import loginRoutes from 'routes/login'
 import personRoutes from 'routes/person'
 import personRequestRoutes from 'routes/person-request'
+
+import MainContainer from 'components/main/MainContainer.vue'
 
 const mainRoute = {
   path: '/',
