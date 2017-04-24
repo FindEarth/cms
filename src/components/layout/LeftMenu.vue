@@ -19,6 +19,12 @@
           this.defaultOpeneds = []
         }
         this.$router.push({ name: key })
+      },
+
+      showComingSoon () {
+        this.$alert('Esta funcionalidad está siendo desarrollada', 'Próximamente', {
+          confirmButtonText: 'OK'
+        })
       }
     }
   }
@@ -45,9 +51,9 @@
              i.fa.fa-bell-o.fa-lg
              | Notificaciones
           el-menu-item-group(title='')
-            el-menu-item(index='') Lista
-            el-menu-item(index='') Crear
-        el-menu-item(index='profile')
+            el-menu-item(index='', @click='showComingSoon()') Lista
+            el-menu-item(index='', @click='showComingSoon()') Crear
+        el-menu-item(index='', @click='showComingSoon()')
           i.fa.fa-user.fa-lg
           | Perfil
     a.copyright(href='https://keepe.rs/', target='_blank')
