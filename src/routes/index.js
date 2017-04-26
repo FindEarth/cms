@@ -1,4 +1,4 @@
-import userService from 'services/user'
+// import userService from 'services/user'
 
 import homeRoutes from 'routes/home'
 import loginRoutes from 'routes/login'
@@ -34,11 +34,13 @@ const loginMiddleware = (to, from, next) => {
   if (publicRoutes.find(publicr => publicr === to.name)) {
     return next()
   }
-  const token = userService.getToken()
-  const currentTimestamp = Math.floor(Date.now() / 1000)
-  if (!token || token.expiresAt < currentTimestamp) {
-    return next({ name: 'login' })
-  }
+
+  // const token = userService.getToken()
+  // const currentTimestamp = Math.floor(Date.now() / 1000)
+  // if (!token || token.expiresAt < currentTimestamp) {
+  //   return next({ name: 'login' })
+  // }
+
   next()
 }
 
