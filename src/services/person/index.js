@@ -24,7 +24,7 @@ personService.getByOrganization = function (organization, query = {}) {
   return personService.get(query)
 }
 
-personService.getByOrganizationFound = function (organization, query = {}) {
+personService.getFoundByOrganization = function (organization, query = {}) {
   query.organization = organization
   return personService.getFound(query)
 }

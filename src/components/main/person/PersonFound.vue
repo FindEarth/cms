@@ -21,7 +21,7 @@
     methods: {
       getPeople () {
         this.isLoading = true
-        personService.getByOrganization(userService.get().organization)
+        personService.getFoundByOrganization(userService.get().organization)
           .then((people) => {
             this.people = people
             this.isLoading = false
