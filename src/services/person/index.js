@@ -24,6 +24,11 @@ personService.getByOrganization = function (organization, query = {}) {
   return personService.get(query)
 }
 
+personService.getByOrganizationFound = function (organization, query = {}) {
+  query.organization = organization
+  return personService.getFound(query)
+}
+
 personService.create = function (person) {
   return api.post('/person', person)
     .then((response) => {
