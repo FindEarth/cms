@@ -1,35 +1,34 @@
-import api   from 'services/api';
-import store from 'store';
+import api from 'services/api'
+import store from 'store'
 
+const userService = {}
 
-const userService = {};
-
-userService.authenticate = function(username, password) {
+userService.authenticate = function (username, password) {
   return api.post('/auth', { username, password })
     .then((res) => {
-      store.set('token', res.data.idToken);
-    });
-};
+      store.set('token', res.data.idToken)
+    })
+}
 
-userService.get = function() {
-  return store.get('user');
-};
+userService.get = function () {
+  return store.get('user')
+}
 
-userService.getToken = function() {
-  return store.get('token');
-};
+userService.getToken = function () {
+  return store.get('token')
+}
 
-userService.clearToken = function() {
-  store.remove('token');
-};
+userService.clearToken = function () {
+  store.remove('token')
+}
 
-userService.clearUser = function() {
-  store.remove('user');
-};
+userService.clearUser = function () {
+  store.remove('user')
+}
 
-userService.clear = function() {
-  this.clearToken();
-  this.clearUser();
-};
+userService.clear = function () {
+  this.clearToken()
+  this.clearUser()
+}
 
-export default userService;
+export default userService

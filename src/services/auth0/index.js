@@ -1,6 +1,5 @@
-import Auth0Lock from 'auth0-lock';
-import store     from 'store';
-
+import Auth0Lock from 'auth0-lock'
+import store from 'store'
 
 const lock = new Auth0Lock(
   'fqfXBUk40SmkYJBwy1a5gNgi3Vod60lK',
@@ -12,36 +11,36 @@ const lock = new Auth0Lock(
     language: 'en',
     closable: false,
     theme: {
-      primaryColor:'#3A99D8',
+      primaryColor: '#3A99D8',
       logo: 'https://avatars2.githubusercontent.com/u/19509447?v=3&s=200'
     },
     auth: {
-      responseType : 'token',
+      responseType: 'token',
       autoParseHash: true,
-      params       : { scope: 'openid email user_metadata app_metadata picture' }
+      params: { scope: 'openid email user_metadata app_metadata picture' }
     }
   }
-);
+)
 
 lock.authCallbackListener = (from, to, next) => {
-  if (store.get('token')) { next(); }
+  if (store.get('token')) { next() }
   if (window.location.hash && window.location.hash.includes('access_token')) {
     lock.resumeAuth(window.location.hash, (err, authResult) => {
-      if (err) { return next({ name: 'login' }); }
+      if (err) { return next({ name: 'login' }) }
       store.set('token', {
-        value    : authResult.idToken,
+        value: authResult.idToken,
         expiresAt: authResult.idTokenPayload.exp
-      });
+      })
       store.set('user', {
-        name        : authResult.idTokenPayload.app_metadata.name,
-        email       : authResult.idTokenPayload.email,
-        picture     : authResult.idTokenPayload.picture,
+        name: authResult.idTokenPayload.app_metadata.name,
+        email: authResult.idTokenPayload.email,
+        picture: authResult.idTokenPayload.picture,
         organization: authResult.idTokenPayload.user_metadata.organization
-      });
-      next({ name: 'home' });
-    });
+      })
+      next({ name: 'home' })
+    })
   }
-  next();
-};
+  next()
+}
 
-export default lock;
+export default lock

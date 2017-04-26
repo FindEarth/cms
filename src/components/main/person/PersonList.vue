@@ -1,68 +1,70 @@
 <script>
-  import moment        from 'moment';
-  import personService from 'services/person';
+  import moment from 'moment'
+
+  import userService from 'services/user'
+  import personService from 'services/person'
 
   export default {
     components: {},
 
-    data() {
+    data () {
       return {
-        people   : [],
+        people: [],
         isLoading: false
-      };
+      }
     },
 
-    mounted() {
-      this.getPeople();
+    mounted () {
+      this.getPeople()
     },
 
     methods: {
-      getPeople() {
-        this.isLoading = true;
-        personService.get()
+      getPeople () {
+        this.isLoading = true
+        personService.getByOrganization(userService.get().organization)
           .then((people) => {
-            this.people    = people;
-            this.isLoading = false;
-          });
+            this.people = people
+            this.isLoading = false
+          })
       },
 
-      onSelect(person) {
+      onSelect (person) {
         this.$router.push({
-          name  : 'person-detail',
+          name: 'person-detail',
           params: { personId: person._id }
-        });
+        })
       },
 
-      deletePerson(index, person) {
+      deletePerson (index, person) {
         const message = `Esta operacion borrara la persona ${person.name} ` +
-                        'permanentemente, Desea continuar?';
+                        'permanentemente, Desea continuar?'
         this.$confirm(message, 'Eliminar Persona', {
           confirmButtonText: 'OK',
-          cancelButtonText : 'Cancel',
-          type             : 'warning'
+          cancelButtonText: 'Cancel',
+          type: 'warning'
         })
         .then(() => personService.delete(person._id))
-        .then(() => this.people.splice(index, 1));
+        .then(() => this.people.splice(index, 1))
       },
 
-      sharePerson(person) {
-        personService.share(person);
+      sharePerson (person) {
+        personService.share(person)
       },
 
-      editPerson(person) {
+      editPerson (person) {
         this.$router.push({
-          name  : 'person-edit',
+          name: 'person-edit',
           params: { personId: person._id }
-        });
+        })
       }
     },
 
     filters: {
-      date(date) {
-        return moment(date).format('D MMMM YYYY');
+      date (date) {
+        return moment(date).format('D MMMM YYYY')
       }
     }
-  };
+  }
 </script>
 
 <template lang='pug'>
@@ -109,6 +111,3 @@
               @click.native.stop='deletePerson(scope.$index, scope.row)'
             )
 </template>
-
-<style lang="scss">
-</style>

@@ -13,35 +13,34 @@
       }
     },
 
-    data() {
-
+    data () {
       return {
         counter: 0
-      };
+      }
     },
 
-    mounted() {
-      this.transitionCounter();
+    mounted () {
+      this.transitionCounter()
     },
 
     methods: {
-      transitionCounter() {
-        const intervalTime = this.limitToReach / this.animationDuration;
+      transitionCounter () {
+        const intervalTime = this.limitToReach / this.animationDuration
         const interval = setInterval(() => {
-          this.counter += intervalTime;
+          this.counter += intervalTime
           if (this.counter >= this.limitToReach) {
-            clearInterval(interval);
-            this.counter = this.limitToReach;
+            clearInterval(interval)
+            this.counter = this.limitToReach
           }
-        }, 1);
+        }, 1)
       }
     },
     computed: {
-      showCounter() {
-        return parseInt(this.counter, 10);
+      showCounter () {
+        return parseInt(this.counter, 10)
       }
     }
-  });
+  })
 </script>
 
 <template lang='pug'>

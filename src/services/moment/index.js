@@ -1,11 +1,11 @@
-import moment from 'moment';
+import moment from 'moment'
 
-const momentService = {};
+const momentService = {}
 momentService.format = {
-  day  : 'dddd', // Monday
+  day: 'dddd', // Monday
   short: 'll', // 28 de oct. de 2016 ,
-  full : 'llll' // mar, 1 de nov. de 2016, 13:47
-};
-moment.locale('es');
+  full: 'llll' // mar, 1 de nov. de 2016, 13:47
+}
+moment.locale('es')
 
-export default momentService;
+export default momentService

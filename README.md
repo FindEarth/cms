@@ -1,6 +1,6 @@
 # CMS | Find Earth
 
-[![Codeship](https://img.shields.io/codeship/08998b80-d320-0134-1787-029621bb9ebb/master.svg)]()
+[![Codeship](https://img.shields.io/codeship/55530020-09f4-0135-259a-02d4833482d6/master.svg)]()
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cb9ddf66e54e408f9b9ce0b424ab995e)](https://www.codacy.com/app/FindEarth/cms?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=FindEarth/cms&amp;utm_campaign=Badge_Grade)
 [![bitHound Overall Score](https://www.bithound.io/github/FindEarth/cms/badges/score.svg)](https://www.bithound.io/github/FindEarth/cms)
 [![bitHound Dependencies](https://www.bithound.io/github/FindEarth/cms/badges/dependencies.svg)](https://www.bithound.io/github/FindEarth/cms/develop/dependencies/npm)
@@ -30,5 +30,11 @@ npm run e2e
 # run all tests
 npm test
 ```
+
+## License
+[MIT License](https://github.com/findearth/cms/blob/develop/LICENSE)
+
+## Style
+[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](http://standardjs.com)
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader)

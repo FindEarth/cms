@@ -1,27 +1,27 @@
 <script>
-  import mapStyle from 'styles/map/wy';
+  import mapStyle from 'styles/map/wy'
 
   export default {
     props: {
       geo: {
         type: Object,
         default: () => ({
-          loc        : [],
-          address    : '',
-          city       : '',
-          postalCode : '',
+          loc: [],
+          address: '',
+          city: '',
+          postalCode: '',
           countryCode: '',
-          country    : ''
+          country: ''
         })
       }
     },
 
-    data() {
+    data () {
       return {
-        mapOptions : {
-          mapTypeControl   : false,
+        mapOptions: {
+          mapTypeControl: false,
           fullscreenControl: true,
-          styles           : mapStyle
+          styles: mapStyle
         },
         radius: 1000,
         center: { lat: this.geo.loc[1] || -34.603684, lng: this.geo.loc[0] || -58.381559 },
@@ -29,52 +29,52 @@
           position: { lat: this.geo.loc[1] || -34.603684, lng: this.geo.loc[0] || -58.381559 }
         },
         isFormValid: true
-      };
+      }
     },
 
     methods: {
-      formatGeo(marker, type, format) {
-        const ac = marker.address_components.find(i => i.types[0] === type);
-        if (!ac) { return null; }
-        return ac[`${format}_name`];
+      formatGeo (marker, type, format) {
+        const ac = marker.address_components.find(i => i.types[0] === type)
+        if (!ac) { return null }
+        return ac[`${format}_name`]
       },
 
-      onPlaceChange(marker) {
-        const lat = marker.geometry.location.lat();
-        const lng = marker.geometry.location.lng();
+      onPlaceChange (marker) {
+        const lat = marker.geometry.location.lat()
+        const lng = marker.geometry.location.lng()
 
-        this.center = { lat, lng };
+        this.center = { lat, lng }
 
-        this.marker.position.lat = lat;
-        this.marker.position.lng = lng;
+        this.marker.position.lat = lat
+        this.marker.position.lng = lng
 
-        this.geo.address     = marker.formatted_address;
-        this.geo.country     = this.formatGeo(marker, 'country', 'long');
-        this.geo.countryCode = this.formatGeo(marker, 'country', 'short');
-        this.geo.city        = this.formatGeo(marker, 'administrative_area_level_1', 'long');
-        this.geo.postalCode  = this.formatGeo(marker, 'postal_code', 'short');
-        this.geo.loc         = [lng, lat];
+        this.geo.address = marker.formatted_address
+        this.geo.country = this.formatGeo(marker, 'country', 'long')
+        this.geo.countryCode = this.formatGeo(marker, 'country', 'short')
+        this.geo.city = this.formatGeo(marker, 'administrative_area_level_1', 'long')
+        this.geo.postalCode = this.formatGeo(marker, 'postal_code', 'short')
+        this.geo.loc = [lng, lat]
       },
 
-      onSubmit() {
+      onSubmit () {
         if (!this.geo.address) {
-          this.isFormValid = false;
-          this.watchAddressChange();
-          return;
+          this.isFormValid = false
+          this.watchAddressChange()
+          return
         }
 
-        this.$emit('gelocation-submitted', this.geo);
+        this.$emit('gelocation-submitted', this.geo)
       },
 
-      watchAddressChange() {
+      watchAddressChange () {
         this.$watch('geo.address', (nv) => {
           if (nv) {
-            this.isFormValid = true;
+            this.isFormValid = true
           }
-        });
+        })
       }
     }
-  };
+  }
 </script>
 
 <template lang='pug'>

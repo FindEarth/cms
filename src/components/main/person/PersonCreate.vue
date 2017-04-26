@@ -1,68 +1,68 @@
 <script>
-  import personService from 'services/person';
+  import personService from 'services/person'
 
-  import BasicInformation from 'components/main/person/create-steps/BasicInformation';
-  import Geo              from 'components/main/person/create-steps/Geolocation';
-  import FileUpload       from 'components/main/person/create-steps/FileUpload';
-  import Resume           from 'components/main/person/create-steps/Resume';
+  import BasicInformation from 'components/main/person/create-steps/BasicInformation'
+  import Geo from 'components/main/person/create-steps/Geolocation'
+  import FileUpload from 'components/main/person/create-steps/FileUpload'
+  import Resume from 'components/main/person/create-steps/Resume'
 
   export default {
     name: 'PersonCreate',
 
     components: { BasicInformation, Geo, FileUpload, Resume },
 
-    data() {
+    data () {
       return {
-        step     : 1,
+        step: 1,
         isLoading: false,
 
         person: {
-          name       : '',
-          age        : '',
+          name: '',
+          age: '',
           description: {},
-          gender     : 'M',
-          lastSeenAt : '',
+          gender: 'M',
+          lastSeenAt: '',
           geo: {
-            loc        : [],
-            address    : '',
-            city       : '',
-            postalCode : '',
+            loc: [],
+            address: '',
+            city: '',
+            postalCode: '',
             countryCode: '',
-            country    : ''
+            country: ''
           },
           contacts: [{ name: '', phone: '', email: '' }],
-          photos  : []
+          photos: []
         }
-      };
+      }
     },
 
     methods: {
-      stepBack() {
-        this.step -= 1;
+      stepBack () {
+        this.step -= 1
       },
 
-      onBasicInformationSubmitted(basicInformation) {
-        Object.assign(this.person, basicInformation);
-        this.step += 1;
+      onBasicInformationSubmitted (basicInformation) {
+        Object.assign(this.person, basicInformation)
+        this.step += 1
       },
 
-      onGelocationSubmitted(geolocation) {
-        Object.assign(this.person.geo, geolocation);
-        this.step += 1;
+      onGelocationSubmitted (geolocation) {
+        Object.assign(this.person.geo, geolocation)
+        this.step += 1
       },
 
-      onFileUploadSubmitted(files) {
-        this.person.photos = files;
-        this.step += 1;
+      onFileUploadSubmitted (files) {
+        this.person.photos = files
+        this.step += 1
       },
 
-      onResumeSubmitted() {
-        this.isLoading = true;
+      onResumeSubmitted () {
+        this.isLoading = true
         return personService.create(this.person)
-          .then(() => this.$router.push({ name: 'person-list' }));
+          .then(() => this.$router.push({ name: 'person-list' }))
       }
     }
-  };
+  }
 </script>
 
 <template lang='pug'>

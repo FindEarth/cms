@@ -1,108 +1,108 @@
 <script>
-  import personService        from 'services/person';
-  import personRequestService from 'services/person-request';
-  import mapStyle             from 'styles/map/wy';
+  import personService from 'services/person'
+  import personRequestService from 'services/person-request'
+  import mapStyle from 'styles/map/wy'
 
   export default {
 
-    data() {
+    data () {
       return {
-        personRequest   : {},
-        isLoading       : true,
-        activeTab       : '1',
-        mapOptions      : {
-          mapTypeControl   : false,
+        personRequest: {},
+        isLoading: true,
+        activeTab: '1',
+        mapOptions: {
+          mapTypeControl: false,
           fullscreenControl: true,
-          styles           : mapStyle
+          styles: mapStyle
         }
-      };
+      }
     },
 
-    mounted() {
-      this.isLoading = true;
-      this.getPersonRequest(this.$route.params.personRequestId);
+    mounted () {
+      this.isLoading = true
+      this.getPersonRequest(this.$route.params.personRequestId)
     },
 
     computed: {
-      position() {
+      position () {
         const position = {
           lat: 0,
           lng: 0
-        };
-        if (!this.personRequest.geo) { return position; }
+        }
+        if (!this.personRequest.geo) { return position }
 
-        position.lat = this.personRequest.geo.loc[1];
-        position.lng = this.personRequest.geo.loc[0];
-        return position;
+        position.lat = this.personRequest.geo.loc[1]
+        position.lng = this.personRequest.geo.loc[0]
+        return position
       },
 
-      appearance() {
-        const message = 'Apariencia no definida';
-        return this.personRequest.description && this.personRequest.description.appearance || message;
+      appearance () {
+        const message = 'Apariencia no definida'
+        return this.personRequest.description && this.personRequest.description.appearance || message
       },
 
-      clothing() {
-        const message = 'Vestimenta no definida';
-        return this.personRequest.description && this.personRequest.description.clothing || message;
+      clothing () {
+        const message = 'Vestimenta no definida'
+        return this.personRequest.description && this.personRequest.description.clothing || message
       },
 
-      moreData() {
-        const message = 'Mas informacion no provista';
-        return this.personRequest.description && this.personRequest.description.more || message;
+      moredata () {
+        const message = 'Mas informacion no provista'
+        return this.personRequest.description && this.personRequest.description.more || message
       }
     },
 
     methods: {
-      getPersonRequest(personRequestId) {
+      getPersonRequest (personRequestId) {
         personRequestService.getById(personRequestId)
           .then((personRequest) => {
-            this.personRequest = personRequest;
-            this.isLoading     = false;
-          });
+            this.personRequest = personRequest
+            this.isLoading = false
+          })
       },
-      approve() {
-        let newPersonId;
+      approve () {
+        let newPersonId
         const message = 'Esta seguro que desea aprobar la solicitud de persona de ' +
-                        `${this.personRequest.name}?`;
+                        `${this.personRequest.name}?`
         this.$confirm(message, 'Aprobar solicitud de persona', {
           confirmButtonText: 'OK',
-          cancelButtonText : 'Cancel',
-          type             : 'warning'
+          cancelButtonText: 'Cancel',
+          type: 'warning'
         })
         .then(() => {
-          this.isLoading = true;
-          return personService.create(this.personRequest);
+          this.isLoading = true
+          return personService.create(this.personRequest)
         })
         .then((person) => {
-          newPersonId = person._id;
-          this.personRequest.approved = true;
-          return personRequestService.update(this.personRequest);
+          newPersonId = person._id
+          this.personRequest.approved = true
+          return personRequestService.update(this.personRequest)
         })
         .then(() => {
-          this.isLoading = false;
+          this.isLoading = false
           this.$router.push({
-            name  : 'person-detail',
+            name: 'person-detail',
             params: { personId: newPersonId }
-          });
-        });
+          })
+        })
       },
-      removePersonRequests() {
+      removePersonRequests () {
         const message = 'Esta operacion borrara la solicitud de persona de ' +
-                        `${this.personRequest.name} permanentemente. Desea continuar?`;
+                        `${this.personRequest.name} permanentemente. Desea continuar?`
         this.$confirm(message, 'Eliminar Solicitud de Persona', {
           confirmButtonText: 'OK',
-          cancelButtonText : 'Cancel',
-          type             : 'warning'
+          cancelButtonText: 'Cancel',
+          type: 'warning'
         })
         .then(() => personRequestService.delete(this.personRequest._id))
         .then(() => {
           this.$router.push({
             name: 'person-list'
-          });
-        });
+          })
+        })
       }
     }
-  };
+  }
 </script>
 
 <template lang="pug">

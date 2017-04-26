@@ -1,13 +1,13 @@
 <script>
-  import TopMenu  from 'components/layout/TopMenu';
-  import LeftMenu from 'components/layout/LeftMenu';
+  import TopMenu from 'components/layout/TopMenu'
+  import LeftMenu from 'components/layout/LeftMenu'
 
   export default {
     name: 'MainContainer',
 
     components: { TopMenu, LeftMenu }
 
-  };
+  }
 </script>
 
 <template lang='pug'>
