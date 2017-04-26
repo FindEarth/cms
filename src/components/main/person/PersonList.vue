@@ -1,5 +1,7 @@
 <script>
   import moment from 'moment'
+
+  import userService from 'services/user'
   import personService from 'services/person'
 
   export default {
@@ -19,7 +21,7 @@
     methods: {
       getPeople () {
         this.isLoading = true
-        personService.get()
+        personService.getByOrganization(userService.get().organization)
           .then((people) => {
             this.people = people
             this.isLoading = false
