@@ -10,11 +10,13 @@
 
     methods: {
       getActive () {
-        return this.$route.name
+        if (this.$route.name !== 'person-detail') { return this.$route.name }
+        if (this.$route.query.isFound) { return 'person-found' }
+        return 'person-list'
       },
 
       handleSelect (key, keyPath) {
-        if (this.subMenus.includes(key)) return
+        if (this.subMenus.includes(key)) { return }
         if (this.singleItems.includes(key)) {
           this.defaultOpeneds = []
         }
