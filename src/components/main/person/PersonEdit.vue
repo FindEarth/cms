@@ -73,6 +73,8 @@
 
       onResumeSubmitted () {
         this.isLoading = true
+        delete this.person.slug
+
         return personService.update(this.person)
           .then(() => this.$router.push({ name: 'person-list' }))
       }
