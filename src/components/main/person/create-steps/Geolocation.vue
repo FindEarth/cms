@@ -49,6 +49,7 @@
         this.marker.position.lng = lng
 
         this.geo.address = marker.formatted_address
+        this.geo.vicinity = marker.vicinity
         this.geo.country = this.formatGeo(marker, 'country', 'long')
         this.geo.countryCode = this.formatGeo(marker, 'country', 'short')
         this.geo.city = this.formatGeo(marker, 'administrative_area_level_1', 'long')
