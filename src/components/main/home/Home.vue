@@ -1,4 +1,5 @@
 <script>
+import personService from 'services/person'
 import barChart from 'components/shared/barChart'
 import pieChart from 'components/shared/pieChart'
 import counter from 'components/shared/counter'
@@ -14,9 +15,9 @@ export default {
   data () {
     return {
       missingByAge: {
-        xAxisData: [10, 11, 12, 14, 15, 18, 20, 24, 25, 28, 30, 36, 40, 48, 52, 60, 80, 85, 90, 92],
-        yAxisData: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-        data: [4, 43, 12, 1, 5, 6, 20, 13, 80, 5, 4, 43, 12, 1, 5, 6, 20, 13, 80, 5],
+        xAxisData: [],
+        yAxisData: [],
+        data: [],
         title: {
           x: 'center',
           text: 'Desaparecidos por Edad',
@@ -28,13 +29,7 @@ export default {
         }
       },
       missingByGender: {
-        data: [{
-          value: 335,
-          name: 'Hombres'
-        }, {
-          value: 310,
-          name: 'Mujeres'
-        }],
+        data: [],
         title: {
           x: 'center',
           text: 'Desaparecidos por Género',
@@ -63,9 +58,27 @@ export default {
           }
         }
       },
-      missingPeople: 188,
-      foundPeople: 57
+      missingPeople: 0,
+      foundPeople: 0
     }
+  },
+
+  mounted () {
+    Promise.all([
+      personService.getStatsByGender(),
+      personService.getStatsByAge(),
+      personService.getTotalCount(),
+      personService.getFoundCount()
+    ])
+    .then(([gender, age, totalCount, foundCount]) => {
+      this.missingByGender.data.push(...gender)
+
+      this.missingByAge.data.push(...age.map(s => s.total))
+      this.missingByAge.xAxisData.push(...age.map(s => s._id))
+
+      this.missingPeople = totalCount
+      this.foundPeople = foundCount
+    })
   }
 }
 </script>
@@ -91,6 +104,7 @@ export default {
             :yAxisData='missingByAge.yAxisData',
             :data='missingByAge.data'
           )
+
     el-row.chart-row
       el-col(:span='8')
         .grid-content.chart-wrapper.full
@@ -107,6 +121,7 @@ export default {
             :chartPosition='["50%", "60%"]',
             :data='missingByGender.data'
           )
+
       el-col(:span='8')
         .grid-content.chart-wrapper.full
           pieChart(
@@ -125,14 +140,14 @@ export default {
       el-col(:span='8')
         el-row(:span='12')
           .grid-content.chart-wrapper.half
-            h3(class='counter-title') Personas Encontradas
-            p(class='number found')
-              counter(:limitToReach='missingPeople', :animationDuration='260')
+            h3(class='counter-title') Personas Desaparecidas
+            p(class='number found') {{ missingPeople }}
+              //- counter(:limitToReach='missingPeople', :animationDuration='260')
         el-row(:span='12')
           .grid-content.chart-wrapper.half
-            h3(class='counter-title') Personas Desaparecidas
-            p(class='number lost')
-              counter(:limitToReach='foundPeople', :animationDuration='260')
+            h3(class='counter-title') Personas Encontradas
+            p(class='number lost') {{ foundPeople }}
+              //- counter(:limitToReach='foundPeople', :animationDuration='260')
 </template>
 
 <style lang='scss' scoped>

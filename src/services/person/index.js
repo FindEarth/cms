@@ -79,4 +79,39 @@ personService.share = function (person, source) {
   window.open(sources[source])
 }
 
+personService.getStatsByGender = function () {
+  return api.get('/stats/person/gender')
+    .then(response => {
+      const [stats] = response.data
+      return [{
+        name: 'Hombres',
+        value: stats.male
+      }, {
+        name: 'Mujeres',
+        value: stats.female
+      }]
+    })
+}
+
+personService.getStatsByAge = function () {
+  return api.get('/stats/person/age')
+    .then(response => {
+      return response.data
+    })
+}
+
+personService.getTotalCount = function () {
+  return api.get('/stats/person/count/total')
+    .then(response => {
+      return response.data
+    })
+}
+
+personService.getFoundCount = function () {
+  return api.get('/stats/person/count/found')
+    .then(response => {
+      return response.data
+    })
+}
+
 export default personService
