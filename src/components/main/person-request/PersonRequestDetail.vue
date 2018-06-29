@@ -155,7 +155,7 @@
 
 <style lang='scss'>
   .container {
-    padding-bottom: 30px;
+    padding-bottom: 0;
   }
   .map {
     height: 250px;
